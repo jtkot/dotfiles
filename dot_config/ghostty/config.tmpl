@@ -1,0 +1,122 @@
+# Shell
+command = {{ .tmuxPath }} -l
+shell-integration = fish
+shell-integration-features = no-cursor, sudo, title, ssh-env, ssh-terminfo
+
+# Customization
+theme = Xcode Dark hc
+background-blur = macos-glass-regular
+background-opacity-cells = true
+background-opacity = {{ .backgroundOpacity }}
+window-padding-balance = true
+window-padding-x = 5
+window-padding-y = 0
+
+# TODO: padding color should be customizable on per axis basis
+window-padding-color = extend
+
+# BUG: those values aren't interpreted properly
+window-width = 126
+window-height = 28
+
+# BUG: step resize isn't strictly respected by macOS and actual windiow size
+# might eventually get off grid
+# window-step-resize = true
+
+# Font
+adjust-cell-height = 57%
+font-family = Google Sans Code
+font-size = {{ .fontSize }}
+font-feature = -calt
+
+# Behavior
+auto-update = download
+quit-after-last-window-closed = true
+
+# Keyboard
+macos-option-as-alt = left
+mouse-shift-capture = true
+
+{{- if ne .chezmoi.os "darwin" }}
+
+# macOS-style keybindings
+keybind = super+@=text:\x00
+keybind = super+a=text:\x01
+keybind = super+b=text:\x02
+keybind = super+c=text:\x03
+keybind = super+d=text:\x04
+keybind = super+e=text:\x05
+keybind = super+f=text:\x06
+keybind = super+g=text:\x07
+keybind = super+h=text:\x08
+keybind = super+i=text:\x09
+keybind = super+j=text:\x0a
+keybind = super+k=text:\x0b
+keybind = super+l=text:\x0c
+keybind = super+m=text:\x0d
+keybind = super+n=text:\x0e
+keybind = super+o=text:\x0f
+keybind = super+p=text:\x10
+keybind = super+q=text:\x11
+keybind = super+r=text:\x12
+keybind = super+s=text:\x13
+keybind = super+t=text:\x14
+keybind = super+u=text:\x15
+keybind = super+v=text:\x16
+keybind = super+w=text:\x17
+keybind = super+x=text:\x18
+keybind = super+y=text:\x19
+keybind = super+z=text:\x1a
+keybind = super+[=text:\x1b
+keybind = super+\=text:\x1c
+keybind = super+]=text:\x1d
+keybind = super+^=text:\x1e
+keybind = super+_=text:\x1f
+keybind = super+?=text:\x7f
+
+keybind = ctrl+shift+a=unbind
+keybind = ctrl+shift+c=unbind
+keybind = ctrl+shift+e=unbind
+keybind = ctrl+shift+i=unbind
+keybind = ctrl+shift+j=unbind
+keybind = ctrl+shift+n=unbind
+keybind = ctrl+shift+o=unbind
+keybind = ctrl+shift+q=unbind
+keybind = ctrl+shift+t=unbind
+keybind = ctrl+shift+v=unbind
+keybind = ctrl+shift+w=unbind
+
+keybind = ctrl+@=ignore
+keybind = ctrl+a=select_all
+keybind = ctrl+b=ignore
+keybind = ctrl+c=copy_to_clipboard
+keybind = ctrl+d=ignore
+keybind = ctrl+e=new_split:down
+keybind = ctrl+f=ignore
+keybind = ctrl+g=ignore
+keybind = ctrl+h=ignore
+keybind = ctrl+i=inspector:toggle
+keybind = ctrl+j=write_screen_file:paste
+keybind = ctrl+k=ignore
+keybind = ctrl+l=ignore
+keybind = ctrl+m=ignore
+keybind = ctrl+n=new_window
+keybind = ctrl+o=new_split:right
+keybind = ctrl+p=ignore
+keybind = ctrl+q=ignore
+keybind = ctrl+r=ignore
+keybind = ctrl+s=ignore
+keybind = ctrl+t=new_tab
+keybind = ctrl+u=ignore
+keybind = ctrl+v=paste_from_clipboard
+keybind = ctrl+w=close_tab
+keybind = ctrl+x=ignore
+keybind = ctrl+y=ignore
+keybind = ctrl+z=ignore
+keybind = ctrl+[=ignore
+keybind = ctrl+\=ignore
+keybind = ctrl+]=ignore
+keybind = ctrl+^=ignore
+keybind = ctrl+_=ignore
+keybind = ctrl+?=ignore
+{{- end }}

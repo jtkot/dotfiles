@@ -1,0 +1,20 @@
+[commit]
+	gpgsign = true
+
+[core]
+	eol = lf
+	autocrlf = input
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+	required = true
+	smudge = git-lfs smudge -- %f
+
+[init]
+	defaultBranch = master
+
+[user]
+	email = jan@catnip.supply
+	name = Jan Kot
+	signingkey = 74865B39CC76129E

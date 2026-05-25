@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "darwin" -}}
+set-option -g default-shell /opt/homebrew/bin/fish
+{{ end -}}
+
+set-option -g renumber-windows on
+set-option -g set-titles on
+set-option -g status-right "#{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}"
+set-option -g focus-events on
+set-window-option -g mode-keys vi
+set-option -sga command-alias "new-window-in-cwd=new-window -c '#{pane_current_path}'"
+set-option -sga command-alias "split-vertically-in-cwd=split-window -v -c '#{pane_current_path}'"
+set-option -sga command-alias "split-horizontally-in-cwd=split-window -h -c '#{pane_current_path}'"
+bind-key -N "Create a new window in the current path" c new-window-in-cwd
+bind-key -N "Create a new vertical pane in the current path" \" split-vertically-in-cwd
+bind-key -N "Create a new horizontal pane in the current path" % split-horizontally-in-cwd

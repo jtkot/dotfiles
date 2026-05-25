@@ -1,0 +1,16 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"lsp": true,
+	"mcp": {
+		"ghidra": {
+			"enabled": false,
+			"type": "local",
+			"command": [
+				"uv",
+				"run",
+				"--script",
+				"{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
+			]
+		}
+	}
+}

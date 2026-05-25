@@ -1,0 +1,27 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
+[merge-tools.vimdiff]
+program = "nvim"
+
+[ui]
+default-command = "log"
+paginate = "never"
+diff-editor = ":builtin"
+merge-editor = "vimdiff"
+
+[user]
+name = "Jan Kot"
+email = "jan@catnip.supply"
+
+[git]
+sign-on-push = true
+
+[signing]
+backend = "gpg"
+
+[aliases]
+init = ["git", "init"]
+rm = ["file", "untrack"]
+
+[revset-aliases]
+'immutable_heads()' = "builtin_immutable_heads() | remote_bookmarks()"

@@ -1,0 +1,8 @@
+{{- if eq .chezmoi.os "darwin" -}}
+Include macos_config
+{{ end -}}
+
+Include hosts
+
+Host *
+    AddKeysToAgent yes

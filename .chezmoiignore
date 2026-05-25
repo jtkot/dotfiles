@@ -1,0 +1,17 @@
+LICENSE
+**/.DS_Store
+
+.config/nvim/lazy-lock.json
+
+
+{{- if ne .chezmoi.os "darwin" }}
+
+.config/hypr
+.config/uwsm
+.config/walker
+
+{{- if ne .chezmoi.hostname "jan-macbook" }}
+.config/nixos
+{{- end -}}
+
+{{- end }}

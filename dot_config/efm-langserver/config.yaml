@@ -1,0 +1,41 @@
+tools:
+  eslint: &eslint
+      lint-command: 'eslint --stdin --stdin-filename ${INPUT} --format json | yq -o csv ''.[] | [.filePath, (.messages.[] | [.line, .column, ("" + .severity + "" | sub("2", "e") | sub("1", "w")), .message + " (" + .ruleId + ")"])[] ]'''
+      lint-source: 'eslint'
+      lint-stdin: true
+      lint-ignore-exit-code: true
+      lint-after-open: true
+      lint-formats:
+        - '%f,%l,%c,%t,%m'
+        - '%f,%l,%c,%t,%m'
+  prettier: &prettier
+      format-stdin: true
+      format-command: 'prettier --stdin-filepath ${INPUT}'
+
+languages:
+  hexpat:
+    - lint-command: 'plcli run -p ${INPUT} | grep -A1 error | tr "\n" ":" | sed "s/  -->   in //g; s/:--:/\n/g; s/:$/\n/"'
+      lint-source: 'plcli'
+      lint-stdin: false
+      lint-after-open: true
+      lint-ignore-exit-code: true
+      lint-formats: 
+        - '%trror: %m:%f:%l:%c'
+        # - '%tarning: %m:%f:%l:%c'
+  meson:
+    - lint-command: 'muon analyze -l -O ${INPUT}'
+      lint-source: 'muon'
+      lint-stdin: true
+      format-stdin: true
+      format-command: 'muon fmt -'
+      lint-after-open: true
+      lint-formats: 
+        - '%f:%l:%c: %trror %m'
+        - '%f:%l:%c: %tarning %m'
+        # - '%f:%l:%c: %m'
+  typescript:
+    - <<: *eslint
+    - <<: *prettier
+  javascript:
+    - <<: *eslint
+    - <<: *prettier

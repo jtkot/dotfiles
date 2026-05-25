@@ -1,0 +1,39 @@
+{
+	"flakes": [
+		{
+			"from": {
+				"id": "dvt",
+				"type": "indirect"
+			},
+			"to": {
+				"type": "tarball",
+				"url": "https://api.flakehub.com/f/the-nix-way/dev-templates"
+			}
+		},
+		{
+			"from": {
+				"id": "unfree",
+				"type": "indirect"
+			},
+			"to": {
+				"owner": "numtide",
+				"ref": "nixpkgs-unstable",
+				"repo": "nixpkgs-unfree",
+				"type": "github"
+			}
+		},
+		{
+			"from": {
+				"id": "stable",
+				"type": "indirect"
+			},
+			"to": {
+				"owner": "NixOS",
+				"ref": "nixos-25.11",
+				"repo": "nixpkgs",
+				"type": "github"
+			}
+		}
+	],
+	"version": 2
+}
