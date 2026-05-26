@@ -146,5 +146,5 @@
     "vm.watermark_scale_factor" = 125;
     "vm.page-cluster" = 0;
   };
-  zramSwap.memoryMax = 16384;
+  zramSwap.memoryMax = 16 * 1024 * 1024 * 1024;
 }
