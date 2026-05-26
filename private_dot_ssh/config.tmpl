@@ -1,8 +1,11 @@
-{{- if eq .chezmoi.os "darwin" -}}
-Include macos_config
-{{ end -}}
-
 Include hosts
+{{- if eq .chezmoi.os "darwin" }}
+Include ~/.colima/ssh_config
+{{- end }}
 
 Host *
+{{- if eq .chezmoi.os "darwin" }}
+    IdentityAgent ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+    UseKeychain yes
+{{- end }}
     AddKeysToAgent yes
