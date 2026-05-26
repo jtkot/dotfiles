@@ -31,6 +31,7 @@
     nixd
     nixfmt
     nur.repos.Ev357.helium
+    opencode
     p7zip
     patchelf
     qview
