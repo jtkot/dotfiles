@@ -4,13 +4,13 @@ LICENSE
 .config/nvim/lazy-lock.json
 
 
-{{- if ne .chezmoi.os "darwin" }}
+{{- if ne .chezmoi.os "linux" }}
 
 .config/hypr
 .config/uwsm
 .config/walker
 
-{{- if ne .chezmoi.hostname "jan-macbook" }}
+{{- if ne .chezmoi.hostname "jan-pc" }}
 .config/nixos
 {{- end -}}
 
