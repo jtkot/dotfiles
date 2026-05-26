@@ -8,6 +8,7 @@
     bintools
     bottom
     cider-2
+    chezmoi
     d-spy
     fastfetch
     file
