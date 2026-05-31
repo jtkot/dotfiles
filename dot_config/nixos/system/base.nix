@@ -99,7 +99,6 @@
     enable = true;
     withUWSM = true;
   };
-  programs.command-not-found.enable = true;
   programs.gnome-disks.enable = true;
 
   networking.networkmanager.enable = true;

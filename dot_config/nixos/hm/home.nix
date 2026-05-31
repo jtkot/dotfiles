@@ -26,7 +26,6 @@
     llama-cpp-vulkan
     mpv
     neovim
-    nix-index
     nix-tree
     nixd
     nixfmt
