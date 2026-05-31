@@ -4,7 +4,7 @@ encryption = "gpg"
 recipient = "74865B39CC76129E"
 
 {{ $fontSizes := dict "jan-macbook" 14 -}}
-{{- $fontSize := index $fontSizes .chezmoi.hostname | default 11 -}}
+{{- $fontSize := index $fontSizes .chezmoi.hostname | default 12 -}}
 
 {{- $backgroundOpacity := 0.8 -}}
 {{- if eq .chezmoi.os "darwin" -}}
@@ -15,6 +15,15 @@ recipient = "74865B39CC76129E"
 {{- if eq .chezmoi.os "darwin" -}}
 {{- $tmuxPath = "/opt/homebrew/bin/tmux" -}}
 {{- end -}}
+
+[merge]
+command = "nvim"
+args = [
+  "-d",
+  "{{ "{{" }} .Destination {{ "}}" }}",
+  "{{ "{{" }} .Source {{ "}}" }}",
+  "{{ "{{" }} .Target {{ "}}" }}",
+]
 
 [data]
 fontSize = {{ $fontSize }}
