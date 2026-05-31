@@ -1,22 +1,19 @@
 final: prev: {
-  openrgb-beta = prev.openrgb.overrideAttrs (
-    old:
+  openrgb = prev.openrgb.overrideAttrs (
+    prevAttrs:
     let
-      commit = "a6b890a48d75325d47587131c74764b8e9a06a53";
+      rev = "8afad91b33f5fc61f632fe67b6ca98fe2299613d";
     in
     {
-      version = builtins.substring 0 8 commit;
-      src = final.fetchFromGitLab {
-        owner = "CalcProgrammer1";
-        repo = "OpenRGB";
-        rev = commit;
-        hash = "sha256-54rkkwgxLOseRJru3RkX2aYE6y4ryzFUCHR423+Ni/I=";
+      version = "0.9.1.g${builtins.substring 0 8 rev}";
+      src = final.fetchgit {
+        inherit rev;
+        url = "https://gitlab.com/CalcProgrammer1/OpenRGB.git";
+        fetchTags = true;
+        hash = "sha256-3geSs/xePJEXNxzspakP6kUhgtzA0lcHYrvwN7lGFWc=";
       };
+      nativeBuildInputs = prevAttrs.nativeBuildInputs ++ (with final; [ git ]);
       patches = [ ];
-      postPatch = ''
-        patchShebangs scripts/build-udev-rules.sh
-        substituteInPlace scripts/build-udev-rules.sh --replace-fail "/usr/bin/env chmod" "${final.coreutils}/bin/chmod"
-      '';
     }
   );
   linuxPackages = prev.linuxPackages.extend (

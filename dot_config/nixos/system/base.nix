@@ -15,9 +15,6 @@
   };
   documentation.nixos.enable = false;
 
-  # NixOS 25.05 patches
-  services.hardware.openrgb.package = pkgs.openrgb-beta;
-
   # Workaround for Unreal Engine
   system.activationScripts.binbash = {
     text = ''
