@@ -26,11 +26,9 @@
   hardware.nvidia = {
     open = true;
     nvidiaSettings = false;
+    powerManagement.enable = true;
   };
 
-  # NVIDIA 595+; remove it in 26.05
-  hardware.nvidia.powerManagement.enable = false; # enable this!
-  boot.kernelParams = [ "nvidia.NVreg_UseKernelSuspendNotifiers=1" ];
   nix.settings = {
     substituters = [
       "https://cache.nixos-cuda.org"

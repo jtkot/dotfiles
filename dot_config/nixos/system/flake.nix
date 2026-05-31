@@ -1,8 +1,7 @@
 {
   description = "My NixOS setup";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -19,12 +18,11 @@
       self,
       nixpkgs,
       lanzaboote,
-      unstable,
       nix-index-database,
     }:
-	let
-		backportsModule = import ./backports.nix unstable;
-	in
+    let
+      backportsModule = import ./backports.nix nixpkgs;
+    in
     {
       nixosConfigurations.jan-pc = nixpkgs.lib.nixosSystem {
         modules = [
