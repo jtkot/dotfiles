@@ -19,6 +19,7 @@
     gimp
     git
     googlesans-code
+    intel-one-mono
     imagemagick
     jq
     jujutsu
@@ -33,11 +34,15 @@
     opencode
     p7zip
     patchelf
+    pandoc
     qview
     pax-utils
     ripgrep
+    rtk
+    texliveSmall
     tmux
     unzip
+    vscode-langservers-extracted
     widevine-cdm
     yq
     yt-dlp
