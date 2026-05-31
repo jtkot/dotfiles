@@ -8,7 +8,13 @@
   networking.hostName = "jan-pc";
   services.openssh.enable = true;
   services.displayManager.gdm.autoSuspend = false;
+
   networking.networkmanager.wifi.powersave = false;
+  networking.wireless.iwd.settings = {
+    DriverQuirks = {
+      PowerSaveDisable = "?*";
+    };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
