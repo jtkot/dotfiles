@@ -21,9 +21,11 @@
 			"enabled": false,
 			"type": "local",
 			"command": [
-				"uv",
-				"run",
-				"--script",
+				"nix",
+				"develop",
+				"{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp",
+				"--command",
+				"python",
 				"{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
 			]
 		}
