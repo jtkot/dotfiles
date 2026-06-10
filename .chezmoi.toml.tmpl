@@ -7,9 +7,6 @@ recipient = "74865B39CC76129E"
 {{- $fontSize := index $fontSizes .chezmoi.hostname | default 12 -}}
 
 {{- $backgroundOpacity := 0.8 -}}
-{{- if eq .chezmoi.os "darwin" -}}
-{{- $backgroundOpacity = 0.66 -}}
-{{- end -}}
 
 {{- $tmuxPath := "/usr/bin/env tmux" -}}
 {{- if eq .chezmoi.os "darwin" -}}
