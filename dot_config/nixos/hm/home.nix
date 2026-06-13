@@ -9,7 +9,7 @@
     bottom
     chezmoi
     cider-2
-	codex
+    codex
     d-spy
     fastfetch
     file
@@ -41,6 +41,7 @@
     qt6.qtdeclarative
     ripgrep
     rtk
+    shellcheck
     texliveSmall
     tmux
     unzip
