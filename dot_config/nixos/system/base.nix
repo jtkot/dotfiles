@@ -103,7 +103,6 @@
   networking.firewall.enable = false;
   services.resolved.enable = true;
 
-  services.dbus.implementation = "broker";
   services.flatpak.enable = true;
   services.fwupd.enable = true;
   services.gvfs.enable = true;
