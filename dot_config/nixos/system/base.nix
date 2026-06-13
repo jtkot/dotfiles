@@ -54,7 +54,6 @@
       "wheel"
       "plugdev"
     ];
-    shell = pkgs.fish;
   };
 
   environment.systemPackages = with pkgs; [
