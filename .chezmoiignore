@@ -9,6 +9,7 @@ LICENSE
 .config/hypr
 .config/uwsm
 .config/walker
+.config/quickshell
 
 {{- if ne .chezmoi.hostname "jan-pc" }}
 .config/nixos

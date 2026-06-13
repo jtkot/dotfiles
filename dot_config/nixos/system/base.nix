@@ -62,7 +62,6 @@
     brightnessctl
     ghostty
     grim
-    hyprpaper
     hyprlock
     hyprpolkitagent
     hypridle
