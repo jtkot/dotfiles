@@ -62,6 +62,11 @@ if status is-interactive
 		alias berg "fj -H codeberg.org"
 	end
 
+	if [ -x "$(command -v llama-cli)" ]
+		alias gemma="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
+		alias qwen="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
+	end
+
 	set -l DOTENV "$HOME/.env"
 	if [ -f $DOTENV ]
 		source $DOTENV

@@ -26,6 +26,11 @@ if [ -x $(command -v info) ]; then
 	alias info="info --vi-keys"
 fi
 
+if [ -x $(command -v llama-cli) ]; then
+	alias gemma="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
+	alias qwen="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
+fi
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
