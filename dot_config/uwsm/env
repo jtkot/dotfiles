@@ -1,2 +1,2 @@
-export XCURSOR_THEME=Adwaita
+export XCURSOR_THEME=macOS
 export XCURSOR_SIZE=24

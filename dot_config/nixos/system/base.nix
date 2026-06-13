@@ -60,6 +60,7 @@
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     brightnessctl
+    apple-cursor
     ghostty
     grim
     hyprlock
@@ -120,7 +121,17 @@
     xkb.layout = "pl";
   };
   services.displayManager.gdm.enable = true;
-
+  programs.dconf.profiles = {
+    gdm.databases = [
+      {
+        settings = with lib.gvariant; {
+          "org/gnome/desktop/interface" = {
+            cursor-theme = mkString "macOS";
+          };
+        };
+      }
+    ];
+  };
   systemd.user.services.hyprpolkitagent = {
     description = "hyprpolkitagent";
     wantedBy = [ "graphical-session.target" ];
