@@ -30,14 +30,14 @@ __load_homebrew() {
 
 __setup_nh() {
 	if [ $(command -v nh) ]; then
-		local NH_HOME_FLAKE="$HOME/.config/nixos/hm"
+		local NH_HOME_FLAKE_LOCAL="$HOME/.config/nixos/hm"
 		if [ -d $NH_HOME_FLAKE ]; then
-			export NH_HOME_FLAKE
+			export NH_HOME_FLAKE="$NH_HOME_FLAKE_LOCAL"
 		fi
 
-		local NH_OS_FLAKE="$HOME/.config/nixos/system"
+		local NH_OS_FLAKE_LOCAL="$HOME/.config/nixos/system"
 		if [ -d $NH_OS_FLAKE ]; then
-			export NH_OS_FLAKE
+			export NH_OS_FLAKE="$NH_OS_FLAKE_LOCAL"
 		fi
 	fi
 }
