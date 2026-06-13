@@ -40,10 +40,10 @@ enabled = false
 command = "nix"
 args = [
   "develop",
-  "/Users/jan/Repositories/ghidra-mcp",
+  "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp",
   "--command",
   "python",
-  "/Users/jan/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
+  "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
 ]
 
 [[hooks.PreToolUse]]
