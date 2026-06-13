@@ -91,7 +91,6 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.nix-ld.enable = true;
   programs.hyprland = {
     enable = true;
     withUWSM = true;
