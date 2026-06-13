@@ -125,6 +125,7 @@
       {
         settings = with lib.gvariant; {
           "org/gnome/desktop/interface" = {
+            scaling-factor = mkUint32 1;
             cursor-theme = mkString "macOS";
           };
         };
