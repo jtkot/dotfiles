@@ -38,7 +38,11 @@
     ];
   };
 
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "nct6687"
+  ];
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "thunderbolt"
