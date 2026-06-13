@@ -61,4 +61,9 @@ if status is-interactive
 	if [ -x "$(command -v fj)" ]
 		alias berg "fj -H codeberg.org"
 	end
+
+	set -l DOTENV "$HOME/.env"
+	if [ -f $DOTENV ]
+		source $DOTENV
+	end
 end
