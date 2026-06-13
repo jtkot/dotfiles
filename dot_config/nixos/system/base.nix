@@ -59,8 +59,9 @@
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    brightnessctl
     apple-cursor
+    # brightnessctl
+    ddcutil
     ghostty
     grim
     hyprlock
