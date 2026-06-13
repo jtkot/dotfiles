@@ -23,7 +23,7 @@ ShellRoot {
         Image {
             id: wallpaper
             anchors.fill: parent
-            source: "/home/jan/.config/hypr/wallpapers/tahoe.jpg"
+            source: "wallpapers/tahoe.jpg"
             fillMode: Image.PreserveAspectCrop
         }
     }
