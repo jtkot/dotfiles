@@ -72,6 +72,7 @@
     sbctl
     slurp
     sushi
+    elephant
     walker
     wl-clipboard
     quickshell
