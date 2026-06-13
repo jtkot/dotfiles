@@ -82,7 +82,6 @@
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
 
-  programs.fish.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
