@@ -65,7 +65,6 @@
     hyprlock
     hyprpolkitagent
     hypridle
-    hyprsunset
     nautilus
     nh
     sbctl
