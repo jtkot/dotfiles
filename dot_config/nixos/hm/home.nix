@@ -6,6 +6,7 @@
   home.stateVersion = "26.05";
   home.packages = with pkgs; [
     bintools
+    blender
     bottom
     chezmoi
     cider-2
