@@ -7,8 +7,8 @@
   home.packages = with pkgs; [
     bintools
     bottom
-    cider-2
     chezmoi
+    cider-2
     d-spy
     fastfetch
     file
@@ -19,8 +19,8 @@
     gimp
     git
     googlesans-code
-    intel-one-mono
     imagemagick
+    intel-one-mono
     jq
     jujutsu
     license-cli
@@ -33,10 +33,11 @@
     nur.repos.Ev357.helium
     opencode
     p7zip
-    patchelf
     pandoc
-    qview
+    patchelf
     pax-utils
+    qview
+    qt6.qtdeclarative
     ripgrep
     rtk
     texliveSmall
