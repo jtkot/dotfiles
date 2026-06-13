@@ -9,6 +9,18 @@ if [ -r $HOMEBREW_BASH_COMPLETION ]; then
   source $HOMEBREW_BASH_COMPLETION
 fi
 
+if [ $(command -v nh) ]; then
+	NH_HOME_FLAKE="$HOME/.config/nixos/hm"
+	if [ -d $NH_HOME_FLAKE ]; then
+		export NH_HOME_FLAKE
+	fi
+
+	NH_OS_FLAKE="$HOME/.config/nixos/system"
+	if [ -d $NH_OS_FLAKE ]; then
+		export NH_OS_FLAKE
+	fi
+fi
+
 if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
     source $GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash
 fi
