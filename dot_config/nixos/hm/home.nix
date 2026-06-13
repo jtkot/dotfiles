@@ -9,6 +9,7 @@
     bottom
     chezmoi
     cider-2
+	codex
     d-spy
     fastfetch
     file
