@@ -28,6 +28,7 @@
     nvidiaSettings = false;
     powerManagement.enable = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
 
   nix.settings = {
     substituters = [

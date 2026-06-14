@@ -151,4 +151,5 @@
     "vm.page-cluster" = 0;
   };
   zramSwap.memoryMax = 16 * 1024 * 1024 * 1024;
+  virtualisation.podman.enable = true;
 }

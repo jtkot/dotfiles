@@ -37,6 +37,7 @@
     pandoc
     patchelf
     pax-utils
+    podman-compose
     qview
     qt6.qtdeclarative
     ripgrep
