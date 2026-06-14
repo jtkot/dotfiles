@@ -1,0 +1,52 @@
+safe_source() {
+	if [ -f $1 ]; then
+		source $1
+	fi
+}
+export -f safe_source
+
+prepend_to_path() {
+	if [ -d $1 ]; then
+		if [ -n "$PATH" ]; then
+			PATH="$1:$PATH"
+			return
+		fi
+		export PATH="$1"
+	fi
+}
+export -f prepend_to_path
+
+__load_homebrew() {
+	local BREW="/opt/homebrew/bin/brew"
+	if [ -f $BREW -a -z "$(command -v brew)" ]; then
+		export HOMEBREW_NO_ANALYTICS=1
+		export HOMEBREW_NO_EMOJI=1
+		export HOMEBREW_NO_ENV_HINTS=1
+		export HOMEBREW_CASK_OPTS="--no-quarantine"
+		source <($BREW shellenv)
+		MANPATH=$HOMEBREW_PREFIX/share/man$MANPATH # a bug in homebrew?
+	fi
+}
+
+__setup_nh() {
+	if [ $(command -v nh) ]; then
+		local NH_HOME_FLAKE="$HOME/.config/nixos/hm"
+		if [ -d $NH_HOME_FLAKE ]; then
+			export NH_HOME_FLAKE
+		fi
+
+		local NH_OS_FLAKE="$HOME/.config/nixos/system"
+		if [ -d $NH_OS_FLAKE ]; then
+			export NH_OS_FLAKE
+		fi
+	fi
+}
+
+export EDITOR="nvim"
+export GPG_TTY="$(tty)"
+__load_homebrew
+prepend_to_path "$HOME/.nix-profile/bin" 
+prepend_to_path "$HOME/.local/bin"
+__setup_nh
+safe_source "$HOME/.env"
+safe_source "$HOME/.bashrc"

@@ -1,30 +1,44 @@
-source $HOME/.profile
-source $HOME/.env
-
-export EDITOR="nvim"
-
-HOMEBREW_BASH_COMPLETION="$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-if [ -r $HOMEBREW_BASH_COMPLETION ]; then
-  export HOMEBREW_BASH_COMPLETION_USER_DIR="/Applications/Xcode.app/Contents/Developer/usr/share/bash-completion"
-  source $HOMEBREW_BASH_COMPLETION
-fi
-
-if [ $(command -v nh) ]; then
-	NH_HOME_FLAKE="$HOME/.config/nixos/hm"
-	if [ -d $NH_HOME_FLAKE ]; then
-		export NH_HOME_FLAKE
+__setup_bash_completion() {
+	local HOMEBREW_BASH_COMPLETION="$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+	if [ -r $HOMEBREW_BASH_COMPLETION ]; then
+	  export HOMEBREW_BASH_COMPLETION_USER_DIR="/Applications/Xcode.app/Contents/Developer/usr/share/bash-completion"
+	  source $HOMEBREW_BASH_COMPLETION
 	fi
+}
 
-	NH_OS_FLAKE="$HOME/.config/nixos/system"
-	if [ -d $NH_OS_FLAKE ]; then
-		export NH_OS_FLAKE
-	fi
-fi
+__setup_prompt() {
+	local GREEN="\[$(tput setaf 2)\]"
+	local RESET="\[$(tput sgr0)\]"
+	export PS1="$GREEN\$(basename \$PWD) $RESET) "
+}
+
+__sudo_toggle_command() {
+    if [ -z "$READLINE_LINE" ]; then
+		return
+    fi
+
+    if [[ "$READLINE_LINE" =~ ^sudo[[:space:]]+(.*)$ ]]; then
+        READLINE_LINE="${BASH_REMATCH[1]}"
+        READLINE_POINT=$((READLINE_POINT - 5))
+    else
+        READLINE_LINE="sudo $READLINE_LINE"
+        READLINE_POINT=$((READLINE_POINT + 5))
+    fi
+}
+
+shopt -s autocd
+shopt -s histappend
+# exec {BASH_XTRACEFD}> /dev/null
+__setup_bash_completion
+__setup_prompt
 
 if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
     source $GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash
 fi
 
+if [ -n "$PS1" ]; then
+    bind -x '"\es": __sudo_toggle_command'
+fi
 
 if [ $(command -v fzf) ]; then
 	source <(fzf --bash)
@@ -51,18 +65,8 @@ alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
 alias ........="cd ../../../../../../.."
 alias .........="cd ../../../../../../../.."
-
 alias ls="ls --color=auto"
 alias l="ls -l"
 alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
-
-# exec {BASH_XTRACEFD}> /dev/null
-shopt -s autocd
-shopt -s histappend
-
-GREEN="\[$(tput setaf 2)\]"
-RESET="\[$(tput sgr0)\]"
-
-export PS1="$GREEN\$(basename \$PWD) $RESET) "
