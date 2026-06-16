@@ -31,6 +31,12 @@ __load_homebrew() {
 	fi
 }
 
+__load_nix() {
+  if [ -z "$(command -v nix)" ]; then
+	safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+  fi
+}
+
 __setup_nh() {
 	if [ "$(command -v nh)" ]; then
 		local NH_HOME_FLAKE_LOCAL="$HOME/.config/nixos/hm"
@@ -50,7 +56,7 @@ EDITOR="nvim"
 GPG_TTY="$(tty)"
 
 __load_homebrew
-safe_source "/etc/bash.bashrc"
+__load_nix
 prepend_to_path "$HOME/.local/bin"
 __setup_nh
 safe_source "$HOME/.env"
