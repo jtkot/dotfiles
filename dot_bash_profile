@@ -1,12 +1,13 @@
 safe_source() {
-	if [ -f $1 ]; then
-		source $1
+	if [ -f "$1" ]; then
+		# shellcheck disable=SC1090
+		source "$1"
 	fi
 }
 export -f safe_source
 
 prepend_to_path() {
-	if [ -d $1 ]; then
+	if [ -d "$1" ]; then
 		if [ -n "$PATH" ]; then
 			PATH="$1:$PATH"
 			return
@@ -18,34 +19,37 @@ export -f prepend_to_path
 
 __load_homebrew() {
 	local BREW="/opt/homebrew/bin/brew"
-	if [ -f $BREW -a -z "$(command -v brew)" ]; then
+	if [ -f $BREW ] && [ -z "$(command -v brew)" ]; then
 		export HOMEBREW_CASK_OPTS="--no-quarantine"
 		export HOMEBREW_NO_ANALYTICS=1
 		export HOMEBREW_NO_ASK=1
 		export HOMEBREW_NO_EMOJI=1
 		export HOMEBREW_NO_ENV_HINTS=1
 		export HOMEBREW_UPGRADE_GREEDY=1
+		# shellcheck disable=SC1090
 		source <($BREW shellenv)
 		MANPATH=$HOMEBREW_PREFIX/share/man$MANPATH # a bug in homebrew?
 	fi
 }
 
 __setup_nh() {
-	if [ $(command -v nh) ]; then
+	if [ "$(command -v nh)" ]; then
 		local NH_HOME_FLAKE_LOCAL="$HOME/.config/nixos/hm"
-		if [ -d $NH_HOME_FLAKE ]; then
+		if [ -d "$NH_HOME_FLAKE" ]; then
 			export NH_HOME_FLAKE="$NH_HOME_FLAKE_LOCAL"
 		fi
 
 		local NH_OS_FLAKE_LOCAL="$HOME/.config/nixos/system"
-		if [ -d $NH_OS_FLAKE ]; then
+		if [ -d "$NH_OS_FLAKE" ]; then
 			export NH_OS_FLAKE="$NH_OS_FLAKE_LOCAL"
 		fi
 	fi
 }
 
-export EDITOR="nvim"
-export GPG_TTY="$(tty)"
+export EDITOR GPG_TTY
+EDITOR="nvim"
+GPG_TTY="$(tty)"
+
 __load_homebrew
 prepend_to_path "$HOME/.nix-profile/bin" 
 prepend_to_path "$HOME/.local/bin"

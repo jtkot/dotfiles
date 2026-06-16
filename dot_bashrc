@@ -1,15 +1,17 @@
 __setup_bash_completion() {
 	local HOMEBREW_BASH_COMPLETION="$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-	if [ -r $HOMEBREW_BASH_COMPLETION ]; then
+	if [ -r "$HOMEBREW_BASH_COMPLETION" ]; then
 	  export HOMEBREW_BASH_COMPLETION_USER_DIR="/Applications/Xcode.app/Contents/Developer/usr/share/bash-completion"
-	  source $HOMEBREW_BASH_COMPLETION
+	  # shellcheck source=/opt/homebrew/etc/profile.d/bash_completion.sh
+	  source "$HOMEBREW_BASH_COMPLETION"
 	fi
 }
 
 __setup_prompt() {
-	local GREEN="\[$(tput setaf 2)\]"
-	local RESET="\[$(tput sgr0)\]"
-	export PS1="$GREEN\$(basename \$PWD) $RESET) "
+	local GREEN RESET
+	GREEN="\[$(tput setaf 2)\]"
+	RESET="\[$(tput sgr0)\]"
+	export PS1="$GREEN\$(basename \"\$PWD\") $RESET) "
 }
 
 __sudo_toggle_command() {
@@ -28,31 +30,34 @@ __sudo_toggle_command() {
 
 shopt -s autocd
 shopt -s histappend
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export HISTSIZE=$((2**18))
 # exec {BASH_XTRACEFD}> /dev/null
 __setup_bash_completion
 __setup_prompt
 
 if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
-    source $GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash
+    source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
 fi
 
 if [ -n "$PS1" ]; then
     bind -x '"\es": __sudo_toggle_command'
 fi
 
-if [ $(command -v fzf) ]; then
+if [ "$(command -v fzf)" ]; then
+	# shellcheck disable=SC1090
 	source <(fzf --bash)
 fi
 
-if [ $(command -v fj) ]; then
+if [ "$(command -v fj)" ]; then
 	alias berg="fj -H codeberg.org"
 fi
 
-if [ -x $(command -v info) ]; then
+if [ -x "$(command -v info)" ]; then
 	alias info="info --vi-keys"
 fi
 
-if [ -x $(command -v llama-cli) ]; then
+if [ -x "$(command -v llama-cli)" ]; then
 	alias gemma="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
 	alias qwen="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
 fi
