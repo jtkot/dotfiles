@@ -30,7 +30,7 @@ __sudo_toggle_command() {
 
 shopt -s autocd
 shopt -s histappend
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTSIZE=$((2**18))
 # exec {BASH_XTRACEFD}> /dev/null
 __setup_bash_completion
