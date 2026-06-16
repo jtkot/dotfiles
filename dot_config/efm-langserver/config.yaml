@@ -11,6 +11,14 @@ tools:
   prettier: &prettier
       format-stdin: true
       format-command: 'prettier --stdin-filepath ${INPUT}'
+  shellcheck: &shellcheck
+      lint-command: 'shellcheck - --format=json | jq ''.[] | .level = (.level | .[0:1] | sub("s"; "n")) | "\(.line):\(.column):\(.level):\(.message) [SC\(.code)]"'''
+      lint-source: 'shellcheck'
+      lint-stdin: true
+      lint-ignore-exit-code: true
+      lint-after-open: true
+      lint-formats:
+        - '"%l:%c:%t:%m"'
 
 languages:
   hexpat:
@@ -21,7 +29,6 @@ languages:
       lint-ignore-exit-code: true
       lint-formats: 
         - '%trror: %m:%f:%l:%c'
-        # - '%tarning: %m:%f:%l:%c'
   meson:
     - lint-command: 'muon analyze -l -O ${INPUT}'
       lint-source: 'muon'
@@ -33,6 +40,8 @@ languages:
         - '%f:%l:%c: %trror %m'
         - '%f:%l:%c: %tarning %m'
         # - '%f:%l:%c: %m'
+  sh:
+    - <<: *shellcheck
   typescript:
     - <<: *eslint
     - <<: *prettier

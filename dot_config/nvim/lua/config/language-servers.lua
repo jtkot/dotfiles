@@ -1,7 +1,7 @@
 return {
 	["efm-langserver"] = {
 		cmd = { 'efm-langserver' },
-		filetypes = { 'meson', 'javascript', 'typescript', 'hexpat' }
+		filetypes = { 'meson', 'javascript', 'typescript', 'hexpat', 'sh' }
 	},
 	["nixd"] = {
 		cmd = { 'nixd' },
