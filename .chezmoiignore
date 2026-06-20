@@ -3,7 +3,6 @@ LICENSE
 
 .config/nvim/lazy-lock.json
 
-
 {{- if ne .chezmoi.os "linux" }}
 
 .config/hypr
@@ -15,4 +14,10 @@ LICENSE
 .config/nixos
 {{- end -}}
 
+{{- end -}}
+
+
+{{- if ne .chezmoi.os "darwin" }}
+
+.homebrew
 {{- end }}
