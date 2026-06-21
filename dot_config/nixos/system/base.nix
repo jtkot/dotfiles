@@ -78,12 +78,12 @@
   ];
   fonts.packages = [ pkgs.font-awesome ];
 
-  hardware.keyboard.qmk.enable = true;
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
+  hardware.keyboard.qmk.enable = true;
 
   programs.gnupg.agent = {
-    enable = true;
+   enable = true;
     enableSSHSupport = true;
   };
   programs.neovim = {
