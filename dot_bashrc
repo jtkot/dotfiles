@@ -40,7 +40,7 @@ if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
     source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
 fi
 
-if [ -n "$PS1" ]; then
+if [[ $- == *i* ]] && [ -t 0 ]; then
     bind -x '"\es": __sudo_toggle_command'
 fi
 
