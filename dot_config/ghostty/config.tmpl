@@ -1,6 +1,6 @@
 # Shell
 command = {{ .tmuxPath }} new-session -t main
-shell-integration-features = no-cursor, sudo, title, ssh-env, ssh-terminfo
+shell-integration-features = no-cursor
 
 # Customization
 theme = Xcode Dark hc
@@ -10,6 +10,7 @@ background-opacity = 1
 window-padding-balance = true
 window-padding-x = 5
 window-padding-y = 0
+bell-features = no-title
 
 # TODO: padding color should be customizable on per axis basis
 window-padding-color = extend
