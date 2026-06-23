@@ -4,7 +4,7 @@
 	"small_model": "deepseek/deepseek-v4-flash",
 	"model": "deepseek/deepseek-v4-pro",
 	"mcp": {
-		"ghidra": {
+		"Ghidra": {
 			"enabled": false,
 			"type": "local",
 			"command": [
@@ -16,10 +16,15 @@
 				"{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
 			]
 		},
-		"cloudflare-docs": {
+		"Cloudflare Docs": {
 			"type": "remote",
 			"url": "https://docs.mcp.cloudflare.com/mcp",
 			"enabled": false
+		},
+		"Astro Docs": {
+		  "type": "remote",
+		  "url": "https://mcp.docs.astro.build/mcp",
+		  "enabled": false
 		}
 	}
 }
