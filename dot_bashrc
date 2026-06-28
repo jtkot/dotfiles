@@ -11,7 +11,7 @@ __setup_prompt() {
 	local GREEN RESET
 	GREEN="\[$(tput setaf 2)\]"
 	RESET="\[$(tput sgr0)\]"
-	export PS1="$GREEN\$(basename \"\$PWD\") $RESET) "
+	export PS1="$GREEN\W$RESET ) "
 }
 
 __sudo_toggle_command() {
