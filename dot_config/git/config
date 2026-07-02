@@ -18,3 +18,12 @@
 	email = jan@catnip.supply
 	name = Jan Kot
 	signingkey = 74865B39CC76129E
+
+ [credential "smtp://smtp.mail.me.com:587"]
+    helper = store
+
+[sendemail]
+	smtpserver = smtp.mail.me.com
+	smtpserverport = 587
+	smtpencryption = tls
+	smtpuser = jtkot@icloud.com
