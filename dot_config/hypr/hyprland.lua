@@ -25,7 +25,7 @@ hl.monitor({
 hl.on("hyprland.start", function()
 	startService("elephant")
 	startService("walker --gapplication-service")
-	-- startService("hypridle")
+	startService("hypridle")
 	startService("hyprpolkitagent")
 	startService("qs")
 end)
