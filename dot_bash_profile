@@ -57,6 +57,12 @@ GPG_TTY="$(tty)"
 
 __load_homebrew
 __load_nix
+
+if [ "$(command -v gem)" ]; then
+	prepend_to_path "$(gem env gemdir)/bin"
+fi
+
+prepend_to_path "$HOME/.dotnet/tools"
 prepend_to_path "$HOME/.local/bin"
 __setup_nh
 safe_source "$HOME/.env"
