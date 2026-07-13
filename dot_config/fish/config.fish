@@ -63,8 +63,8 @@ if status is-interactive
 	end
 
 	if [ -x "$(command -v llama-cli)" ]
-		alias gemma="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
-		alias qwen="llama-cli -hf unsloth/gemma-4-26b-a4b-it-GGUF:UD-IQ3_S -c 130000"
+		alias gemma "llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
+		alias qwen "llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
 	end
 
 	set -l DOTENV "$HOME/.env"
