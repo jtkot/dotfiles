@@ -1,14 +1,14 @@
-#:schema https://developers.openai.com/codex/config-schema.json
+# :schema https://developers.openai.com/codex/config-schema.json
 
-analytics.enabled = false
 check_for_update_on_startup = false
-model = "mimo-v2.5-pro"
+model = "deepseek-v4-pro"
 plan_mode_reasoning_effort = "xhigh"
 model_catalog_json = "catalog.json"
 model_provider = "openrouter"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 show_raw_agent_reasoning = false
+analytics.enabled = false
 skills.bundled.enabled = false
 
 [tui]
@@ -28,8 +28,8 @@ name = "OpenRouter"
 base_url = "https://openrouter.ai/api/v1"
 env_key = "OPENROUTER_API_KEY"
 wire_api = "responses"
-http_headers = { "HTTP-Referer" = "https://openai.com/codex/", "X-OpenRouter-Title" = "Codex"}
-env_http_headers = { "x-session-id" = "CODEX_THREAD_ID" }
+http_headers = { HTTP-Referer = "https://openai.com/codex/", X-OpenRouter-Title = "Codex" }
+env_http_headers = { x-session-id = "CODEX_THREAD_ID" }
 
 [mcp_servers.cloudflare-docs]
 enabled = false
@@ -45,6 +45,10 @@ args = [
   "python",
   "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
 ]
+
+[mcp_servers.localhost]
+enabled = false
+url = "http://127.0.0.1:8080/mcp"
 
 [[hooks.PreToolUse]]
 matcher = "^Bash$"
