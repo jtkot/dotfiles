@@ -2,7 +2,7 @@ final: prev: {
   openrgb = prev.openrgb.overrideAttrs (
     prevAttrs:
     let
-      rev = "8afad91b33f5fc61f632fe67b6ca98fe2299613d";
+      rev = "6b8db478fb6038cd0602ca61d601be6a1bc6c075";
     in
     {
       version = "0.9.1.g${builtins.substring 0 8 rev}";
@@ -10,7 +10,7 @@ final: prev: {
         inherit rev;
         url = "https://gitlab.com/CalcProgrammer1/OpenRGB.git";
         fetchTags = true;
-        hash = "sha256-3geSs/xePJEXNxzspakP6kUhgtzA0lcHYrvwN7lGFWc=";
+        hash = "sha256-p2Kk+gcWCMNPs78TLWvVINHU5ghFf4AcAlan6VZKrnk=";
       };
       nativeBuildInputs = prevAttrs.nativeBuildInputs ++ (with final; [ git ]);
       patches = [ ];
@@ -21,12 +21,12 @@ final: prev: {
       nvidiaPackages = lpsuper.nvidiaPackages.extend (
         npself: npsuper: {
           stable = npself.mkDriver {
-            version = "595.84";
-            sha256_64bit = "sha256-mcQE5SExvye8ptoCaNzOPr7cenOrF0BxqZXPGmxeugY=";
-            sha256_aarch64 = "sha256-GloNdDFfmXFVu4FAlNNk2qzqLOuw2N5CKatKkcSrQxk=";
-            openSha256 = "sha256-pEmA2tUcOKwUPKy6N0QvS49Pdut4/7Phs/JhjdyBcNY=";
-            settingsSha256 = "sha256-QrnBM+sdWO4GanO62rxpHmRrjYkYpl5RD6fIiHq4C4A=";
-            persistencedSha256 = "sha256-50xYdgx7EEThbaMp4QS8GADbxj0mhBXh8QQN0tWMwRg=";
+            version = "610.43.03";
+            sha256_64bit = "sha256-ReLUwTSiPDXlDyU6SqY+fl6NF+PRhdSgfIpY6WEu05I=";
+            sha256_aarch64 = "sha256-jSdlXo60ilXLKWKvZfgbBnVqVYuw6zhnGuiDgwxYz94=";
+            openSha256 = "sha256-QCXmqo2xNyIwjGv0da2MUC8ex641Mmc5DUI+uRFVwgE=";
+            settingsSha256 = "sha256-z/t+SdEQdVJPwjKIRHO02d264Kt47eWiOwwsaxmh4xQ=";
+            persistencedSha256 = "sha256-sOKUsAFHh0/COH+nNgbH9+7hWgivOzq4YmTuk9MOFfI=";
           };
         }
       );
