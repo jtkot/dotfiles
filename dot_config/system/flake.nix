@@ -38,7 +38,6 @@
           ./nixos.nix
           ./jan-pc.nix
           lanzaboote.nixosModules.lanzaboote
-          nix-index-database.nixosModules.default
         ];
         specialArgs = { inherit inputs; };
       };
@@ -47,6 +46,7 @@
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           modules = [
             ./home.nix
+            nix-index-database.homeModules.default
           ];
           extraSpecialArgs = { inherit inputs; };
         };
