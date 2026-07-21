@@ -92,6 +92,9 @@
     wl-clipboard
     quickshell
   ];
+  environment.defaultPackages = with pkgs; [
+    file
+  ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
