@@ -44,6 +44,7 @@ __setup_nh() {
 	fi
 }
 
+safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 safe_source "$HOME/.env"
 
 export EDITOR GPG_TTY NIX_CONFIG
