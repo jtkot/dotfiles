@@ -1,10 +1,10 @@
 if [ ! (command -q nh) ]
-	set -l NH_HOME_FLAKE "$HOME/.config/nixos/hm"
+	set -l NH_HOME_FLAKE "$HOME/.config/system/hm"
 	if [ -d "$NH_HOME_FLAKE" ]
 		set -gx NH_HOME_FLAKE "$NH_HOME_FLAKE"
 	end
 
-	set -l NH_OS_FLAKE "$HOME/.config/nixos/system"
+	set -l NH_OS_FLAKE "$HOME/.config/system/nixos"
 	if [ -d "$NH_OS_FLAKE" ]
 		set -gx NH_OS_FLAKE "$NH_OS_FLAKE"
 	end

@@ -39,12 +39,12 @@ __load_nix() {
 
 __setup_nh() {
 	if [ "$(command -v nh)" ]; then
-		local NH_HOME_FLAKE_LOCAL="$HOME/.config/nixos/hm"
+		local NH_HOME_FLAKE_LOCAL="$HOME/.config/system/hm"
 		if [ -d "$NH_HOME_FLAKE_LOCAL" ]; then
 			export NH_HOME_FLAKE="$NH_HOME_FLAKE_LOCAL"
 		fi
 
-		local NH_OS_FLAKE_LOCAL="$HOME/.config/nixos/system"
+		local NH_OS_FLAKE_LOCAL="$HOME/.config/system/nixos"
 		if [ -d "$NH_OS_FLAKE_LOCAL" ]; then
 			export NH_OS_FLAKE="$NH_OS_FLAKE_LOCAL"
 		fi
