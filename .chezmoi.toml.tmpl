@@ -10,11 +10,6 @@ recipient = "74865B39CC76129E"
 
 {{- $backgroundOpacity := 0.8 -}}
 
-{{- $tmuxPath := "/usr/bin/env tmux" -}}
-{{- if eq .chezmoi.os "darwin" -}}
-{{- $tmuxPath = "/opt/homebrew/bin/tmux" -}}
-{{- end -}}
-
 [merge]
 command = "nvim"
 args = [
@@ -28,4 +23,3 @@ args = [
 backgroundOpacity = {{ $backgroundOpacity }}
 cellHeight = {{ $cellHeight }}
 fontSize = {{ $fontSize }}
-tmuxPath = "{{ $tmuxPath }}"
