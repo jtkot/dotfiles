@@ -2,10 +2,14 @@
 {
   home.username = "jan";
   home.homeDirectory = "/home/jan";
-  nixpkgs.overlays = with inputs; [ nur.overlays.default ];
+  nixpkgs.overlays = with inputs; [
+    nur.overlays.default
+    (import ./overrides.nix)
+  ];
 
   home.stateVersion = "26.05";
   home.packages = with pkgs; [
+    ani-cli
     bintools
     blender
     bottom
