@@ -1,9 +1,0 @@
-{
-  "trustedformulae": [
-    "ruffle-rs/ruffle/ruffle",
-    "thezoraiz/ascii-image-converter/ascii-image-converter"
-  ],
-  "trustedcasks": [
-    "gcenx/wine/game-porting-toolkit"
-  ]
-}

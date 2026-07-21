@@ -17,19 +17,6 @@ prepend_to_path() {
 }
 export -f prepend_to_path
 
-__load_homebrew() {
-	local BREW="/opt/homebrew/bin/brew"
-	if [ -f $BREW ] && [ -z "$(command -v brew)" ]; then
-		export HOMEBREW_NO_ANALYTICS=1
-		export HOMEBREW_NO_ASK=1
-		export HOMEBREW_NO_EMOJI=1
-		export HOMEBREW_NO_ENV_HINTS=1
-		export HOMEBREW_UPGRADE_GREEDY=1
-		# shellcheck disable=SC1090
-		source <($BREW shellenv)
-		MANPATH=$HOMEBREW_PREFIX/share/man$MANPATH # a bug in homebrew?
-	fi
-}
 
 __setup_nh() {
 	local NH_FLAKE_LOCAL="$HOME/.config/system"
@@ -50,7 +37,6 @@ EDITOR="nvim"
 GPG_TTY="$(tty)"
 NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
 
-__load_homebrew
 __setup_nh
 
 prepend_to_path "$HOME/.local/bin"

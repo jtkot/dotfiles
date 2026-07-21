@@ -41,7 +41,17 @@ in
         while read dir; do addToSearchPath "MANPATH" "$dir"; done < "$file"
       done
 
+      # NOTE: is there a bug in homebrew?
+      MANPATH="''${MANPATH}${config.homebrew.prefix}/share/man"
+    '';
+
     shells = [ pkgs.bashInteractive ];
+    variables = {
+      HOMEBREW_NO_ANALYTICS = "1";
+      HOMEBREW_NO_ASK = "1";
+      HOMEBREW_NO_EMOJI = "1";
+      HOMEBREW_NO_ENV_HINTS = "1";
+    };
     defaultPackages = [
       (mkSystemBinSymlink "/usr/libexec/PlistBuddy")
       (mkSystemBinSymlink "/usr/libexec/java_home")
@@ -51,5 +61,50 @@ in
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;
+  };
+
+  homebrew = {
+    enable = true;
+    enableBashIntegration = true;
+    casks = [
+      "ableton-live-suite"
+      "android-platform-tools"
+      "calibre"
+      "db-browser-for-sqlite"
+      "game-porting-toolkit"
+      "ghostty"
+      "hammerspoon"
+      "helium-browser"
+      "imhex"
+      "moonlight"
+      "qview"
+      "schism-tracker"
+      "secretive"
+      "sonos"
+      "stolendata-mpv"
+      "transmission"
+      "valhalla-freq-echo"
+      "valhalla-space-modulator"
+      "valhalla-supermassive"
+      "wireshark-app"
+    ];
+    masApps = {
+      "Keynote" = 361285480;
+      "MacPacker" = 6473273874;
+      "Microsoft Excel" = 462058435;
+      "Model D" = 1339418001;
+      "Pages" = 361309726;
+      "Pixelmator Pro" = 1289583905;
+      "Reeder" = 6475002485;
+      "WireGuard" = 1451685025;
+      "Xcode" = 497799835;
+    };
+    taps = [
+      {
+        name = "gcenx/wine";
+        trusted = true;
+      }
+    ];
+    onActivation.cleanup = "uninstall";
   };
 }
