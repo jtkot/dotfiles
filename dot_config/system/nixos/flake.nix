@@ -26,6 +26,7 @@
     {
       nixosConfigurations.jan-pc = nixpkgs.lib.nixosSystem {
         modules = [
+          ./base.nix
           ./jan-pc.nix
           backportsModule
           lanzaboote.nixosModules.lanzaboote

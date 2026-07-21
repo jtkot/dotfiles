@@ -4,7 +4,6 @@
   ...
 }:
 {
-  system.stateVersion = lib.versions.majorMinor lib.version;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -16,29 +15,55 @@
   documentation.nixos.enable = false;
 
   # Workaround for Unreal Engine
-  system.activationScripts.binbash = {
+  system.activationScripts.binBash = {
     text = ''
       ln -sfn /bin/sh /bin/bash
     '';
   };
 
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
-  boot.kernelParams = [
-    "quiet"
-    "udev.log_level=3"
-  ];
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
+  boot = {
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    loader.efi.canTouchEfiVariables = true;
+    loader.timeout = 0;
+    plymouth.enable = true;
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+    ];
+    kernel.sysctl = {
+      "vm.swappiness" = 180;
+      "vm.watermark_boost_factor" = 0;
+      "vm.watermark_scale_factor" = 125;
+      "vm.page-cluster" = 0;
+    };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
   };
-  boot.plymouth.enable = true;
 
+  zramSwap = {
+    enable = true;
+    memoryMax = 16 * 1024 * 1024 * 1024;
+  };
+
+  networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.firewall.enable = false;
+  services.resolved.enable = true;
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.graphics.enable = true;
+  hardware.keyboard.qmk.enable = true;
   security.polkit.enable = true;
   security.rtkit.enable = true;
-  security.sudo.extraConfig = "Defaults pwfeedback";
+  services.fwupd.enable = true;
+  services.gvfs.enable = true;
+  services.printing.enable = true;
+  services.timesyncd.servers = [ "time.apple.com" ];
+  services.upower.enable = true;
+  virtualisation.containers.enable = true;
 
   time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "pl_PL.UTF-8";
@@ -76,12 +101,6 @@
     wl-clipboard
     quickshell
   ];
-  fonts.packages = [ pkgs.font-awesome ];
-
-  hardware.enableRedistributableFirmware = true;
-  hardware.graphics.enable = true;
-  hardware.keyboard.qmk.enable = true;
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -90,34 +109,25 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
-  programs.gnome-disks.enable = true;
 
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
-  networking.firewall.enable = false;
-  services.resolved.enable = true;
-
-  services.flatpak.enable = true;
-  services.fwupd.enable = true;
-  services.gvfs.enable = true;
-  services.playerctld.enable = true;
-  services.timesyncd.servers = [ "time.apple.com" ];
-  services.printing.enable = true;
-  services.upower.enable = true;
   services.pipewire = {
     enable = true;
     audio.enable = true;
   };
+
+  programs.gnome-disks.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.playerctld.enable = true;
+  services.flatpak.enable = true;
   services.xserver = {
     enable = true;
     excludePackages = with pkgs; [ xterm ];
     xkb.layout = "pl";
   };
-  services.displayManager.gdm.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
   programs.dconf.profiles = {
     gdm.databases = [
       {
@@ -143,13 +153,4 @@
       TimeoutStopSec = 10;
     };
   };
-  zramSwap.enable = true;
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 180;
-    "vm.watermark_boost_factor" = 0;
-    "vm.watermark_scale_factor" = 125;
-    "vm.page-cluster" = 0;
-  };
-  zramSwap.memoryMax = 16 * 1024 * 1024 * 1024;
-  virtualisation.podman.enable = true;
 }

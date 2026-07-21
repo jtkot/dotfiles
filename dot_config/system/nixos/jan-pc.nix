@@ -1,11 +1,12 @@
 {
   config,
-  lib,
   ...
 }:
 {
-  imports = [ ./base.nix ];
+  nixpkgs.hostPlatform = "x86_64-linux";
+  system.stateVersion = "25.05";
   networking.hostName = "jan-pc";
+
   services.openssh.enable = true;
   services.displayManager.gdm.autoSuspend = false;
 
@@ -16,11 +17,9 @@
     };
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
   hardware.bluetooth.enable = true;
   services.hardware.openrgb.enable = true;
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
@@ -29,7 +28,6 @@
     powerManagement.enable = true;
   };
   hardware.nvidia-container-toolkit.enable = true;
-
   nix.settings = {
     substituters = [
       "https://cache.nixos-cuda.org"
@@ -63,7 +61,6 @@
         "subvol=root"
       ];
     };
-
     "/home" = {
       device = "/dev/disk/by-uuid/1a1bb588-b80b-47be-b469-3f97dc05f1ba";
       fsType = "btrfs";
@@ -72,7 +69,6 @@
         "subvol=home"
       ];
     };
-
     "/nix" = {
       device = "/dev/disk/by-uuid/1a1bb588-b80b-47be-b469-3f97dc05f1ba";
       fsType = "btrfs";
@@ -82,7 +78,6 @@
         "subvol=nix"
       ];
     };
-
     "/boot" = {
       device = "/dev/disk/by-uuid/59D7-B538";
       fsType = "vfat";
