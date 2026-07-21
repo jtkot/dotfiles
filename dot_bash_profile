@@ -31,12 +31,6 @@ __load_homebrew() {
 	fi
 }
 
-__load_nix() {
-  if [ -z "$(command -v nix)" ]; then
-	safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-  fi
-}
-
 __setup_nh() {
 	local NH_FLAKE_LOCAL="$HOME/.config/system"
 	if [ "$(command -v nh)" ] && [ -d "$NH_FLAKE_LOCAL" ]; then
@@ -44,6 +38,10 @@ __setup_nh() {
 	fi
 }
 
+# keep nix available after macOS updates
+if [ -z "$(command -v nix)" ]; then
+	safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+fi
 safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 safe_source "$HOME/.env"
 
@@ -53,7 +51,6 @@ GPG_TTY="$(tty)"
 NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
 
 __load_homebrew
-__load_nix
 __setup_nh
 
 prepend_to_path "$HOME/.local/bin"
