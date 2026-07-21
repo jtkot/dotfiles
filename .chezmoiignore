@@ -11,7 +11,7 @@ LICENSE
 .config/quickshell
 
 {{- if ne .chezmoi.hostname "jan-pc" }}
-.config/nixos
+.config/system
 {{- end -}}
 
 {{- end -}}
