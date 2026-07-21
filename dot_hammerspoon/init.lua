@@ -60,7 +60,7 @@ end
 setupSpoonInstall()
 
 -- Change scroll direction when using mouse
-hs.eventtap.new({ hs.eventtap.event.types.scrollWheel }, function(event)
+ScrollWheelInverter = hs.eventtap.new({ hs.eventtap.event.types.scrollWheel }, function(event)
 	local isTrackpad = event:getProperty(hs.eventtap.event.properties.scrollWheelEventIsContinuous)
 	if isTrackpad == 1 then
 		return false
