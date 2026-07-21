@@ -118,7 +118,6 @@
   programs.gnome-disks.enable = true;
   services.displayManager.gdm.enable = true;
   services.playerctld.enable = true;
-  services.flatpak.enable = true;
   services.xserver = {
     enable = true;
     excludePackages = with pkgs; [ xterm ];

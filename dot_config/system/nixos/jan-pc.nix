@@ -9,6 +9,7 @@
 
   services.openssh.enable = true;
   services.displayManager.gdm.autoSuspend = false;
+  programs.steam.enable = true;
 
   networking.networkmanager.wifi.powersave = false;
   networking.wireless.iwd.settings = {
