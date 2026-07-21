@@ -15,6 +15,7 @@ LICENSE
 
 {{- if ne .chezmoi.os "darwin" }}
 
+iCloud Drive
 Library
 .hammerspoon
 {{- end }}

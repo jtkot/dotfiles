@@ -19,11 +19,6 @@
     username = "jan";
     homeDirectory = (if pkgs.stdenv.isDarwin then "/Users/" else "/home/") + config.home.username;
 
-    file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-      "iCloud Drive".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Library/Mobile Documents/com~apple~CloudDocs";
-    };
-
     packages =
       with pkgs;
       [
