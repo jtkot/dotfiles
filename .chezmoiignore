@@ -9,10 +9,12 @@ LICENSE
 .config/uwsm
 .config/walker
 .config/quickshell
+.config/net.imput.helium
 
 {{- end -}}
 
 {{- if ne .chezmoi.os "darwin" }}
 
+Library
 .hammerspoon
 {{- end }}
