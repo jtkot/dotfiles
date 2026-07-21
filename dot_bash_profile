@@ -58,5 +58,4 @@ if [ "$(command -v gem)" ]; then
 	prepend_to_path "$(gem env gemdir)/bin"
 fi
 
-prepend_to_path "$HOME/.dotnet/tools"
 safe_source "$HOME/.bashrc"
