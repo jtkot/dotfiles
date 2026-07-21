@@ -20,4 +20,5 @@ LICENSE
 {{- if ne .chezmoi.os "darwin" }}
 
 .homebrew
+.hammerspoon
 {{- end }}
