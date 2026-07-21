@@ -32,12 +32,11 @@ fi
 safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 safe_source "$HOME/.env"
 
-export EDITOR GPG_TTY NIX_CONFIG
-EDITOR="nvim"
-GPG_TTY="$(tty)"
-NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
-
 __setup_nh
+
+export EDITOR NIX_CONFIG
+EDITOR="nvim"
+NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
 
 prepend_to_path "$HOME/.local/bin"
 if [ "$(command -v gem)" ]; then

@@ -3,6 +3,5 @@ Include hosts
 Host *
 {{- if eq .chezmoi.os "darwin" }}
     IdentityAgent ~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-    UseKeychain yes
 {{- end }}
     AddKeysToAgent yes
