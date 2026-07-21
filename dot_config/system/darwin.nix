@@ -51,6 +51,9 @@ in
       HOMEBREW_NO_ASK = "1";
       HOMEBREW_NO_EMOJI = "1";
       HOMEBREW_NO_ENV_HINTS = "1";
+      XDG_DATA_DIRS = [
+        "/Applications/Xcode.app/Contents/Developer/usr/share"
+      ];
     };
     defaultPackages = [
       (mkSystemBinSymlink "/usr/libexec/PlistBuddy")

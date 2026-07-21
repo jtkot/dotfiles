@@ -1,12 +1,3 @@
-__setup_bash_completion() {
-	local HOMEBREW_BASH_COMPLETION="$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-	if [ -r "$HOMEBREW_BASH_COMPLETION" ]; then
-	  export HOMEBREW_BASH_COMPLETION_USER_DIR="/Applications/Xcode.app/Contents/Developer/usr/share/bash-completion"
-	  # shellcheck source=/opt/homebrew/etc/profile.d/bash_completion.sh
-	  source "$HOMEBREW_BASH_COMPLETION"
-	fi
-}
-
 __setup_prompt() {
 	local GREEN RESET
 	GREEN="\[$(tput setaf 2)\]"
@@ -33,7 +24,6 @@ shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTSIZE=$((2**18))
 # exec {BASH_XTRACEFD}> /dev/null
-__setup_bash_completion
 __setup_prompt
 
 if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
