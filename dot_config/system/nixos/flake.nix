@@ -15,20 +15,15 @@
   };
   outputs =
     {
-      self,
       nixpkgs,
       lanzaboote,
       nix-index-database,
     }:
-    let
-      backportsModule = import ./backports.nix nixpkgs;
-    in
     {
       nixosConfigurations.jan-pc = nixpkgs.lib.nixosSystem {
         modules = [
           ./base.nix
           ./jan-pc.nix
-          backportsModule
           lanzaboote.nixosModules.lanzaboote
           nix-index-database.nixosModules.default
         ];
