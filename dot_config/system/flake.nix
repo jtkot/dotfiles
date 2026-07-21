@@ -1,7 +1,13 @@
 {
   inputs = {
     nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
@@ -27,6 +33,7 @@
     {
       home-manager,
       lanzaboote,
+      nix-darwin,
       nix-index-database,
       nixpkgs,
       nixpkgs-nixos,
@@ -41,9 +48,19 @@
     {
       nixosConfigurations.jan-pc = nixpkgs-nixos.lib.nixosSystem {
         modules = [
+          ./system-common.nix
           ./nixos.nix
           ./jan-pc.nix
           lanzaboote.nixosModules.lanzaboote
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
+      darwinConfigurations.jan-macbook = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./system-common.nix
+          ./darwin.nix
+          ./jan-macbook.nix
         ];
         specialArgs = { inherit inputs; };
       };

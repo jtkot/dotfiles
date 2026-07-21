@@ -4,14 +4,6 @@
   ...
 }:
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [ (import ./overrides.nix) ];
-  };
   documentation.nixos.enable = false;
 
   # Workaround for Unreal Engine
@@ -65,7 +57,6 @@
   services.upower.enable = true;
   virtualisation.containers.enable = true;
 
-  time.timeZone = "Europe/Warsaw";
   i18n.defaultLocale = "pl_PL.UTF-8";
   console = {
     font = "Lat2-Terminus16";
@@ -93,7 +84,6 @@
     hyprpolkitagent
     hypridle
     nautilus
-    nh
     sbctl
     slurp
     sushi
@@ -102,10 +92,6 @@
     wl-clipboard
     quickshell
   ];
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
