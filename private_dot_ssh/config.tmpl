@@ -1,7 +1,4 @@
 Include hosts
-{{- if eq .chezmoi.os "darwin" }}
-Include ~/.colima/ssh_config
-{{- end }}
 
 Host *
 {{- if eq .chezmoi.os "darwin" }}
