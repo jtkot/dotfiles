@@ -32,6 +32,12 @@
       nixpkgs-nixos,
       ...
     }@inputs:
+    let
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+    in
     {
       nixosConfigurations.jan-pc = nixpkgs-nixos.lib.nixosSystem {
         modules = [
@@ -42,13 +48,15 @@
         specialArgs = { inherit inputs; };
       };
 
+      packages = nixpkgs.lib.genAttrs systems (system: {
         homeConfigurations.jan = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
             nix-index-database.homeModules.default
           ];
           extraSpecialArgs = { inherit inputs; };
         };
+      });
     };
 }

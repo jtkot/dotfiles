@@ -10,12 +10,7 @@ LICENSE
 .config/walker
 .config/quickshell
 
-{{- if ne .chezmoi.hostname "jan-pc" }}
-.config/system
 {{- end -}}
-
-{{- end -}}
-
 
 {{- if ne .chezmoi.os "darwin" }}
 
