@@ -20,5 +20,6 @@ sign-on-push = true
 backend = "gpg"
 
 [aliases]
+clone = ["git", "clone"]
 init = ["git", "init"]
 rm = ["file", "untrack"]
