@@ -1,0 +1,26 @@
+[DEFAULT]
+compartment-id = $OCI_CLI_TENANCY
+region = eu-frankfurt-1
+auth = security_token
+
+[OCI_CLI_CANNED_QUERIES]
+filter_by_display_name_contains_text = data[?contains("display-name", `your_text_here`)]
+filter_by_display_name_contains_text_and_get_attributes = data[?contains("display-name", `your_text_here`)].{id: id, timeCreated: "time-created"}
+get_id_and_display_name_from_list = data[*].{id: id, "display-name": "display-name"}
+get_id_and_display_name_from_single_result = data.{id: id, "display-name": "display-name"}
+get_id_display_name_and_lifecycle_state_from_list_as_csv = data[*].[join(`,`, [id, "display-name", "lifecycle-state"])][]
+get_id_display_name_and_lifecycle_state_from_single_result_as_csv = data.[id, "display-name", "lifecycle-state"] | join(`,`, @)
+get_last_2_results = data[-2:]
+get_public_ip = data[?"public-ip" != null]."public-ip" | [0]
+get_top_5_results = data[:5]
+list_public_ips = data[?"public-ip" != null]."public-ip"
+
+[OCI_CLI_COMMAND_ALIASES]
+ls = list
+rm = os.object.delete
+
+[OCI_CLI_PARAM_ALIASES]
+--ad = --availability-domain
+--dn = --display-name
+--egress-rules = --egress-security-rules
+--ingress-rules = --ingress-security-rules
