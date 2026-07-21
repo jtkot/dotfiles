@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.username = "jan";
   home.homeDirectory = "/home/jan";
+  nixpkgs.overlays = with inputs; [ nur.overlays.default ];
 
   home.stateVersion = "26.05";
   home.packages = with pkgs; [

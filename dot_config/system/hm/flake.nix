@@ -17,23 +17,18 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
-      nur,
-    }:
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ nur.overlays.default ];
-      };
     in
     {
-      homeConfigurations."jan" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations.jan = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
         modules = [ ./home.nix ];
+        extraSpecialArgs = { inherit inputs; };
       };
     };
 }
