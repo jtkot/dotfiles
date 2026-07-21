@@ -39,7 +39,6 @@
         fastfetch
         fd
         ffmpeg
-        file
         forgejo-cli
         fzf
         gh
@@ -173,6 +172,12 @@
         show-thumbnail = true;
         showsCursor = true;
         style = "selection";
+      };
+      "com.apple.menuextra.clock" = {
+        FlashDateSeparators = false;
+        ShowDate = 1;
+        ShowDayOfWeek = true;
+        ShowSeconds = true;
       };
     };
   };
