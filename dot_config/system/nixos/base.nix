@@ -85,6 +85,7 @@
     adwaita-icon-theme
     apple-cursor
     # brightnessctl
+    efibootmgr
     ddcutil
     ghostty
     grim
