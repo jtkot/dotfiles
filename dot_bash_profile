@@ -51,19 +51,21 @@ __setup_nh() {
 	fi
 }
 
-export EDITOR GPG_TTY
+safe_source "$HOME/.env"
+
+export EDITOR GPG_TTY NIX_CONFIG
 EDITOR="nvim"
 GPG_TTY="$(tty)"
+NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
 
 __load_homebrew
 __load_nix
+__setup_nh
 
+prepend_to_path "$HOME/.local/bin"
 if [ "$(command -v gem)" ]; then
 	prepend_to_path "$(gem env gemdir)/bin"
 fi
 
 prepend_to_path "$HOME/.dotnet/tools"
-prepend_to_path "$HOME/.local/bin"
-__setup_nh
-safe_source "$HOME/.env"
 safe_source "$HOME/.bashrc"
