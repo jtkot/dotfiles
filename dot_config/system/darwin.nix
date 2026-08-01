@@ -71,7 +71,6 @@ in
     enableBashIntegration = true;
     casks = [
       "ableton-live-suite"
-      "android-platform-tools"
       "calibre"
       "db-browser-for-sqlite"
       "game-porting-toolkit"
