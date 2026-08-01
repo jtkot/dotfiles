@@ -16,7 +16,7 @@ final: prev: {
   openrgb = prev.openrgb.overrideAttrs (
     prevAttrs:
     let
-      rev = "6b8db478fb6038cd0602ca61d601be6a1bc6c075";
+      rev = "c7140baa330dabce7c699c418cc0963f17f32202";
     in
     {
       version = "0.9.1.g${builtins.substring 0 8 rev}";
@@ -24,7 +24,7 @@ final: prev: {
         inherit rev;
         url = "https://gitlab.com/CalcProgrammer1/OpenRGB.git";
         fetchTags = true;
-        hash = "sha256-p2Kk+gcWCMNPs78TLWvVINHU5ghFf4AcAlan6VZKrnk=";
+        hash = "sha256-JNVAefH87I/ni+RKVvJU+LNvgzNTjuR1G9J/Di3gwsE=";
       };
       nativeBuildInputs = prevAttrs.nativeBuildInputs ++ (with final; [ git ]);
       patches = [ ];
