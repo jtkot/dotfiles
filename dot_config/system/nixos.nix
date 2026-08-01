@@ -33,6 +33,13 @@
       enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
+
+    kernelPackages = pkgs.linuxPackages_7_1; # for macbook support in cdc_ncm
+    extraModulePackages = [
+      (pkgs.net-usb-kernel-modules.overrideAttrs (_: {
+        patches = [ ./cdc-ncm-apple.patch ];
+      }))
+    ];
   };
 
   zramSwap = {

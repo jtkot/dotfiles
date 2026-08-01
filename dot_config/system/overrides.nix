@@ -46,4 +46,45 @@ final: prev: {
       );
     }
   );
+  net-usb-kernel-modules =
+    let
+      kernel = final.linuxPackages_7_1.kernel;
+    in
+    final.stdenv.mkDerivation {
+      pname = "net-usb-kernel-modules";
+      inherit (kernel)
+        src
+        version
+        postPatch
+        nativeBuildInputs
+        ;
+
+      kernel_dev = kernel.dev;
+      kernelVersion = kernel.modDirVersion;
+
+      modulePath = "drivers/net/usb";
+
+      buildPhase = ''
+        runHook preBuild
+
+        make -C "$kernel_dev/lib/modules/$kernelVersion/build" \
+        M="$PWD/$modulePath" \
+        "-j$NIX_BUILD_CORES" \
+        modules
+
+        runHook postBuild
+      '';
+
+      installPhase = ''
+        runHook preInstall
+
+        make -C "$kernel_dev/lib/modules/$kernelVersion/build" \
+           INSTALL_MOD_PATH="$out" \
+           XZ="xz -T$NIX_BUILD_CORES" \
+           M="$PWD/$modulePath" \
+           modules_install
+
+        runHook postInstall
+      '';
+    };
 }
