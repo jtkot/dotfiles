@@ -1,0 +1,60 @@
+diff --git a/drivers/net/usb/cdc_ncm.c b/drivers/net/usb/cdc_ncm.c
+index 0223a1728..55f45b2b7 100644
+--- a/drivers/net/usb/cdc_ncm.c
++++ b/drivers/net/usb/cdc_ncm.c
+@@ -1995,30 +1995,37 @@ static const struct driver_info wwan_noarp_info = {
+ 	.set_rx_mode = cdc_ncm_update_filter,
+ };
+ 
++#define APPLE_PRIVATE_INTERFACE_DEVICE(pid, ifnum) \
++	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, (pid), (ifnum)), \
++		.driver_info = (unsigned long)&apple_private_interface_info, \
++	}
++
++#define APPLE_TETHERING_INTERFACE_DEVICE(pid) \
++	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, (pid), 2), \
++		.driver_info = (unsigned long)&apple_tethering_interface_info, \
++	}
++
++#define APPLE_MOBILE_DEVICE_PAIR(pid) \
++	APPLE_TETHERING_INTERFACE_DEVICE(pid), \
++	APPLE_PRIVATE_INTERFACE_DEVICE(pid, 4)
++
++#define MAC_DEVICE_PAIR(pid) \
++	APPLE_PRIVATE_INTERFACE_DEVICE(pid, 0), \
++	APPLE_PRIVATE_INTERFACE_DEVICE(pid, 2)
++
+ static const struct usb_device_id cdc_devs[] = {
+ 	/* iPhone */
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x12a8, 2),
+-		.driver_info = (unsigned long)&apple_tethering_interface_info,
+-	},
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x12a8, 4),
+-		.driver_info = (unsigned long)&apple_private_interface_info,
+-	},
++	APPLE_MOBILE_DEVICE_PAIR(0x12a8),
+ 
+ 	/* iPad */
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x12ab, 2),
+-		.driver_info = (unsigned long)&apple_tethering_interface_info,
+-	},
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x12ab, 4),
+-		.driver_info = (unsigned long)&apple_private_interface_info,
+-	},
++	APPLE_MOBILE_DEVICE_PAIR(0x12ab),
+ 
+ 	/* Mac */
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x1905, 0),
+-		.driver_info = (unsigned long)&apple_private_interface_info,
+-	},
+-	{ USB_DEVICE_INTERFACE_NUMBER(0x05ac, 0x1905, 2),
+-		.driver_info = (unsigned long)&apple_private_interface_info,
+-	},
++	MAC_DEVICE_PAIR(0x1901),
++	MAC_DEVICE_PAIR(0x1902),
++	MAC_DEVICE_PAIR(0x1903),
++	MAC_DEVICE_PAIR(0x1904),
++	MAC_DEVICE_PAIR(0x1905),
+ 
+ 	/* Ericsson MBM devices like F5521gw */
+ 	{ .match_flags = USB_DEVICE_ID_MATCH_INT_INFO
