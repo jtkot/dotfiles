@@ -16,11 +16,13 @@
 
   security.sudo.extraConfig = "Defaults pwfeedback";
   time.timeZone = "Europe/Warsaw";
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
 
   environment.systemPackages = with pkgs; [
     nh
   ];
-
+  programs.zsh.enable = false;
   programs.bash.completion.enable = true;
   programs.gnupg.agent = {
     enable = true;

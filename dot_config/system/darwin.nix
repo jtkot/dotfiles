@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -14,11 +13,8 @@ let
 in
 {
   system.primaryUser = "jan";
-  system.tools = {
-    darwin-option.enable = false;
-    darwin-uninstaller.enable = false;
-    darwin-version.enable = false;
-  };
+  system.tools.enable = false;
+  system.tools.darwin-rebuild.enable = true;
 
   environment = {
     extraInit = ''
@@ -40,9 +36,6 @@ in
       for file in /etc/manpaths /etc/manpaths.d/*; do
         while read dir; do addToSearchPath "MANPATH" "$dir"; done < "$file"
       done
-
-      # NOTE: is there a bug in homebrew?
-      MANPATH="''${MANPATH}${config.homebrew.prefix}/share/man"
     '';
 
     shells = [ pkgs.bashInteractive ];
@@ -55,7 +48,7 @@ in
         "/Applications/Xcode.app/Contents/Developer/usr/share"
       ];
     };
-    defaultPackages = [
+    systemPackages = [
       (mkSystemBinSymlink "/usr/libexec/PlistBuddy")
       (mkSystemBinSymlink "/usr/libexec/java_home")
       (mkSystemBinSymlink "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister")

@@ -39,7 +39,6 @@
         gh
         ghidra-bin
         git-lfs
-        gitMinimal
         imagemagick
         intel-one-mono
         jadx
@@ -58,7 +57,7 @@
         ocamlPackages.cpdf
         oci-cli
         opencode
-        p7zip
+        p7zip-rar
         pandoc
         podman
         podman-compose

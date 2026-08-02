@@ -4,7 +4,7 @@
   ...
 }:
 {
-  documentation.nixos.enable = false;
+  system.disableInstallerTools = true;
 
   # Workaround for Unreal Engine
   system.activationScripts.binBash = {
@@ -76,24 +76,24 @@
     adwaita-icon-theme
     apple-cursor
     # brightnessctl
-    efibootmgr
     ddcutil
+    efibootmgr
+    elephant # available also as a service
+    file
     ghostty
+    gitMinimal # available in programs
     grim
-    hyprlock
+    hypridle # services
+    hyprlock # services
     hyprpolkitagent
-    hypridle
+    jq
     nautilus
+    quickshell
     sbctl
     slurp
-    sushi
-    elephant
+    sushi # services
     walker
     wl-clipboard
-    quickshell
-  ];
-  environment.defaultPackages = with pkgs; [
-    file
   ];
   programs.neovim = {
     enable = true;
@@ -105,6 +105,7 @@
     audio.enable = true;
   };
 
+  programs.nano.enable = false;
   programs.gnome-disks.enable = true;
   services.displayManager.gdm.enable = true;
   services.playerctld.enable = true;
