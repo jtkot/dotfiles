@@ -10,8 +10,12 @@ set show-mode-in-prompt on
 set vi-cmd-mode-string "\1\e[33m\2[N]\1\e[0m\2 "
 set vi-ins-mode-string "\1\e[38m\2[I]\1\e[0m\2 "
 
+# key bindings
 set keymap vi-command
 "/": ""
 ":": execute-named-command
 "?": ""
 "v": ""
+
+set keymap vi-insert
+"\eg": glob-expand-word
