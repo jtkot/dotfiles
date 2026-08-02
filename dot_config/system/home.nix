@@ -98,9 +98,9 @@
       ];
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = !pkgs.stdenv.isDarwin;
   xdg.userDirs = {
-    enable = true;
+    enable = !pkgs.stdenv.isDarwin;
     createDirectories = true;
     templates = null;
     projects = null;
