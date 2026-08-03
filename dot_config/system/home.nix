@@ -106,7 +106,7 @@
     projects = null;
     videos = "${config.home.homeDirectory}/Movies";
   };
-
+  programs.nix-index.symlinkToCacheHome = false;
   targets.darwin = lib.optionalAttrs pkgs.stdenv.isDarwin {
     defaults = {
       NSGlobalDomain = {
