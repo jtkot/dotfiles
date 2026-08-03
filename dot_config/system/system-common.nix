@@ -18,6 +18,7 @@
   time.timeZone = "Europe/Warsaw";
   documentation.doc.enable = false;
   documentation.info.enable = false;
+
   environment.shellAliases = {
     rm = "rm -i";
     cp = "cp -i";

@@ -16,6 +16,25 @@ in
   system.tools.enable = false;
   system.tools.darwin-rebuild.enable = true;
 
+  users = {
+    knownUsers = [
+      "root"
+      "jan"
+    ];
+    users.root = {
+      shell = pkgs.bashInteractive;
+      uid = 0;
+      gid = 0;
+    };
+    users.jan = {
+      description = "Jan Kot";
+      shell = pkgs.bashInteractive;
+      uid = 501;
+      gid = 20;
+      isHidden = false;
+    };
+  };
+
   environment = {
     extraInit = ''
       # source: https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/setup.sh

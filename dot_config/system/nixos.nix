@@ -55,6 +55,7 @@
   services.printing.enable = true;
   services.timesyncd.servers = [ "time.apple.com" ];
   services.upower.enable = true;
+  services.userborn.enable = true;
   virtualisation.containers.enable = true;
 
   i18n.defaultLocale = "pl_PL.UTF-8";
@@ -63,13 +64,18 @@
     useXkbConfig = true;
   };
 
-  users.users.jan = {
-    description = "Jan Kot";
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "plugdev"
-    ];
+  users = {
+    defaultUserShell = pkgs.bashInteractive;
+    groups.jan = { };
+    users.jan = {
+      description = "Jan Kot";
+      isNormalUser = true;
+      group = "jan";
+      extraGroups = [
+        "wheel"
+        "plugdev"
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
