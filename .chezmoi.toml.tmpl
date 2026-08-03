@@ -4,11 +4,7 @@ encryption = "gpg"
 recipient = "74865B39CC76129E"
 
 {{ $fontSizes := dict "jan-macbook" 14 -}}
-{{- $fontSize := index $fontSizes .chezmoi.hostname | default 12 -}}
 {{- $cellHeights := dict "jan-macbook" 55 -}}
-{{- $cellHeight := index $cellHeights .chezmoi.hostname | default 56 -}}
-
-{{- $backgroundOpacity := 0.8 -}}
 
 [merge]
 command = "nvim"
@@ -20,6 +16,5 @@ args = [
 ]
 
 [data]
-backgroundOpacity = {{ $backgroundOpacity }}
-cellHeight = {{ $cellHeight }}
-fontSize = {{ $fontSize }}
+fontSize = {{ index $fontSizes .chezmoi.hostname | default 12 }}
+cellHeight = {{ index $cellHeights .chezmoi.hostname | default 56 }}
