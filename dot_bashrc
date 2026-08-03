@@ -1,13 +1,23 @@
 __setup_prompt() {
-	local GREEN RESET
-	GREEN="\[$(tput setaf 2)\]"
-	RESET="\[$(tput sgr0)\]"
-	export PS1="$GREEN\W$RESET ) "
+    local GREEN RED COLOR RESET PROMPT_CHAR
+    RED="\[$(tput setaf 1)\]"
+    GREEN="\[$(tput setaf 2)\]"
+    RESET="\[$(tput sgr0)\]"
+
+    if [ "$EUID" -eq 0 ]; then
+        COLOR="$RED"
+        PROMPT_CHAR="#"
+    else
+        COLOR="$GREEN"
+        PROMPT_CHAR=")"
+    fi
+
+    export PS1="$COLOR\W$RESET $PROMPT_CHAR "
 }
 
 __sudo_toggle_command() {
     if [ -z "$READLINE_LINE" ]; then
-		return
+        return
     fi
 
     if [[ "$READLINE_LINE" =~ ^sudo[[:space:]]+(.*)$ ]]; then
@@ -35,21 +45,21 @@ if [[ $- == *i* ]] && [ -t 0 ]; then
 fi
 
 if [ "$(command -v fzf)" ]; then
-	# shellcheck disable=SC1090
-	source <(fzf --bash)
+    # shellcheck disable=SC1090
+    source <(fzf --bash)
 fi
 
 if [ "$(command -v fj)" ]; then
-	alias berg="fj -H codeberg.org"
+    alias berg="fj -H codeberg.org"
 fi
 
 if [ -x "$(command -v info)" ]; then
-	alias info="info --vi-keys"
+    alias info="info --vi-keys"
 fi
 
 if [ -x "$(command -v llama-cli)" ]; then
-	alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
-	alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
+    alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
+    alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
 fi
 
 alias ..="cd .."
