@@ -52,7 +52,6 @@
           ./nixos.nix
           ./jan-pc.nix
           lanzaboote.nixosModules.lanzaboote
-          nix-index-database.nixosModules.default
         ];
         specialArgs = { inherit inputs; };
       };
@@ -62,7 +61,6 @@
           ./system-common.nix
           ./darwin.nix
           ./jan-macbook.nix
-          nix-index-database.darwinModules.default
         ];
         specialArgs = { inherit inputs; };
       };
@@ -72,6 +70,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home.nix
+            nix-index-database.homeModules.default
           ];
           extraSpecialArgs = { inherit inputs; };
         };
