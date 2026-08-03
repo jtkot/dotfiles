@@ -1,0 +1,127 @@
+Diagnostics:
+  ClangTidy:
+    Add: [ '*' ]
+    CheckOptions:
+      readability-identifier-naming.ClassCase: CamelCase
+      readability-identifier-naming.EnumCase: CamelCase
+      readability-identifier-naming.FunctionCase: camelBack
+      readability-identifier-naming.MemberCase: lower_case
+      readability-identifier-naming.ParameterCase: lower_case
+      readability-identifier-naming.PrivateMemberCase: lower_case
+      readability-identifier-naming.VariableCase: lower_case
+      readability-identifier-naming.AbstractClassPrefix: I
+      readability-identifier-naming.EnumPrefix: E
+      readability-identifier-naming.PrivateMemberPrefix: m_
+    Remove: [
+      # TODO: include aliases
+      # fuchsia-temporary-objects, # in which version was this rule introduced?
+
+      ### disabling those rules triggers warning about long processing time ###
+      # bugprone-bitwise-pointer-cast,
+      # llvm-prefer-static-over-anonymous-namespace,
+      # readability-ambiguous-smartptr-reset-call,
+      # readability-container-size-empty,
+
+      ### disabled rules ###
+      abseil-*,
+      altera-*,
+      android-*,
+      boost-*,
+      bugprone-argument-comment,
+      bugprone-bad-signal-to-kill-thread,
+      bugprone-bool-pointer-implicit-conversion,
+      bugprone-casting-through-void,
+      bugprone-crtp-constructor-accessibility,
+      bugprone-dynamic-static-initializers,
+      bugprone-easily-swappable-parameters,
+      bugprone-empty-catch,
+      bugprone-inaccurate-erase,
+      bugprone-incorrect-enable-if,
+      bugprone-lambda-function-name,
+      bugprone-macro-repeated-side-effects,
+      bugprone-misplaced-operator-in-strlen-in-alloc,
+      bugprone-misplaced-pointer-arithmetic-in-alloc,
+      bugprone-multi-level-implicit-pointer-conversion,
+      bugprone-multiple-new-in-one-expression,
+      bugprone-not-null-terminated-result,
+      bugprone-optional-value-conversion,
+      bugprone-posix-return,
+      bugprone-signal-handler,
+      bugprone-signed-char-misuse,
+      bugprone-sizeof-expression,
+      bugprone-string-constructor,
+      bugprone-suspicious-enum-usage,
+      bugprone-suspicious-memory-comparison,
+      bugprone-suspicious-memset-usage,
+      bugprone-suspicious-missing-comma,
+      bugprone-suspicious-realloc-usage,
+      bugprone-suspicious-semicolon,
+      bugprone-suspicious-string-compare,
+      bugprone-suspicious-stringview-data-usage,
+      bugprone-swapped-arguments,
+      bugprone-unsafe-functions,
+      cert-dcl16-c,
+      cert-env33-c,
+      cert-err33-c, # TODO: check whether it reports anything more then unused does?
+      cert-flp30-c,
+      cert-msc50-cpp,
+      cert-msc51-cpp,
+      concurrency-mt-unsafe,
+      concurrency-thread-canceltype-asynchronous,
+      cppcoreguidelines-avoid-goto,
+      cppcoreguidelines-avoid-magic-numbers,
+      cppcoreguidelines-avoid-non-const-global-variables,
+      cppcoreguidelines-no-malloc,
+      cppcoreguidelines-owning-memory,
+      cppcoreguidelines-pro-bounds-pointer-arithmetic,
+      cppcoreguidelines-pro-type-reinterpret-cast,
+      cppcoreguidelines-pro-type-union-access,
+      darwin-*,
+      fuchsia-default-arguments-calls,
+      google-readability-avoid-underscore-in-googletest-name,
+      google-readability-casting,
+      google-readability-todo,
+      google-upgrade-googletest-case,
+      hicpp-no-assembler,
+      hicpp-uppercase-literal-suffix,
+      linuxkernel-*,
+      llvmlibc-*,
+      misc-misplaced-const,
+      misc-non-copyable-objects,
+      misc-non-private-member-variables-in-classes,
+      cppcoreguidelines-non-private-member-variables-in-classes,
+      misc-uniqueptr-reset-release,
+      modernize-use-trailing-return-type,
+      mpi-*,
+      objc-*,
+      openmp-*,
+      performance-faster-string-find,
+      performance-inefficient-algorithm,
+      performance-inefficient-string-concatenation,
+      performance-inefficient-vector-operation,
+      portability-restrict-system-includes,
+      readability-avoid-nested-conditional-operator,
+      readability-container-contains,
+      readability-container-data-pointer,
+      readability-function-cognitive-complexity,
+      readability-function-size,
+      readability-identifier-length,
+      readability-magic-numbers,
+      readability-math-missing-parentheses,
+      readability-misleading-indentation,
+      readability-redundant-smartptr-get,
+      readability-redundant-string-cstr,
+      readability-redundant-string-init,
+      readability-simplify-boolean-expr,
+      readability-simplify-subscript-expr,
+      readability-string-compare,
+      readability-suspicious-call-argument,
+      readability-uppercase-literal-suffix,
+      readability-use-anyofallof,
+      readability-use-std-min-max,
+      readability-isolate-declaration,
+
+      ### rules that should be set on per project basis ###
+      fuchsia-virtual-inheritance,
+      fuchsia-default-arguments-declarations
+    ]
