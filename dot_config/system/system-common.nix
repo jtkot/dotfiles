@@ -26,7 +26,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    nh
+    nh # programs (nixos only)
   ];
   programs.zsh.enable = false;
   programs.bash.completion.enable = true;

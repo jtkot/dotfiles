@@ -26,29 +26,29 @@
         apkeep
         ascii-image-converter
         binwalk
-        bottom
+        bottom # programs
         chezmoi
         cloudflared
         djvulibre
         efm-langserver
-        fastfetch
-        fd
+        fastfetch # programs
+        fd # programs
         ffmpeg
         forgejo-cli
-        fzf
-        gh
+        fzf # programs
+        gh # programs
         ghidra-bin
-        git-lfs
+        git-lfs # programs
         imagemagick
         intel-one-mono
         jadx
-        jujutsu
+        jujutsu # programs
         kaitai-struct-compiler
         lima
         loccount
         lua-language-server
         mutagen
-        neovim
+        neovim # programs
         nix-prefetch-scripts
         nix-tree
         nixd
@@ -56,14 +56,14 @@
         nmap
         ocamlPackages.cpdf
         oci-cli
-        opencode
+        opencode # programs
         p7zip-rar
-        pandoc
-        podman
+        pandoc # programs
+        podman # services
         podman-compose
         portablemc
         recode
-        ripgrep
+        ripgrep # programs
         roboto
         rtk
         ruby_4_0
@@ -71,14 +71,14 @@
         shellcheck
         sshuttle
         stylua
-        tmux
+        tmux # programs
         tombi
         typst
         validator-nu
         vscode-langservers-extracted
         yaml-language-server
         yq
-        yt-dlp
+        yt-dlp # programs
         zbar
       ]
       ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [
@@ -86,11 +86,11 @@
         cider-2
         d-spy
         gdb
-        ghostty
+        ghostty # programs
         krita
         license-cli
         llama-cpp-vulkan
-        mpv
+        mpv # programs
         nur.repos.Ev357.helium
         qt6.qtdeclarative
         qview
