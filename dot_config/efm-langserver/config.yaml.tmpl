@@ -32,13 +32,13 @@ languages:
         - '%f:%l:%c: %trror %m'
         - '%f:%l:%c: %tarning %m'
   sh:
-    - lint-command: 'shellcheck - --format=json | jq ''.[] | .level = (.level | .[0:1] | sub("s"; "n")) | "\(.line):\(.column):\(.level):\(.message) [SC\(.code)]"'''
+    - lint-command: 'sed -e "s/\t/ /g" | shellcheck - --format=json | jq ''.[] | .level = (.level | .[0:1] | sub("s"; "n")) | "\(.line):\(.column):\(.endColumn):\(.level):\(.message) [SC\(.code)]"'''
       lint-source: 'shellcheck'
       lint-stdin: true
       lint-ignore-exit-code: true
       lint-after-open: true
       lint-formats:
-        - '"%l:%c:%t:%m"'
+        - '"%l:%c:%k:%t:%m"'
       format-command: 'shfmt -s --filename ${INPUT} -'
       format-stdin: true
   typescript:
