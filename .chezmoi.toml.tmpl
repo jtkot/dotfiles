@@ -5,6 +5,8 @@ recipient = "74865B39CC76129E"
 
 {{ $fontSizes := dict "jan-macbook" 14 -}}
 {{- $cellHeights := dict "jan-macbook" 55 -}}
+{{- $imhexSharePaths := dict "darwin" "/Applications/ImHex.app/Contents/MacOS" -}}
+{{- $imhexDefaultSharePath:= joinPath .chezmoi.homeDir ".nix-profile/share/imhex" -}}
 
 [merge]
 command = "nvim"
@@ -18,3 +20,4 @@ args = [
 [data]
 fontSize = {{ index $fontSizes .chezmoi.hostname | default 12 }}
 cellHeight = {{ index $cellHeights .chezmoi.hostname | default 56 }}
+imhexSharePath = "{{ index $imhexSharePaths .chezmoi.os | default $imhexDefaultSharePath }}"

@@ -87,6 +87,7 @@
         d-spy
         gdb
         ghostty # programs
+        imhex
         krita
         license-cli
         llama-cpp-vulkan

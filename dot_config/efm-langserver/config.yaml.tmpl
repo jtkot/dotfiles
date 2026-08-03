@@ -21,16 +21,14 @@ tools:
         - '"%l:%c:%t:%m"'
 
 languages:
-{{- if eq .chezmoi.os "darwin" }}
   hexpat:
-    - lint-command: 'plcli run -I /Applications/ImHex.app/Contents/MacOS/includes -p ${INPUT} | grep -A1 error | tr "\n" ":" | sed "s/  -->   in //g; s/:--:/\n/g; s/:$/\n/"'
+    - lint-command: 'plcli run -I {{ .imhexSharePath }}/includes -p ${INPUT} | grep -A1 error | tr "\n" ":" | sed "s/  -->   in //g; s/:--:/\n/g; s/:$/\n/"'
       lint-source: 'plcli'
       lint-stdin: false
       lint-after-open: true
       lint-ignore-exit-code: true
       lint-formats: 
         - '%trror: %m:%f:%l:%c'
-{{- end }}
   meson:
     - lint-command: 'muon analyze -l -O ${INPUT}'
       lint-source: 'muon'
