@@ -17,7 +17,6 @@ prepend_to_path() {
 }
 export -f prepend_to_path
 
-
 __setup_nh() {
 	local NH_FLAKE_LOCAL="$HOME/.config/system"
 	if [ "$(command -v nh)" ] && [ -d "$NH_FLAKE_LOCAL" ]; then

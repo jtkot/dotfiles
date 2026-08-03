@@ -1,65 +1,65 @@
 __setup_prompt() {
-    local GREEN RED COLOR RESET PROMPT_CHAR
-    RED="\[$(tput setaf 1)\]"
-    GREEN="\[$(tput setaf 2)\]"
-    RESET="\[$(tput sgr0)\]"
+	local GREEN RED COLOR RESET PROMPT_CHAR
+	RED="\[$(tput setaf 1)\]"
+	GREEN="\[$(tput setaf 2)\]"
+	RESET="\[$(tput sgr0)\]"
 
-    if [ "$EUID" -eq 0 ]; then
-        COLOR="$RED"
-        PROMPT_CHAR="#"
-    else
-        COLOR="$GREEN"
-        PROMPT_CHAR=")"
-    fi
+	if [ "$EUID" -eq 0 ]; then
+		COLOR="$RED"
+		PROMPT_CHAR="#"
+	else
+		COLOR="$GREEN"
+		PROMPT_CHAR=")"
+	fi
 
-    export PS1="$COLOR\W$RESET $PROMPT_CHAR "
+	export PS1="$COLOR\W$RESET $PROMPT_CHAR "
 }
 
 __sudo_toggle_command() {
-    if [ -z "$READLINE_LINE" ]; then
-        return
-    fi
+	if [ -z "$READLINE_LINE" ]; then
+		return
+	fi
 
-    if [[ "$READLINE_LINE" =~ ^sudo[[:space:]]+(.*)$ ]]; then
-        READLINE_LINE="${BASH_REMATCH[1]}"
-        READLINE_POINT=$((READLINE_POINT - 5))
-    else
-        READLINE_LINE="sudo $READLINE_LINE"
-        READLINE_POINT=$((READLINE_POINT + 5))
-    fi
+	if [[ $READLINE_LINE =~ ^sudo[[:space:]]+(.*)$ ]]; then
+		READLINE_LINE="${BASH_REMATCH[1]}"
+		READLINE_POINT=$((READLINE_POINT - 5))
+	else
+		READLINE_LINE="sudo $READLINE_LINE"
+		READLINE_POINT=$((READLINE_POINT + 5))
+	fi
 }
 
 shopt -s autocd
 shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-export HISTSIZE=$((2**18))
+export HISTSIZE=$((2 ** 18))
 # exec {BASH_XTRACEFD}> /dev/null
 __setup_prompt
 
 if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
-    source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
+	source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
 fi
 
 if [[ $- == *i* ]] && [ -t 0 ]; then
-    bind -x '"\es": __sudo_toggle_command'
+	bind -x '"\es": __sudo_toggle_command'
 fi
 
 if [ "$(command -v fzf)" ]; then
-    # shellcheck disable=SC1090
-    source <(fzf --bash)
+	# shellcheck disable=SC1090
+	source <(fzf --bash)
 fi
 
 if [ "$(command -v fj)" ]; then
-    alias berg="fj -H codeberg.org"
+	alias berg="fj -H codeberg.org"
 fi
 
 if [ -x "$(command -v info)" ]; then
-    alias info="info --vi-keys"
+	alias info="info --vi-keys"
 fi
 
 if [ -x "$(command -v llama-cli)" ]; then
-    alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
-    alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
+	alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
+	alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
 fi
 
 alias ..="cd .."
