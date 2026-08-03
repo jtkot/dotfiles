@@ -68,6 +68,7 @@
         rtk
         ruby_4_0
         ruffle
+        shfmt
         shellcheck
         sshuttle
         stylua
