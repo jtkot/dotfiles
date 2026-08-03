@@ -22,6 +22,7 @@
     rm = "rm -i";
     cp = "cp -i";
     mv = "mv -i";
+    sudo = "sudo ";
   };
 
   environment.systemPackages = with pkgs; [
