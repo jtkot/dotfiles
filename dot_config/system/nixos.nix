@@ -19,6 +19,7 @@
     loader.efi.canTouchEfiVariables = true;
     loader.timeout = 0;
     plymouth.enable = true;
+    tmp.cleanOnBoot = true;
     kernelParams = [
       "quiet"
       "udev.log_level=3"
