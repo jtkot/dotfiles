@@ -35,7 +35,7 @@ end
 
 local function loadSpoonInstall()
 	---@class spoon.SpoonInstall
-	local SpoonInstall = hs.loadSpoon("SpoonInstall") 
+	local SpoonInstall = hs.loadSpoon("SpoonInstall")
 
 	SpoonInstall:asyncUpdateRepo("default", function(repo, success)
 		SpoonInstall:andUse("EmmyLua")
@@ -65,7 +65,9 @@ ScrollWheelInverter = hs.eventtap.new({ hs.eventtap.event.types.scrollWheel }, f
 	if isTrackpad == 1 then
 		return false
 	end
-	event:setProperty(hs.eventtap.event.properties.scrollWheelEventDeltaAxis1,
-		-event:getProperty(hs.eventtap.event.properties.scrollWheelEventDeltaAxis1))
+	for _, axis in ipairs({ "scrollWheelEventDeltaAxis1", "scrollWheelEventDeltaAxis2" }) do
+		local propertyId = hs.eventtap.event.properties[axis]
+		event:setProperty(propertyId, -event:getProperty(propertyId))
+	end
 	return false
 end):start()
