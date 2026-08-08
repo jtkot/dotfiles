@@ -29,10 +29,24 @@ __sudo_toggle_command() {
 	fi
 }
 
+__read_history() {
+	history -c
+	history -r
+}
+
+__sync_history() {
+	history -w
+	pkill -WINCH -u "$EUID" -x "^(-)?bash$"
+}
+
 shopt -s autocd
-shopt -s histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTSIZE=$((2 ** 18))
+export HISTCONTROL="ignorespace:erasedups"
+export PROMPT_COMMAND="__sync_history; $PROMPT_COMMAND"
+trap '__read_history' WINCH
+# unset HISTFILE to aviod triggering builtin history write on exit mechanism
+trap '__sync_history; unset HISTFILE' EXIT
+
 # exec {BASH_XTRACEFD}> /dev/null
 __setup_prompt
 
