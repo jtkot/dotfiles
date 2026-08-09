@@ -9,7 +9,7 @@
   nixpkgs = {
     overlays = with inputs; [
       nur.overlays.default
-      (import ./overrides.nix)
+      (import ./overrides.nix {})
     ];
     config.allowUnfree = true;
   };

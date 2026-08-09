@@ -24,6 +24,7 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
+    branch = "latest";
     open = true;
     nvidiaSettings = false;
     powerManagement.enable = true;

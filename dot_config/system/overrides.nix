@@ -1,4 +1,12 @@
-final: prev: {
+{
+  nixpkgs-unstable ? null,
+}:
+final: prev:
+let
+  lib = final.lib;
+  selectHighestVersion = a: b: if lib.versionOlder a.version b.version then b else a;
+in
+{
   ani-cli =
     (prev.ani-cli.overrideAttrs (
       finalAttrs: prevAttrs: {
@@ -30,20 +38,31 @@ final: prev: {
       patches = [ ];
     }
   );
-  linuxPackages = prev.linuxPackages.extend (
-    lpself: lpsuper: {
-      nvidiaPackages = lpsuper.nvidiaPackages.extend (
-        npself: npsuper: {
-          stable = npself.mkDriver {
-            version = "610.43.03";
-            sha256_64bit = "sha256-ReLUwTSiPDXlDyU6SqY+fl6NF+PRhdSgfIpY6WEu05I=";
-            sha256_aarch64 = "sha256-jSdlXo60ilXLKWKvZfgbBnVqVYuw6zhnGuiDgwxYz94=";
-            openSha256 = "sha256-QCXmqo2xNyIwjGv0da2MUC8ex641Mmc5DUI+uRFVwgE=";
-            settingsSha256 = "sha256-z/t+SdEQdVJPwjKIRHO02d264Kt47eWiOwwsaxmh4xQ=";
-            persistencedSha256 = "sha256-sOKUsAFHh0/COH+nNgbH9+7hWgivOzq4YmTuk9MOFfI=";
-          };
-        }
+  kernelPackagesExtensions = prev.kernelPackagesExtensions ++ [
+    (_: prevKernelPackages: {
+      nvidiaPackages = prevKernelPackages.nvidiaPackages.extend (
+        finalNvidiaPackages: _:
+        (lib.genAttrs [ "new_feature" "production" ] (
+          branch:
+          finalNvidiaPackages.mkDriver (
+            with nixpkgs-unstable.legacyPackages.x86_64-linux.linuxPackages.nvidiaPackages.${branch};
+            {
+              inherit version;
+              sha256_64bit = modsrc.src.hash;
+              sha256_aarch64 =
+                nixpkgs-unstable.legacyPackages.aarch64-linux.linuxPackages.nvidiaPackages.${branch}.modsrc.src.hash;
+              openSha256 = open.src.hash;
+              settingsSha256 = settings.src.hash;
+              persistencedSha256 = persistenced.src.hash;
+            }
+          )
+        ))
+        // (with finalNvidiaPackages; {
+          stable = if final.stdenv.hostPlatform.system == "i686-linux" then legacy_390 else production;
+          latest = selectHighestVersion production new_feature;
+          bleeding_edge = latest;
+        })
       );
-    }
-  );
+    })
+  ];
 }

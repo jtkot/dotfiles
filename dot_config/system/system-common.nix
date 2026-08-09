@@ -11,7 +11,7 @@
   ];
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [ (import ./overrides.nix) ];
+    overlays = [ (import ./overrides.nix { nixpkgs-unstable = inputs.nixpkgs-unstable; }) ];
   };
 
   security.sudo.extraConfig = "Defaults pwfeedback";
