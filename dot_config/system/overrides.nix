@@ -7,6 +7,33 @@ let
   selectHighestVersion = a: b: if lib.versionOlder a.version b.version then b else a;
 in
 {
+  license-cli = prev.license-cli.overrideAttrs (
+    finalAttrs: prevAttrs: {
+      postInstall = ''
+        installShellCompletion completions/license.{bash,fish}
+        installShellCompletion --zsh completions/_license
+        installManPage ./license.1
+
+        install -Dm0755 ./scripts/set-license -t $out/bin
+        wrapProgram $out/bin/set-license \
+          --prefix PATH : "$out/bin" \
+          --prefix PATH : ${lib.makeBinPath [ final.fzf ]}
+      ''
+      + lib.optionalString (!final.stdenv.isDarwin) ''
+
+        install -Dm0755 ./scripts/copy-header -t $out/bin
+        wrapProgram $out/bin/copy-header \
+          --prefix PATH : "$out/bin" \
+          --prefix PATH : ${
+            lib.makeBinPath (
+              with final;
+              [
+                wl-clipboard
+                xclip
+              ]
+            )
+          }
+      '';
     }
   );
   kernelPackagesExtensions = prev.kernelPackagesExtensions ++ [

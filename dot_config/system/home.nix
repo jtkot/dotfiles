@@ -44,6 +44,7 @@
         jadx
         jujutsu # programs
         kaitai-struct-compiler
+        license-cli
         lima
         loccount
         lua-language-server
@@ -90,7 +91,6 @@
         ghostty # programs
         imhex
         krita
-        license-cli
         llama-cpp-vulkan
         mpv # programs
         nur.repos.Ev357.helium
