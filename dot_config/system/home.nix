@@ -9,7 +9,7 @@
   nixpkgs = {
     overlays = with inputs; [
       nur.overlays.default
-      (import ./overrides.nix {})
+      (import ./overrides.nix { })
     ];
     config.allowUnfree = true;
   };
@@ -22,7 +22,7 @@
     packages =
       with pkgs;
       [
-        ani-cli
+        (ani-cli.override { withMpv = false; })
         apkeep
         ascii-image-converter
         binwalk
