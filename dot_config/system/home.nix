@@ -37,7 +37,7 @@
         forgejo-cli
         fzf # programs
         gh # programs
-        ghidra-bin
+        ghidra
         git-lfs # programs
         imagemagick
         intel-one-mono
