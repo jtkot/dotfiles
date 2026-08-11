@@ -1,3 +1,0 @@
-[DEFAULT]
-key_file = ~/.oci/sessions/DEFAULT/oci_api_key.pem
-security_token_file = ~/.oci/sessions/DEFAULT/token
