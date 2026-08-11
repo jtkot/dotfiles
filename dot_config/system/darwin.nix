@@ -111,7 +111,7 @@ in
       "Pixelmator Pro" = 1289583905;
       "Reeder" = 6475002485;
       "WireGuard" = 1451685025;
-      "Xcode" = 497799835;
+      # "Xcode" = 497799835;
     };
     taps = [
       {
