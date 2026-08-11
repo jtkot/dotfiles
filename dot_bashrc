@@ -65,6 +65,8 @@ fi
 
 if [[ $(command -v fj) ]]; then
 	alias berg="fj -H codeberg.org"
+	_completion_loader fj 2> /dev/null
+	eval "$(complete -p fj | sed 's/fj$/berg/')"
 fi
 
 if [[ -x $(command -v info) ]]; then
