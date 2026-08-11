@@ -17,7 +17,7 @@ hl.monitor({
 	position = "auto",
 	scale = 1.25,
 	vrr = 3,
-	icc = "/home/jan/.config/hypr/S2725QC_6500.icc",
+	icc = "/home/jan/Library/ColorSync/Profiles/S2725QC_6500.icc",
 })
 
 
