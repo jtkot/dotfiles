@@ -57,6 +57,7 @@
   services.timesyncd.servers = [ "time.apple.com" ];
   services.upower.enable = true;
   services.userborn.enable = true;
+  services.usbmuxd.enable = true;
   virtualisation.containers.enable = true;
 
   i18n.defaultLocale = "pl_PL.UTF-8";
