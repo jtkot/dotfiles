@@ -79,7 +79,7 @@
         validator-nu
         vscode-langservers-extracted
         yaml-language-server
-        yq
+        yq-go
         yt-dlp # programs
         zbar
       ]
