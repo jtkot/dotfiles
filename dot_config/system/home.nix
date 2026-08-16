@@ -110,6 +110,8 @@
   };
   programs.nix-index.symlinkToCacheHome = false;
   targets.darwin = lib.optionalAttrs pkgs.stdenv.isDarwin {
+    linkApps.enable = true;
+    copyApps.enable = !config.targets.darwin.linkApps.enable;
     defaults = {
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = true;
