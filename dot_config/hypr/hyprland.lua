@@ -117,6 +117,7 @@ hl.config({
 	input = {
 		kb_layout = "pl",
 		follow_mouse = 0,
+		natural_scroll = true,
 		sensitivity = 0.675,
 		accel_profile = "flat",
 	}
