@@ -122,4 +122,26 @@ in
     ];
     onActivation.cleanup = "uninstall";
   };
+
+  system.defaults = {
+    CustomSystemPreferences = {
+      "/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist" = {
+        AutoHotspotMode = "Never";
+        JoinModeFallback = [ "DoNothing" ];
+      };
+      "/Library/Preferences/.GlobalPreferences.plist" = {
+        "com.apple.coremedia.optimizeVideoStreamingOnBattery" = true;
+        NSShowFeedbackMenu = false;
+      };
+      loginwindow = {
+        ClockFontWeight = 485;
+        RetriesUntilHint = 0;
+      };
+      system.defaults.SoftwareUpdate = {
+        AutomaticallyInstallMacOSUpdates = true;
+        AutomaticDownload = true;
+        SplatEnabled = true;
+      };
+    };
+  };
 }

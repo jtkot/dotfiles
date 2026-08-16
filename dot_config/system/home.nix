@@ -115,6 +115,7 @@
     defaults = {
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = true;
+        "com.apple.sound.beep.sound" = "/System/Library/Sounds/Bottle.aiff";
         AppleSpacesSwitchOnActivate = true;
         NSCloseAlwaysConfirmsChanges = true;
         NSQuitAlwaysKeepsWindows = true;
@@ -134,13 +135,12 @@
         KeyRepeat = 2;
         ApplePressAndHoldEnabled = false;
       };
-      "com.apple.finder" = {
-        FXEnableExtensionChangeWarning = false;
-        _FXSortFoldersFirst = true;
-        _FXSortFoldersFirstOnDesktop = true;
-        FXDefaultSearchScope = "SCcf"; # current directory
-        NewWindowTarget = "PfHm"; # home directory
-        FinderSpawnTab = false;
+      "com.apple.bird" = {
+        "com.apple.clouddocs.unshared.moveOut.suppress" = 1;
+      };
+      "com.apple.chronod" = {
+        effectiveRemoteWidgetsEnabled = false;
+        hasRemoteWidgets = false;
       };
       "com.apple.dock" = {
         tilesize = 36;
@@ -151,6 +151,72 @@
         mru-spaces = false;
         show-recents = false;
       };
+      "com.apple.finder" =
+        let
+          IconViewSettings = {
+            arrangeBy = "name";
+            backgroundColorBlue = 1;
+            backgroundColorGreen = 1;
+            backgroundColorRed = 1;
+            gridOffsetX = 0;
+            gridOffsetY = 0;
+            gridSpacing = 44;
+            iconSize = 64;
+            labelOnBottom = true;
+            showIconPreview = true;
+            showItemInfo = true;
+            textSize = 11;
+          };
+        in
+        {
+          FK_DefaultIconViewSettings = IconViewSettings;
+          FXDefaultSearchScope = "SCcf"; # current directory
+          FXEnableExtensionChangeWarning = false;
+          FXICloudDriveDesktop = true;
+          FXICloudDriveDocuments = true;
+          FXICloudDriveEnabled = true;
+          FXPreferredGroupBy = "None";
+          FXPreferredViewStyle = "icnv";
+          FXRemoveOldTrashItems = true;
+          FinderSpawnTab = false;
+          NewWindowTarget = "PfHm"; # home directory
+          ShowHardDrivesOnDesktop = false;
+          ShowPathbar = true;
+          _FXSortFoldersFirst = true;
+          _FXSortFoldersFirstOnDesktop = true;
+          DesktopViewSettings = {
+            IconViewSettings = IconViewSettings // {
+              arrangeBy = "grid";
+              showItemInfo = false;
+            };
+          };
+          ICloudViewSettings = {
+            inherit IconViewSettings;
+          };
+          StandardViewSettings = {
+            inherit IconViewSettings;
+          };
+        };
+      "com.apple.loginwindow" = {
+        ClockFontWeight = 485;
+        TALLogoutSavesState = false;
+      };
+      "com.apple.menuextra.clock" = {
+        FlashDateSeparators = false;
+        ShowDate = 1;
+        ShowDayOfWeek = true;
+        ShowSeconds = true;
+      };
+      "com.apple.screencapture" = {
+        disable-shadow = true;
+        location-screenshot = "~/Library/Mobile Documents/com~apple~CloudDocs/Zrzuty ekranu";
+        location-screenrecording = "~/Library/Mobile Documents/com~apple~CloudDocs/Nagrania ekranu";
+        save-selections = false;
+        show-thumbnail = true;
+        showsCursor = true;
+        captureSystemAudio = true;
+        style = "selection";
+      };
       "com.apple.WindowManager" = {
         # Window tiling
         EnableTilingByEdgeDrag = false;
@@ -159,24 +225,22 @@
 
         # Stage Manager
         AppWindowGroupingBehavior = 0;
+        GloballyEnabledEver = true;
 
         # Desktop
         EnableStandardClickToShowDesktop = false;
       };
-      "com.apple.screencapture" = {
-        disable-shadow = true;
-        location = "~/Library/Mobile Documents/com~apple~CloudDocs/Zrzuty ekranu";
-        save-selections = false;
-        show-thumbnail = true;
-        showsCursor = true;
-        style = "selection";
+      "com.apple.TextEdit" = {
+        NSShowAppCentricOpenPanelInsteadOfUntitledFile = false;
+        RichText = false;
+        CheckGrammarWithSpelling = true;
+        NSFixedPitchFontSize = 17;
       };
-      "com.apple.menuextra.clock" = {
-        FlashDateSeparators = false;
-        ShowDate = 1;
-        ShowDayOfWeek = true;
-        ShowSeconds = true;
-      };
+      "${config.home.homeDirectory}/Library/Containers/com.apple.archiveutility/Data/Library/Preferences/com.apple.archiveutility.plist" =
+        {
+          dearchive-move-after-location.Selection = "MoveToTrash";
+          archive-reveal-after = true;
+        };
     };
   };
 }
