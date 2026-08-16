@@ -94,7 +94,6 @@ in
       "qview"
       "schism-tracker"
       "secretive"
-      "sonos"
       "stolendata-mpv"
       "transmission"
       "valhalla-freq-echo"
@@ -103,6 +102,8 @@ in
       "wireshark-app"
     ];
     masApps = {
+      # "GREE+" = 1167857672;
+      # "Hik-Connect" = 1087803190;
       "Keynote" = 361285480;
       "MacPacker" = 6473273874;
       "Microsoft Excel" = 462058435;
