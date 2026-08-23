@@ -65,7 +65,7 @@ fi
 
 if [[ $(command -v fj) ]]; then
 	alias berg="fj -H codeberg.org"
-	_completion_loader fj 2> /dev/null
+	_completion_loader fj 2>/dev/null
 	eval "$(complete -p fj | sed 's/fj$/berg/')"
 fi
 
@@ -76,6 +76,11 @@ fi
 if [[ -x $(command -v llama-cli) ]]; then
 	alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
 	alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
+fi
+
+if [[ $(uname -s) == "Darwin" ]]; then
+	export LANG
+	LANG="$(defaults read -g AppleLocale).UTF-8"
 fi
 
 alias ..="cd .."
