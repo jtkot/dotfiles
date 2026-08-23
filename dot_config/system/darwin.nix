@@ -119,6 +119,10 @@ in
         name = "gcenx/wine";
         trusted = true;
       }
+      {
+        name = "bell-sw/liberica";
+        trusted = true;
+      }
     ];
     onActivation.cleanup = "uninstall";
   };
