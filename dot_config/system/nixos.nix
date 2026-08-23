@@ -45,6 +45,7 @@
   networking.networkmanager.wifi.backend = "iwd";
   networking.firewall.enable = false;
   services.resolved.enable = true;
+  services.avahi.enable = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
