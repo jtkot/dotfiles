@@ -7,6 +7,75 @@ let
   selectHighestVersion = a: b: if lib.versionOlder a.version b.version then b else a;
 in
 {
+  ghidra = prev.ghidra.overrideAttrs (with final;
+    finalGhidra: prevGhidra: {
+      passthru = prevGhidra.passthru // {
+        withExtensions =
+          f:
+          (symlinkJoin {
+            name = "${ghidra.pname}-with-extensions-${lib.getVersion final.ghidra}";
+            paths = (f ghidra-extensions);
+            nativeBuildInputs = [
+              makeBinaryWrapper
+            ]
+            ++ lib.optional stdenv.hostPlatform.isDarwin final.desktopToDarwinBundle;
+            postBuild = ''
+              # Prevent attempted creation of plugin lock files in the Nix store.
+              touch $out/lib/ghidra/Ghidra/.dbDirLock
+
+              makeWrapper "${ghidra}/lib/ghidra/ghidraRun" "$out/bin/ghidra" \
+                  --set NIX_GHIDRAHOME "$out/lib/ghidra/Ghidra"
+              for bin in ${ghidra}/lib/ghidra/support/*; do
+                    if [[ ! -d $bin ]] && [[ -x $bin ]]; then
+                      makeWrapper "$bin" "$out/bin/ghidra-$(basename "$bin")" \
+                        --set NIX_GHIDRAHOME "$out/lib/ghidra/Ghidra" \
+						--prefix PATH : ${lib.makeBinPath [ python3 openjdk21 ]}
+                    fi
+                  done
+              ln -s ${ghidra}/share $out/share
+            '';
+            inherit (ghidra) meta;
+          });
+      };
+    }
+  );
+
+  ghidra-mcp = final.ghidra.buildGhidraExtension (
+    let
+      version = "6.0.0";
+    in
+    {
+      pname = "ghidra-mcp";
+      inherit version;
+
+      src = final.fetchFromGitHub {
+        owner = "bethington";
+        repo = "ghidra-mcp";
+        rev = "v${version}";
+        hash = "sha256-LnhhJwycO8NQV+YaTP7ZoxGkoGLkc14BwY66wczbpp0=";
+      };
+
+      installPhase = ''
+        runHook preInstall
+
+        mkdir -p $out/lib/ghidra/Ghidra/Extensions
+        unzip -d $out/lib/ghidra/Ghidra/Extensions build/distributions/*.zip
+
+        # Prevent attempted creation of plugin lock files in the Nix store.
+        for i in $out/lib/ghidra/Ghidra/Extensions/*; do
+          touch "$i/.dbDirLock"
+        done
+
+        runHook postInstall
+      '';
+
+      meta = {
+        description = "Ghidra MCP Server";
+        homepage = "https://github.com/bethington/ghidra-mcp";
+        license = lib.licenses.asl20;
+      };
+    }
+  );
   license-cli = prev.license-cli.overrideAttrs (
     finalAttrs: prevAttrs: {
       postInstall = ''

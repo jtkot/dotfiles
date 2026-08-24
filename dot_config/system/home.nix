@@ -37,7 +37,7 @@
         forgejo-cli
         fzf # programs
         gh # programs
-        ghidra
+        (ghidra.withExtensions (e: with e; [ ghidra-mcp ]))
         git-lfs # programs
         imagemagick
         intel-one-mono
