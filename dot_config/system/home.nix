@@ -227,6 +227,7 @@
         # Stage Manager
         AppWindowGroupingBehavior = 0;
         GloballyEnabledEver = true;
+		HideDesktop = false;
 
         # Desktop
         EnableStandardClickToShowDesktop = false;
