@@ -40,11 +40,12 @@ enabled = false
 command = "nix"
 args = [
   "develop",
-  "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp",
   "--command",
   "python",
-  "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/bridge_mcp_ghidra.py"
+  "-m",
+  "bridge_mcp_ghidra"
 ]
+cwd = "{{- .chezmoi.homeDir -}}/Repositories/ghidra-mcp/python"
 
 [mcp_servers.localhost]
 enabled = false
