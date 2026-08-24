@@ -135,7 +135,6 @@ in
       };
       "/Library/Preferences/.GlobalPreferences.plist" = {
         "com.apple.coremedia.optimizeVideoStreamingOnBattery" = true;
-        NSShowFeedbackMenu = false;
       };
       loginwindow = {
         RetriesUntilHint = 0;
