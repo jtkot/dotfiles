@@ -198,6 +198,7 @@
           };
         };
       "com.apple.loginwindow" = {
+        ClockFontIdentifier = "rounded";
         ClockFontWeight = 485;
         TALLogoutSavesState = false;
       };

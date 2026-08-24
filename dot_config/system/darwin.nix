@@ -138,7 +138,6 @@ in
         NSShowFeedbackMenu = false;
       };
       loginwindow = {
-        ClockFontWeight = 485;
         RetriesUntilHint = 0;
       };
       system.defaults.SoftwareUpdate = {
