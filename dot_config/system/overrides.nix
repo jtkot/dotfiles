@@ -19,7 +19,7 @@ in
           --prefix PATH : "$out/bin" \
           --prefix PATH : ${lib.makeBinPath [ final.fzf ]}
       ''
-      + lib.optionalString (!final.stdenv.isDarwin) ''
+      + lib.optionalString (!final.stdenv.hostPlatform.isDarwin) ''
 
         install -Dm0755 ./scripts/copy-header -t $out/bin
         wrapProgram $out/bin/copy-header \

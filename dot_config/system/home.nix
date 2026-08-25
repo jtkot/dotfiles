@@ -17,7 +17,7 @@
   home = {
     stateVersion = "26.05";
     username = "jan";
-    homeDirectory = (if pkgs.stdenv.isDarwin then "/Users/" else "/home/") + config.home.username;
+    homeDirectory = (if pkgs.stdenv.hostPlatform.isDarwin then "/Users/" else "/home/") + config.home.username;
 
     packages =
       with pkgs;
@@ -100,16 +100,16 @@
       ];
   };
 
-  fonts.fontconfig.enable = !pkgs.stdenv.isDarwin;
+  fonts.fontconfig.enable = !pkgs.stdenv.hostPlatform.isDarwin;
   xdg.userDirs = {
-    enable = !pkgs.stdenv.isDarwin;
+    enable = !pkgs.stdenv.hostPlatform.isDarwin;
     createDirectories = true;
     templates = null;
     projects = null;
     videos = "${config.home.homeDirectory}/Movies";
   };
   programs.nix-index.symlinkToCacheHome = false;
-  targets.darwin = lib.optionalAttrs pkgs.stdenv.isDarwin {
+  targets.darwin = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     linkApps.enable = true;
     copyApps.enable = !config.targets.darwin.linkApps.enable;
     defaults = {
