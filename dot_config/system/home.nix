@@ -114,7 +114,7 @@
     copyApps.enable = !config.targets.darwin.linkApps.enable;
     defaults = {
       NSGlobalDomain = {
-        "com.apple.sound.beep.feedback" = true;
+        "com.apple.sound.beep.feedback" = 1;
         "com.apple.sound.beep.sound" = "/System/Library/Sounds/Bottle.aiff";
         AppleSpacesSwitchOnActivate = true;
         NSCloseAlwaysConfirmsChanges = true;
