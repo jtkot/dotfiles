@@ -97,6 +97,10 @@ if [[ $- == *i* ]]; then
 		LANG="$(defaults read -g AppleLocale).UTF-8"
 	fi
 
+	if [[ -n $SSH_CLIENT ]]; then # || [[ -n $SSH_TTY ]]; then
+		unset SSH_ASKPASS
+	fi
+
 	if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
 		source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
 	fi
