@@ -18,5 +18,6 @@ LICENSE
 iCloud Drive
 Library/*
 !Library/ColorSync
+.bash_sessions_disable
 .hammerspoon
 {{- end }}
