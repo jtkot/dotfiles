@@ -1,4 +1,28 @@
-__setup_prompt() {
+function safe_source() {
+	if [[ -f $1 ]]; then
+		# shellcheck disable=SC1090
+		source "$1"
+	fi
+}
+
+function prepend_to_path() {
+	if [[ -d $1 ]]; then
+		if [[ -n $PATH ]]; then
+			PATH="$1$PATH"
+			return
+		fi
+		PATH="$1"
+	fi
+}
+
+function __setup_nh() {
+	local NH_FLAKE_LOCAL="$HOME/.config/system"
+	if [[ $(command -v nh) ]] && [[ -d $NH_FLAKE_LOCAL ]]; then
+		export NH_FLAKE="$NH_FLAKE_LOCAL"
+	fi
+}
+
+function __setup_prompt() {
 	local GREEN RED COLOR RESET PROMPT_CHAR
 	RED="\[$(tput setaf 1)\]"
 	GREEN="\[$(tput setaf 2)\]"
@@ -12,15 +36,15 @@ __setup_prompt() {
 		PROMPT_CHAR=")"
 	fi
 
-	export PS1="$COLOR\W$RESET $PROMPT_CHAR "
+	PS1="$COLOR\W$RESET $PROMPT_CHAR "
 }
 
-__sudo_toggle_command() {
+function __sudo_toggle_command() {
 	if [[ -z $READLINE_LINE ]]; then
 		return
 	fi
 
-	if [[ $READLINE_LINE =~ ^sudo[[:space:]]+(.*)$ ]]; then
+	if [[ $READLINE_LINE =~ ^sudo[[space:]]+(.*)$ ]]; then
 		READLINE_LINE="${BASH_REMATCH[1]}"
 		READLINE_POINT=$((READLINE_POINT - 5))
 	else
@@ -29,67 +53,82 @@ __sudo_toggle_command() {
 	fi
 }
 
-__read_history() {
+function __read_history() {
 	history -c
 	history -r
 }
 
-__sync_history() {
+function __sync_history() {
 	history -w
 	pkill -WINCH -u "$EUID" -x "^(-)?bash$"
 }
 
-shopt -s autocd
-export HISTSIZE=$((2 ** 18))
-export HISTCONTROL="ignorespace:erasedups"
-export PROMPT_COMMAND="__sync_history; $PROMPT_COMMAND"
-trap '__read_history' WINCH
-# unset HISTFILE to aviod triggering builtin history write on exit mechanism
-trap '__sync_history; unset HISTFILE' EXIT
+# keep nix available after macOS updates
+if [[ -z $(command -v nix) ]]; then
+	safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+fi
+safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+safe_source "$HOME/.env"
 
-# exec {BASH_XTRACEFD}> /dev/null
-__setup_prompt
+__setup_nh
 
-if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-	source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
+export EDITOR="nvim"
+export NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
+
+prepend_to_path "$HOME/.local/bin"
+if [[ $(command -v gem) ]]; then
+	prepend_to_path "$(gem env gemdir)/bin"
 fi
 
-if [[ $- == *i* ]] && [[ -t 0 ]]; then
+if [[ $- == *i* ]]; then
+	HISTSIZE=$((2 ** 18))
+	HISTCONTROL="ignorespace:erasedups"
+	PROMPT_COMMAND="__sync_history; $PROMPT_COMMAND"
+	trap '__read_history' WINCH
+	# unset HISTFILE to aviod triggering builtin history write on exit mechanism
+	trap '__sync_history; unset HISTFILE' EXIT
+
+	shopt -s autocd
 	bind -x '"\es": __sudo_toggle_command'
-fi
+	__setup_prompt
+	# exec {BASH_XTRACEFD}> /dev/null
 
-if [[ $(command -v fzf) ]]; then
-	# shellcheck disable=SC1090
-	source <(fzf --bash)
-fi
+	if [[ $(uname -s) == Darwin ]]; then
+		LANG="$(defaults read -g AppleLocale).UTF-8"
+	fi
 
-if [[ $(command -v fj) ]]; then
-	alias berg="fj -H codeberg.org"
-	_completion_loader fj 2>/dev/null
-	eval "$(complete -p fj | sed 's/fj$/berg/')"
-fi
+	if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+		source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
+	fi
 
-if [[ -x $(command -v info) ]]; then
-	alias info="info --vi-keys"
-fi
+	if [[ $(command -v fzf) ]]; then
+		# shellcheck disable=SC1090
+		source <(fzf --bash)
+	fi
 
-if [[ -x $(command -v llama-cli) ]]; then
-	alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
-	alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
-fi
+	if [[ $(command -v fj) ]]; then
+		alias berg="fj -H codeberg.org"
+		_completion_loader fj 2>/dev/null
+		eval "$(complete -p fj | sed 's/fj$/berg/')"
+	fi
 
-if [[ $(uname -s) == "Darwin" ]]; then
-	export LANG
-	LANG="$(defaults read -g AppleLocale).UTF-8"
-fi
+	if [[ -x $(command -v info) ]]; then
+		alias info="info --vi-keys"
+	fi
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
-alias ........="cd ../../../../../../.."
-alias .........="cd ../../../../../../../.."
-alias ls="ls --color=auto"
-alias l="ls -l"
+	if [[ -x $(command -v llama-cli) ]]; then
+		alias gemma="llama-cli -hf unsloth/gemma-4-26B-A4B-it-qat-GGUF -c 130000"
+		alias qwen="llama-cli -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-IQ3_XXS -c 130000"
+	fi
+
+	alias ..="cd .."
+	alias ...="cd ../.."
+	alias ....="cd ../../.."
+	alias .....="cd ../../../.."
+	alias ......="cd ../../../../.."
+	alias .......="cd ../../../../../.."
+	alias ........="cd ../../../../../../.."
+	alias .........="cd ../../../../../../../.."
+	alias ls="ls --color=auto"
+	alias l="ls -l"
+fi
