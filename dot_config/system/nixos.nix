@@ -111,6 +111,8 @@
     walker
     wl-clipboard
   ];
+
+  fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
