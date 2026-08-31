@@ -48,7 +48,7 @@
         lima
         loccount
         lua-language-server
-        mutagen
+        python3.pkgs.mutagen
         neovim # programs
         nix-prefetch-scripts
         nix-tree
