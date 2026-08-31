@@ -44,8 +44,15 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
   networking.firewall.enable = false;
-  services.resolved.enable = true;
   services.avahi.enable = true;
+  services.resolved.enable = true;
+  services.resolved.settings.Resolve.DNSOverTLS = true;
+  networking.nameservers = [
+  	"1.1.1.1"
+  	"1.0.0.1"
+	"2606:4700:4700::1111"
+	"2606:4700:4700::1001"
+  ];
 
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
