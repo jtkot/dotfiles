@@ -15,13 +15,6 @@ function prepend_to_path() {
 	fi
 }
 
-function __setup_nh() {
-	local NH_FLAKE_LOCAL="$HOME/.config/system"
-	if [[ $(command -v nh) ]] && [[ -d $NH_FLAKE_LOCAL ]]; then
-		export NH_FLAKE="$NH_FLAKE_LOCAL"
-	fi
-}
-
 function __setup_prompt() {
 	local GREEN RED COLOR RESET PROMPT_CHAR
 	RED="\[$(tput setaf 1)\]"
@@ -63,19 +56,25 @@ function __sync_history() {
 	pkill -WINCH -u "$EUID" -x "^(-)?bash$"
 }
 
+export EDITOR="nvim"
+safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+safe_source "$HOME/.env"
+prepend_to_path "$HOME/.local/bin"
+
 # keep nix available after macOS updates
 if [[ -z $(command -v nix) ]]; then
 	safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 fi
-safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-safe_source "$HOME/.env"
 
-__setup_nh
+if [[ $(command -v nix) ]] && [[ $NIX_GITHUB_API_KEY ]]; then
+	export NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
+fi
 
-export EDITOR="nvim"
-export NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
+if [[ $(command -v nh) ]]; then
+	export NH_FLAKE="$HOME/.config/system"
+	[[ -d $NH_FLAKE ]] || unset NH_FLAKE
+fi
 
-prepend_to_path "$HOME/.local/bin"
 if [[ $(command -v gem) ]]; then
 	prepend_to_path "$(gem env gemdir)/bin"
 fi
@@ -91,14 +90,11 @@ if [[ $- == *i* ]]; then
 	shopt -s autocd
 	bind -x '"\es": __sudo_toggle_command'
 	__setup_prompt
+	safe_source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
 	# exec {BASH_XTRACEFD}> /dev/null
 
 	if [[ $(uname -s) == Darwin ]]; then
 		LANG="$(defaults read -g AppleLocale).UTF-8"
-	fi
-
-	if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-		source "$GHOSTTY_RESOURCES_DIR"/shell-integration/bash/ghostty.bash
 	fi
 
 	if [[ $(command -v fzf) ]]; then
