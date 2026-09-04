@@ -91,7 +91,6 @@ in
       "helium-browser"
       "imhex"
       "moonlight"
-      "qview"
       "schism-tracker"
       "secretive"
       "stolendata-mpv"

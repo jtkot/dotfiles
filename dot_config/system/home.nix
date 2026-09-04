@@ -92,11 +92,11 @@
         ghostty # programs
         imhex
         krita
+        loupe
         llama-cpp-vulkan
         mpv # programs
         nur.repos.Ev357.helium
         qt6.qtdeclarative
-        qview
         widevine-cdm
       ];
   };
