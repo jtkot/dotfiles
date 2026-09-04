@@ -91,7 +91,6 @@
         gdb
         ghostty # programs
         imhex
-        krita
         loupe
         llama-cpp-vulkan
         mpv # programs
