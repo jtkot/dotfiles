@@ -17,7 +17,8 @@
   home = {
     stateVersion = "26.05";
     username = "jan";
-    homeDirectory = (if pkgs.stdenv.hostPlatform.isDarwin then "/Users/" else "/home/") + config.home.username;
+    homeDirectory =
+      (if pkgs.stdenv.hostPlatform.isDarwin then "/Users/" else "/home/") + config.home.username;
 
     packages =
       with pkgs;
@@ -112,6 +113,26 @@
   targets.darwin = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     linkApps.enable = true;
     copyApps.enable = !config.targets.darwin.linkApps.enable;
+    currentHostDefaults = {
+      "com.apple.DigitalColorMeter2" = {
+        colorSpace = 4; # sRGB
+        displayMode = 1; # hex
+      };
+      "com.apple.controlcenter" = {
+        AirplayReceiverEnabled = false;
+        BatteryShowEnergyMode = 0;
+        BatteryShowPercentage = true;
+
+        # +2 enable, +8 disable, +16 show always
+        NowPlaying = 8;
+        Display = 8;
+        Sound = 8;
+        WiFi = 8;
+      };
+      "com.apple.Spotlight".MenuItemHidden = true;
+      "com.apple.screensaver".idleTime = 0;
+      "com.apple.soundpref".AlertsUseMainDevice = 1;
+    };
     defaults = {
       NSGlobalDomain = {
         "com.apple.sound.beep.feedback" = 1;
@@ -135,9 +156,7 @@
         KeyRepeat = 2;
         ApplePressAndHoldEnabled = false;
       };
-      "com.apple.bird" = {
-        "com.apple.clouddocs.unshared.moveOut.suppress" = 1;
-      };
+      "com.apple.bird"."com.apple.clouddocs.unshared.moveOut.suppress" = 1;
       "com.apple.chronod" = {
         effectiveRemoteWidgetsEnabled = false;
         hasRemoteWidgets = false;
@@ -227,7 +246,7 @@
         # Stage Manager
         AppWindowGroupingBehavior = 0;
         GloballyEnabledEver = true;
-		HideDesktop = false;
+        HideDesktop = false;
 
         # Desktop
         EnableStandardClickToShowDesktop = false;
@@ -238,11 +257,10 @@
         CheckGrammarWithSpelling = true;
         NSFixedPitchFontSize = 17;
       };
-      "${config.home.homeDirectory}/Library/Containers/com.apple.archiveutility/Data/Library/Preferences/com.apple.archiveutility.plist" =
-        {
-          dearchive-move-after-location.Selection = "MoveToTrash";
-          archive-reveal-after = true;
-        };
+      "com.apple.archiveutility" = {
+        dearchive-move-after-location.Selection = "MoveToTrash";
+        archive-reveal-after = true;
+      };
     };
   };
 }
