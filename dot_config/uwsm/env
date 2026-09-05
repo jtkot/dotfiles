@@ -1,3 +1,0 @@
-export XCURSOR_THEME=macOS
-export XCURSOR_SIZE=30
-export QT_QPA_PLATFORMTHEME=gtk3
