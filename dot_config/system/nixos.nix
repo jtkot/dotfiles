@@ -59,6 +59,7 @@
   hardware.keyboard.qmk.enable = true;
   security.polkit.enable = true;
   security.rtkit.enable = true;
+  security.soteria.enable = true;
   services.fwupd.enable = true;
   services.gvfs.enable = true;
   services.printing.enable = true;
@@ -99,7 +100,6 @@
     file
     ghostty
     grim
-    hyprpolkitagent
     jq
     nautilus
     quickshell
@@ -149,19 +149,6 @@
   };
 
   systemd.user.services.hypridle.serviceConfig.Slice = "session.slice";
-  systemd.user.services.hyprpolkitagent = {
-    description = "hyprpolkitagent";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
-  };
   systemd.user.services.elephant = {
     enableDefaultPath = false;
     serviceConfig = {

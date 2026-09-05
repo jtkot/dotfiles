@@ -6,6 +6,13 @@ local function startApp(cmd)
     return hl.dsp.exec_cmd("systemd-run --user --scope -- " .. cmd)
 end
 
+-- HOOKS
+hl.on("hyprland.start", function()
+  -- notify uwsm that the compositor launched properly
+  -- NOTE: XDG_SESSION_ID is required for soteria
+  hl.exec_cmd("uwsm finalize XDG_SESSION_ID")
+end)
+
 -- MONITORS
 hl.monitor({
     output = "",
