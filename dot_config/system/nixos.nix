@@ -96,20 +96,15 @@
     brightnessctl
     ddcutil
     efibootmgr
-    elephant # available also as a service
     file
     ghostty
-    gitMinimal # available in programs
     grim
-    hypridle # services
-    hyprlock # services
     hyprpolkitagent
     jq
     nautilus
     quickshell
     sbctl
     slurp
-    sushi # services
     walker
     wl-clipboard
   ];
@@ -119,9 +114,17 @@
     enable = true;
     defaultEditor = true;
   };
+  programs.git = {
+    enable = true;
+    package = pkgs.gitMinimal;
+  };
 
   programs.gnome-disks.enable = true;
+  programs.hyprlock.enable = true;
   services.displayManager.gdm.enable = true;
+  services.elephant.enable = true;
+  services.gnome.sushi.enable = true;
+  services.hypridle.enable = true;
   services.playerctld.enable = true;
   services.xserver.xkb.layout = "pl";
   services.pipewire = {
@@ -144,6 +147,8 @@
       }
     ];
   };
+
+  systemd.user.services.hypridle.serviceConfig.Slice = "session.slice";
   systemd.user.services.hyprpolkitagent = {
     description = "hyprpolkitagent";
     wantedBy = [ "graphical-session.target" ];
@@ -155,6 +160,36 @@
       Restart = "on-failure";
       RestartSec = 1;
       TimeoutStopSec = 10;
+    };
+  };
+  systemd.user.services.elephant = {
+    enableDefaultPath = false;
+    serviceConfig = {
+      Slice = "session.slice";
+    };
+  };
+  systemd.user.services.quickshell = {
+    description = "Quickshell";
+    documentation = [ "https://quickshell.outfoxxed.me/docs" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "wayland-wm@hyprland.desktop.service" ];
+    enableDefaultPath = false;
+    serviceConfig = {
+      ExecStart = "${pkgs.quickshell}/bin/qs";
+      Restart = "on-failure";
+      Slice = "session.slice";
+    };
+  };
+  systemd.user.services.walker-daemon = {
+    description = "Walker - Multi-Purpose Launcher (background service)";
+    documentation = [ "https://benz.gitbook.io/walker" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "wayland-wm@hyprland.desktop.service" ];
+    enableDefaultPath = false;
+    serviceConfig = {
+      ExecStart = "${pkgs.walker}/bin/walker --gapplication-service";
+      Restart = "on-failure";
+      Slice = "session.slice";
     };
   };
 }

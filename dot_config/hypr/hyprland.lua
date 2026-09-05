@@ -3,10 +3,6 @@ local terminal = "ghostty"
 local main_mod = "CTRL + SUPER + "
 
 local function startApp(cmd)
-    return hl.dsp.exec_cmd("uwsm app -- " .. cmd)
-end
-
-local function startService(cmd)
     return hl.exec_cmd("uwsm app -t service -s b -- " .. cmd, {})
 end
 
@@ -19,17 +15,6 @@ hl.monitor({
     vrr = 3,
     icc = "/home/jan/Library/ColorSync/Profiles/S2725QC_6500.icc",
 })
-
-
--- SERVICES
-hl.on("hyprland.start", function()
-    startService("elephant")
-    startService("walker --gapplication-service")
-    startService("hypridle")
-    startService("hyprpolkitagent")
-    startService("qs")
-end)
-
 
 -- PERMISSIONS
 hl.config({
