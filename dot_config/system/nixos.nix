@@ -93,7 +93,7 @@
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     apple-cursor
-    # brightnessctl
+    brightnessctl
     ddcutil
     efibootmgr
     elephant # available also as a service
