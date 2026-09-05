@@ -62,6 +62,7 @@
   services.fwupd.enable = true;
   services.gvfs.enable = true;
   services.printing.enable = true;
+  services.scx.enable = true;
   services.timesyncd.servers = [ "time.apple.com" ];
   services.upower.enable = true;
   services.usbmuxd.enable = true;

@@ -14,6 +14,7 @@
   hardware.bluetooth.enable = true;
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
   services.hardware.openrgb.enable = true;
+  services.scx.scheduler = "scx_lavd";
 
   networking.networkmanager.wifi.powersave = false;
   networking.wireless.iwd.settings = {
