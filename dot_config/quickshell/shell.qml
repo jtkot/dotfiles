@@ -13,6 +13,7 @@ import Quickshell.Wayland
 ShellRoot {
     PanelWindow {
         WlrLayershell.layer: WlrLayer.Background
+        exclusionMode: ExclusionMode.Ignore
         anchors {
             top: true
             bottom: true
@@ -101,9 +102,10 @@ ShellRoot {
             active: volume_osd.shouldShowOsd
 
             PanelWindow {
+                WlrLayershell.layer: WlrLayer.Overlay
+                exclusionMode: ExclusionMode.Ignore;
                 anchors.bottom: true
                 margins.bottom: screen.height / 10
-                exclusiveZone: 0
                 implicitWidth: 400
                 implicitHeight: 50
                 color: "transparent"
