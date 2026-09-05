@@ -87,7 +87,6 @@ in
       "db-browser-for-sqlite"
       "game-porting-toolkit"
       "ghostty"
-      # "hammerspoon"
       "helium-browser"
       "imhex"
       "moonlight"

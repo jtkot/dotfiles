@@ -48,10 +48,10 @@
   services.resolved.enable = true;
   services.resolved.settings.Resolve.DNSOverTLS = true;
   networking.nameservers = [
-  	"1.1.1.1"
-  	"1.0.0.1"
-	"2606:4700:4700::1111"
-	"2606:4700:4700::1001"
+    "1.1.1.1"
+    "1.0.0.1"
+    "2606:4700:4700::1111"
+    "2606:4700:4700::1001"
   ];
 
   hardware.enableRedistributableFirmware = true;
@@ -64,8 +64,8 @@
   services.printing.enable = true;
   services.timesyncd.servers = [ "time.apple.com" ];
   services.upower.enable = true;
-  services.userborn.enable = true;
   services.usbmuxd.enable = true;
+  services.userborn.enable = true;
   virtualisation.containers.enable = true;
 
   i18n.defaultLocale = "pl_PL.UTF-8";
@@ -88,6 +88,7 @@
     };
   };
 
+  fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
     apple-cursor
@@ -112,25 +113,19 @@
     wl-clipboard
   ];
 
-  fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
+  programs.nano.enable = false;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
   };
 
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-  };
-
-  programs.nano.enable = false;
   programs.gnome-disks.enable = true;
   services.displayManager.gdm.enable = true;
   services.playerctld.enable = true;
-  services.xserver = {
+  services.xserver.xkb.layout = "pl";
+  services.pipewire = {
     enable = true;
-    excludePackages = with pkgs; [ xterm ];
-    xkb.layout = "pl";
+    audio.enable = true;
   };
   programs.hyprland = {
     enable = true;

@@ -7,9 +7,13 @@
   system.stateVersion = "25.05";
   networking.hostName = "jan-pc";
 
-  services.openssh.enable = true;
-  services.displayManager.gdm.autoSuspend = false;
   programs.steam.enable = true;
+  services.displayManager.gdm.autoSuspend = false;
+  services.openssh.enable = true;
+
+  hardware.bluetooth.enable = true;
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
+  services.hardware.openrgb.enable = true;
 
   networking.networkmanager.wifi.powersave = false;
   networking.wireless.iwd.settings = {
@@ -18,10 +22,7 @@
     };
   };
 
-  hardware.bluetooth.enable = true;
-  services.hardware.openrgb.enable = true;
-  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
-
+  hardware.nvidia-container-toolkit.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     branch = "latest";
@@ -29,7 +30,6 @@
     nvidiaSettings = false;
     powerManagement.enable = true;
   };
-  hardware.nvidia-container-toolkit.enable = true;
   nix.settings = {
     substituters = [
       "https://cache.nixos-cuda.org"
@@ -39,20 +39,22 @@
     ];
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "nct6687"
-  ];
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "thunderbolt"
-    "ahci"
-    "nvme"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ];
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ nct6687d ];
+    kernelModules = [
+      "kvm-intel"
+      "nct6687"
+    ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "thunderbolt"
+      "ahci"
+      "nvme"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+  };
 
   fileSystems = {
     "/" = {
