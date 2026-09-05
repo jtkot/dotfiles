@@ -9,7 +9,7 @@ tools:
         - '%f,%l,%c,%t,%m'
         - '%f,%l,%c,%t,%m'
   prettier: &prettier
-      format-command: 'prettier --stdin-filepath ${INPUT}'
+      format-command: 'prettier --stdin-filepath ${INPUT} ${--tab-width:tabSize} ${--use-tabs:insertSpaces} ${--range-start=charStart} ${--range-start=charEnd}'
       format-stdin: true
 
 languages:
@@ -39,7 +39,7 @@ languages:
       lint-after-open: true
       lint-formats:
         - '"%l:%c:%k:%t:%m"'
-      format-command: 'shfmt -s --filename ${INPUT} -'
+      format-command: 'shfmt -s ${--indent:tabSize} ${--indent 0:!insertSpaces} --filename ${INPUT} -'
       format-stdin: true
   typescript:
     - <<: *eslint
