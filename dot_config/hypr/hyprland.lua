@@ -3,7 +3,7 @@ local terminal = "ghostty"
 local main_mod = "CTRL + SUPER + "
 
 local function startApp(cmd)
-    return hl.exec_cmd("uwsm app -t service -s b -- " .. cmd, {})
+    return hl.dsp.exec_cmd("systemd-run --user --scope -- " .. cmd)
 end
 
 -- MONITORS
