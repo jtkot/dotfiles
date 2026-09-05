@@ -5,7 +5,7 @@ return {
 	hlsearch = false,
 	ignorecase = true,
 	incsearch = true,
-	modeline = true,
+	modeline = false,
 	mouse = "",
 	number = true,
 	numberwidth = 6,
