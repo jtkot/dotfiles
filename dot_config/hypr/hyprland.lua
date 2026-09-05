@@ -3,39 +3,39 @@ local terminal = "ghostty"
 local main_mod = "CTRL + SUPER + "
 
 local function startApp(cmd)
-	return hl.dsp.exec_cmd("uwsm app -- " .. cmd)
+    return hl.dsp.exec_cmd("uwsm app -- " .. cmd)
 end
 
 local function startService(cmd)
-	return hl.exec_cmd("uwsm app -t service -s b -- " .. cmd, {})
+    return hl.exec_cmd("uwsm app -t service -s b -- " .. cmd, {})
 end
 
 -- MONITORS
 hl.monitor({
-	output = "",
-	mode = "highrr",
-	position = "auto",
-	scale = 1.25,
-	vrr = 3,
-	icc = "/home/jan/Library/ColorSync/Profiles/S2725QC_6500.icc",
+    output = "",
+    mode = "highrr",
+    position = "auto",
+    scale = 1.25,
+    vrr = 3,
+    icc = "/home/jan/Library/ColorSync/Profiles/S2725QC_6500.icc",
 })
 
 
 -- SERVICES
 hl.on("hyprland.start", function()
-	startService("elephant")
-	startService("walker --gapplication-service")
-	startService("hypridle")
-	startService("hyprpolkitagent")
-	startService("qs")
+    startService("elephant")
+    startService("walker --gapplication-service")
+    startService("hypridle")
+    startService("hyprpolkitagent")
+    startService("qs")
 end)
 
 
 -- PERMISSIONS
 hl.config({
-	ecosystem = {
-		enforce_permissions = true,
-	},
+    ecosystem = {
+        enforce_permissions = true,
+    },
 })
 
 hl.permission({ binary = "^/nix/store/.*-grim-.*/bin/grim$", type = "screencopy", mode = "allow" })
@@ -44,55 +44,55 @@ hl.permission({ binary = "^/nix/store/.*-hyprlock-.*/bin/hyprlock$", type = "scr
 
 -- LOOK AND FEEL
 hl.config({
-	ecosystem = {
-		no_update_news = true,
-		no_donation_nag = true,
-	},
-	general = {
-		border_size = 0,
-		gaps_in = 0,
-		gaps_out = 0,
-		resize_on_border = true,
-		allow_tearing = false,
-		layout = "dwindle",
-	},
-	decoration = {
-		blur = {
-			enabled = false,
-			size = 8,
-			passes = 3,
-		},
-		dim_inactive = true,
-		dim_strength = 0.1,
-		rounding = 0,
-		shadow = {
-			enabled = true,
-			range = 150,
-			render_power = 2,
-			color = "rgba(00000040)",
-			scale = 0.95,
-			offset = { 0, 20 },
-		},
-	},
-	xwayland = {
-		force_zero_scaling = true,
-		use_nearest_neighbor = false,
-	},
-	animations = {
-		enabled = true,
-	},
-	cursor = {
-		no_warps = true,
-		no_hardware_cursors = false,
-	},
-	dwindle = {
-		preserve_split = true
-	},
-	misc = {
-		force_default_wallpaper = 0,
-		disable_hyprland_logo = true,
-		background_color = 0x1f1f24,
-	}
+    ecosystem = {
+        no_update_news = true,
+        no_donation_nag = true,
+    },
+    general = {
+        border_size = 0,
+        gaps_in = 0,
+        gaps_out = 0,
+        resize_on_border = true,
+        allow_tearing = false,
+        layout = "dwindle",
+    },
+    decoration = {
+        blur = {
+            enabled = false,
+            size = 8,
+            passes = 3,
+        },
+        dim_inactive = true,
+        dim_strength = 0.1,
+        rounding = 0,
+        shadow = {
+            enabled = true,
+            range = 150,
+            render_power = 2,
+            color = "rgba(00000040)",
+            scale = 0.95,
+            offset = { 0, 20 },
+        },
+    },
+    xwayland = {
+        force_zero_scaling = true,
+        use_nearest_neighbor = false,
+    },
+    animations = {
+        enabled = true,
+    },
+    cursor = {
+        no_warps = true,
+        no_hardware_cursors = false,
+    },
+    dwindle = {
+        preserve_split = true
+    },
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = true,
+        background_color = 0x1f1f24,
+    }
 })
 
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
@@ -113,13 +113,13 @@ hl.animation({ leaf = "workspaces", enabled = false })
 
 -- INPUT
 hl.config({
-	input = {
-		kb_layout = "pl",
-		follow_mouse = 0,
-		natural_scroll = true,
-		sensitivity = 0.675,
-		accel_profile = "flat",
-	}
+    input = {
+        kb_layout = "pl",
+        follow_mouse = 0,
+        natural_scroll = true,
+        sensitivity = 0.675,
+        accel_profile = "flat",
+    }
 })
 
 
@@ -178,19 +178,19 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 
 hl.window_rule({
-	name = "fix-tooltips",
-	match = { class = "UnrealEditor", float = true },
-	no_initial_focus = true,
+    name = "fix-tooltips",
+    match = { class = "UnrealEditor", float = true },
+    no_initial_focus = true,
 })
 
 hl.window_rule({
-	name = "floating-sushi",
-	match = { class = "org.gnome.NautilusPreviewer" },
-	float = true,
+    name = "floating-sushi",
+    match = { class = "org.gnome.NautilusPreviewer" },
+    float = true,
 })
 
 hl.window_rule({
-	name = "floating-file-picker",
-	match = { class = "xdg-desktop-portal-gtk" },
-	float = true,
+    name = "floating-file-picker",
+    match = { class = "xdg-desktop-portal-gtk" },
+    float = true,
 })

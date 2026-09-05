@@ -7,9 +7,9 @@ let
   mkSystemBinSymlink =
     path:
     pkgs.runCommandLocal "${lib.baseNameOf path}-system-bin-symlink" { } ''
-      	mkdir -p $out/bin
-      	ln -s ${path} $out/bin/
-      	'';
+          mkdir -p $out/bin
+          ln -s ${path} $out/bin/
+          '';
 in
 {
   system.primaryUser = "jan";

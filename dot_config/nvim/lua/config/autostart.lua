@@ -1,3 +1,3 @@
 return {
-	'colorscheme habamax'
+    'colorscheme habamax'
 }

@@ -120,10 +120,10 @@ ShellRoot {
                             leftMargin: 10
                             rightMargin: 15
                         }
-						spacing: 8
+                        spacing: 8
                         Item {
-							Layout.leftMargin: 4
-							Layout.rightMargin: 4
+                            Layout.leftMargin: 4
+                            Layout.rightMargin: 4
                             implicitHeight: 24
                             implicitWidth: 24
                             IconImage {
