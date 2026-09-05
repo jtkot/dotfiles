@@ -38,3 +38,16 @@ end
 for cmd in vim.iter(require'config.autostart') do
     vim.cmd(cmd)
 end
+
+_G.get_mode_name_short = function ()
+    local mode_names = {
+        ['n']   = 'NOR',
+        ['i']   = 'INS',
+        ['v']   = 'SEL',
+        ['V']   = 'LIN',
+        ['\22'] = 'BLK',
+        ['c']   = 'CMD',
+        -- TODO: missing terminal. anything else?
+    }
+    return mode_names[vim.api.nvim_get_mode().mode]
+end
