@@ -107,6 +107,7 @@
     slurp
     walker
     wl-clipboard
+    xwayland-satellite
   ];
 
   programs.nano.enable = false;
@@ -121,6 +122,7 @@
 
   programs.gnome-disks.enable = true;
   programs.hyprlock.enable = true;
+  programs.niri.enable = true;
   services.displayManager.gdm.enable = true;
   services.elephant.enable = true;
   services.gnome.sushi.enable = true;
@@ -159,7 +161,10 @@
     description = "Quickshell";
     documentation = [ "https://quickshell.outfoxxed.me/docs" ];
     partOf = [ "graphical-session.target" ];
-    wantedBy = [ "wayland-wm@hyprland.desktop.service" ];
+    wantedBy = [
+      "niri.service"
+      "wayland-wm@hyprland.desktop.service"
+    ];
     enableDefaultPath = false;
     serviceConfig = {
       ExecStart = "${pkgs.quickshell}/bin/qs";
@@ -171,7 +176,10 @@
     description = "Walker - Multi-Purpose Launcher (background service)";
     documentation = [ "https://benz.gitbook.io/walker" ];
     partOf = [ "graphical-session.target" ];
-    wantedBy = [ "wayland-wm@hyprland.desktop.service" ];
+    wantedBy = [
+      "niri.service"
+      "wayland-wm@hyprland.desktop.service"
+    ];
     enableDefaultPath = false;
     serviceConfig = {
       ExecStart = "${pkgs.walker}/bin/walker --gapplication-service";

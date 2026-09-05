@@ -21,3 +21,7 @@ args = [
 fontSize = {{ index $fontSizes .chezmoi.hostname | default 11 }}
 cellHeight = {{ index $cellHeights .chezmoi.hostname | default 60 }}
 imhexSharePath = "{{ index $imhexSharePaths .chezmoi.os | default $imhexDefaultSharePath }}"
+{{- if ne .chezmoi.os "darwin" }}
+cursorTheme = "macOS"
+cursorSize = 28
+{{- end }}
