@@ -54,7 +54,7 @@
     "2606:4700:4700::1001"
   ];
 
-  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
   hardware.graphics.enable = true;
   hardware.keyboard.qmk.enable = true;
   security.polkit.enable = true;
