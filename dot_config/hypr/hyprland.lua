@@ -1,19 +1,21 @@
--- VARIABLES
-local terminal = "ghostty"
-local main_mod = "CTRL + SUPER + "
-
 local function startApp(cmd)
     return hl.dsp.exec_cmd("systemd-run --user --scope -- " .. cmd)
 end
 
+local terminal = "ghostty"
+local main_mod = "CTRL + SUPER + "
+
 -- HOOKS
 hl.on("hyprland.start", function()
-  -- notify uwsm that the compositor launched properly
-  -- NOTE: XDG_SESSION_ID is required for soteria
-  hl.exec_cmd("uwsm finalize XDG_SESSION_ID")
+    -- notify uwsm that the compositor launched properly
+    -- NOTE: XDG_SESSION_ID is required for soteria
+    hl.exec_cmd("uwsm finalize XDG_SESSION_ID")
 end)
 
--- MONITORS
+-- CONFIGURATION
+hl.permission({ binary = "^/nix/store/.*-grim-.*/bin/grim$", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "^/nix/store/.*-hyprlock-.*/bin/hyprlock$", type = "screencopy", mode = "allow" })
+
 hl.monitor({
     output = "",
     mode = "highrr",
@@ -23,22 +25,11 @@ hl.monitor({
     icc = "/home/jan/Library/ColorSync/Profiles/S2725QC_6500.icc",
 })
 
--- PERMISSIONS
-hl.config({
-    ecosystem = {
-        enforce_permissions = true,
-    },
-})
-
-hl.permission({ binary = "^/nix/store/.*-grim-.*/bin/grim$", type = "screencopy", mode = "allow" })
-hl.permission({ binary = "^/nix/store/.*-hyprlock-.*/bin/hyprlock$", type = "screencopy", mode = "allow" })
-
-
--- LOOK AND FEEL
 hl.config({
     ecosystem = {
         no_update_news = true,
         no_donation_nag = true,
+        enforce_permissions = true,
     },
     general = {
         border_size = 0,
@@ -84,9 +75,17 @@ hl.config({
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
         background_color = 0x1f1f24,
+    },
+    input = {
+        kb_layout = "pl",
+        follow_mouse = 0,
+        natural_scroll = true,
+        sensitivity = 0.675,
+        accel_profile = "flat",
     }
 })
 
+-- ANIMATIONS
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 hl.curve("easeOutQuad", { type = "bezier", points = { { 0.5, 1 }, { 0.89, 1 } } })
 hl.curve("easeOutCubic", { type = "bezier", points = { { 0.33, 1 }, { 0.68, 1 } } })
@@ -102,18 +101,6 @@ hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOut
 hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, bezier = "easeOutExpo", style = "popin 87%" })
 hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
 hl.animation({ leaf = "workspaces", enabled = false })
-
--- INPUT
-hl.config({
-    input = {
-        kb_layout = "pl",
-        follow_mouse = 0,
-        natural_scroll = true,
-        sensitivity = 0.675,
-        accel_profile = "flat",
-    }
-})
-
 
 -- KEYBINDINGS
 hl.bind("CTRL + Q", hl.dsp.window.close())
@@ -169,6 +156,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 
+-- WINDOW RULES
 hl.window_rule({
     name = "fix-tooltips",
     match = { class = "UnrealEditor", float = true },
