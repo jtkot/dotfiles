@@ -102,6 +102,7 @@
 
   fonts.fontconfig.enable = !pkgs.stdenv.hostPlatform.isDarwin;
   programs.nix-index.symlinkToCacheHome = false;
+  systemd.user.enable = false;
   xdg.userDirs = {
     enable = !pkgs.stdenv.hostPlatform.isDarwin;
     createDirectories = true;
