@@ -18,6 +18,6 @@ args = [
 ]
 
 [data]
-fontSize = {{ index $fontSizes .chezmoi.hostname | default 12 }}
-cellHeight = {{ index $cellHeights .chezmoi.hostname | default 56 }}
+fontSize = {{ index $fontSizes .chezmoi.hostname | default 11 }}
+cellHeight = {{ index $cellHeights .chezmoi.hostname | default 60 }}
 imhexSharePath = "{{ index $imhexSharePaths .chezmoi.os | default $imhexDefaultSharePath }}"
