@@ -3,14 +3,15 @@ LICENSE
 
 .config/nvim/lazy-lock.json
 
-{{- if ne .chezmoi.os "linux" }}
+{{- if eq .chezmoi.os "darwin" }}
 
 .config/elephant
+.config/environment.d
 .config/hypr
 .config/net.imput.helium
+.config/niri
 .config/quickshell
 .config/swayidle
-.config/uwsm
 .config/walker
 
 {{- end -}}
