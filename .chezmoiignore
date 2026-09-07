@@ -5,12 +5,13 @@ LICENSE
 
 {{- if ne .chezmoi.os "linux" }}
 
-.config/hypr
-.config/uwsm
 .config/elephant
-.config/walker
-.config/quickshell
+.config/hypr
 .config/net.imput.helium
+.config/quickshell
+.config/swayidle
+.config/uwsm
+.config/walker
 
 {{- end -}}
 

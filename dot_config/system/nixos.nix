@@ -105,6 +105,7 @@
     quickshell
     sbctl
     slurp
+    swayidle
     walker
     wl-clipboard
     xwayland-satellite
@@ -122,11 +123,11 @@
 
   programs.gnome-disks.enable = true;
   programs.hyprlock.enable = true;
+  services.hypridle.enable = lib.mkForce false;
   programs.niri.enable = true;
   services.displayManager.gdm.enable = true;
   services.elephant.enable = true;
   services.gnome.sushi.enable = true;
-  services.hypridle.enable = true;
   services.playerctld.enable = true;
   services.xserver.xkb.layout = "pl";
   services.pipewire = {
@@ -150,10 +151,24 @@
     ];
   };
 
-  systemd.user.services.hypridle.serviceConfig.Slice = "session.slice";
   systemd.user.services.elephant = {
     enableDefaultPath = false;
     serviceConfig = {
+      Slice = "session.slice";
+    };
+  };
+  systemd.user.services.swayidle = {
+    description = "swayidle - Idle manager for Wayland";
+    documentation = [ "https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [
+      "niri.service"
+      "wayland-wm@hyprland.desktop.service"
+    ];
+    enableDefaultPath = false;
+    serviceConfig = {
+      ExecStart = "${pkgs.swayidle}/bin/swayidle";
+      Restart = "on-failure";
       Slice = "session.slice";
     };
   };
