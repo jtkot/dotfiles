@@ -5,12 +5,46 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell
+import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.Pipewire
 import Quickshell.Hyprland
 import Quickshell.Wayland
 
 ShellRoot {
+    SystemClock {
+        id: _clock
+        precision: SystemClock.Seconds
+    }
+
+    Item {
+        id: niri
+        signal overviewToggled(isOpen: bool)
+
+        Socket {
+            connected: true
+            path: Quickshell.env("NIRI_SOCKET")
+            onConnectedChanged: {
+                if (connected) {
+                    write('"EventStream"\n');
+                    flush();
+                }
+            }
+            parser: SplitParser {
+                onRead: message => {
+                    var event = JSON.parse(message);
+                    for (const key in JSON.parse(message)) {
+                        switch (key) {
+                        case "OverviewOpenedOrClosed":
+                            niri.overviewToggled(event[key]?.is_open ?? false);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     PanelWindow {
         WlrLayershell.layer: WlrLayer.Background
         exclusionMode: ExclusionMode.Ignore
@@ -20,7 +54,7 @@ ShellRoot {
             left: true
             right: true
         }
-        color: "#000000"
+        color: "transparent"
         Image {
             id: wallpaper
             anchors.fill: parent
@@ -30,47 +64,124 @@ ShellRoot {
     }
 
     PanelWindow {
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
-        implicitHeight: 32
-        color: "#000000"
+        anchors.top: true
+        anchors.left: true
+        anchors.right: true
+        color: "transparent"
+        implicitHeight: 128
+        exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.layer: WlrLayer.Bottom
 
-        SystemClock {
-            id: _clock
-            precision: SystemClock.Seconds
+        function toggleLayer(toTop: bool) {
+            WlrLayershell.layer = toTop ? WlrLayer.Top : WlrLayer.Bottom;
         }
 
-        Row {
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            padding: 12
-            spacing: 10
-            Text {
-                id: current_ws
-                color: "#FFFFFF"
-                font.pointSize: 10
-                text: Hyprland.focusedWorkspace?.id ?? "-"
+        Component.onCompleted: {
+            niri.overviewToggled.connect(toggleLayer);
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.00
+                    color: "#CC000000"
+                }
+                GradientStop {
+                    position: 0.25
+                    color: "#77000000"
+                }
+                GradientStop {
+                    position: 0.50
+                    color: "#33000000"
+                }
+                GradientStop {
+                    position: 0.75
+                    color: "#11000000"
+                }
+                GradientStop {
+                    position: 1.00
+                    color: "#00000000"
+                }
             }
-
-            Text {
-                id: current_win
-                color: "#AAAAAA"
-                font.pointSize: 10
-                text: ToplevelManager.activeToplevel?.title ?? ""
-            }
         }
+    }
 
-        Text {
-            id: clock
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-            padding: 12
-            color: "#FFFFFF"
-            font.pointSize: 10
-            text: Qt.formatDateTime(_clock.date, "ddd dd MMM hh:mm:ss")
+    PanelWindow {
+        anchors.top: true
+        anchors.left: true
+        anchors.right: true
+        color: "transparent"
+
+        implicitHeight: mainLayout.childrenRect.height
+
+        Column {
+            id: mainLayout
+            anchors.fill: parent
+
+            Item {
+                id: panel
+                readonly property int verticalPadding: 8
+                readonly property int horizontalPadding: 12
+
+                height: childrenRect.height + 2 * verticalPadding
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Item {
+                    height: 24
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.leftMargin: parent.horizontalPadding
+                    anchors.rightMargin: parent.horizontalPadding
+                    anchors.topMargin: parent.verticalPadding
+                    anchors.bottomMargin: parent.verticalPadding
+
+                    Row {
+                        spacing: 10
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        Loader {
+                            active: Quickshell.env("XDG_CURRENT_DESKTOP") == "Hyprland"
+                            sourceComponent: Text {
+                                id: current_ws
+                                color: "#FFFFFF"
+                                font.pointSize: 10
+                                text: Hyprland.focusedWorkspace.id
+                            }
+                        }
+
+                        Text {
+                            id: panel_cur_win
+                            color: "#FFFFFF"
+                            font.pointSize: 10.5
+                            font.bold: true
+                            style: Text.Raised
+                            text: {
+                                const toplevel = ToplevelManager.activeToplevel;
+                                if (!toplevel || !toplevel.appId)
+                                    return "";
+                                const entry = DesktopEntries.heuristicLookup?.(toplevel.appId);
+                                return entry?.name ?? toplevel.appId;
+                            }
+                        }
+                    }
+
+                    Text {
+                        id: panel_clock
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: "#FFFFFF"
+                        font.pointSize: 10.5
+                        style: Text.Raised
+                        text: {
+                            const str = _clock.date.toLocaleString(Qt.locale(), "ddd dd MMM hh:mm:ss");
+                            return str.charAt(0).toUpperCase() + str.slice(1);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -103,7 +214,7 @@ ShellRoot {
 
             PanelWindow {
                 WlrLayershell.layer: WlrLayer.Overlay
-                exclusionMode: ExclusionMode.Ignore;
+                exclusionMode: ExclusionMode.Ignore
                 anchors.bottom: true
                 margins.bottom: screen.height / 10
                 implicitWidth: 400
