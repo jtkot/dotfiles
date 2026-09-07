@@ -69,7 +69,7 @@ layout {
     struts {
         // left 64
         // right 64
-        // top 64
+        top -16
         // bottom 64
     }
 }
@@ -111,6 +111,18 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    background-effect {
+        blur true
+        xray true
+    }
+}
+
+blur {
+    on
+    passes 3
+    offset 5
+    saturation 1.5
+    noise 0.05
 }
 
 binds {
@@ -168,10 +180,8 @@ binds {
     Ctrl+Super+Shift+Home { move-column-to-first; }
     Ctrl+Super+Shift+End  { move-column-to-last; }
 
-    // Ctrl+Super+Page_Down      { focus-workspace-down; }
-    // Ctrl+Super+Page_Up        { focus-workspace-up; }
-    // Ctrl+Super+D              { focus-workspace-down; }
-    // Ctrl+Super+U              { focus-workspace-up; }
+    Ctrl+Super+Right             { focus-column-right; }
+    Ctrl+Super+Left              { focus-column-left; }
 
     // Ctrl+Super+Shift+Page_Down { move-column-to-workspace-down; }
     // Ctrl+Super+Shift+Page_Up   { move-column-to-workspace-up; }
