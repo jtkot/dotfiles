@@ -58,6 +58,7 @@ in
     '';
 
     shells = [ pkgs.bashInteractive ];
+    pathsToLink = [ "/share/vulkan" ];
     variables = {
       HOMEBREW_NO_ANALYTICS = "1";
       HOMEBREW_NO_ASK = "1";
@@ -67,10 +68,11 @@ in
         "/Applications/Xcode.app/Contents/Developer/usr/share"
       ];
     };
-    systemPackages = [
+    systemPackages = with pkgs; [
       (mkSystemBinSymlink "/usr/libexec/PlistBuddy")
       (mkSystemBinSymlink "/usr/libexec/java_home")
       (mkSystemBinSymlink "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister")
+      mesa
     ];
   };
   security.pam.services.sudo_local = {
