@@ -201,7 +201,6 @@
           FinderSpawnTab = false;
           NewWindowTarget = "PfHm"; # home directory
           ShowHardDrivesOnDesktop = false;
-          ShowPathbar = true;
           _FXSortFoldersFirst = true;
           _FXSortFoldersFirstOnDesktop = true;
           DesktopViewSettings = {
