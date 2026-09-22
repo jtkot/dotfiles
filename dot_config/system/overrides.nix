@@ -7,6 +7,7 @@ let
   selectHighestVersion = a: b: if lib.versionOlder a.version b.version then b else a;
 in
 {
+  mesa-unstable = nixpkgs-unstable.legacyPackages.${final.stdenv.system}.mesa;
   license-cli = prev.license-cli.overrideAttrs (
     finalAttrs: prevAttrs: {
       postInstall = ''

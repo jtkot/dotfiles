@@ -72,7 +72,7 @@ in
       (mkSystemBinSymlink "/usr/libexec/PlistBuddy")
       (mkSystemBinSymlink "/usr/libexec/java_home")
       (mkSystemBinSymlink "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister")
-      mesa
+      mesa-unstable
     ];
   };
   security.pam.services.sudo_local = {
