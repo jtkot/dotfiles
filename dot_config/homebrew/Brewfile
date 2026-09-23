@@ -1,0 +1,102 @@
+brew "apkeep"
+brew "bash"
+brew "bash-completion@2"
+brew "binwalk"
+brew "bottom"
+brew "chezmoi"
+brew "cloudflared"
+brew "cmake"
+brew "cpdf"
+brew "deno", link: false
+brew "djvulibre"
+brew "efm-langserver"
+brew "fastfetch"
+brew "fd"
+brew "ffmpeg"
+brew "forgejo-cli"
+brew "fzf"
+brew "gh"
+brew "gnupg"
+brew "ghidra"
+brew "git-lfs"
+brew "imagemagick"
+brew "jadx"
+brew "jj"
+brew "kaitai-struct-compiler"
+brew "lima"
+brew "lua", link: false
+brew "luajit", link: false
+brew "lua-language-server"
+brew "mas"
+brew "mesa"
+brew "mpv"
+brew "neovim"
+brew "nmap"
+brew "oci-cli"
+brew "pandoc"
+brew "pam-reattach"
+brew "pinentry-mac"
+brew "podman"
+brew "podman-compose"
+brew "python", link: false
+brew "python@3.14", link: false
+brew "node", link: false
+brew "recode"
+brew "ripgrep"
+brew "rtk"
+brew "shellcheck"
+brew "shfmt"
+brew "sshuttle"
+brew "stylua"
+brew "tinymist"
+brew "tmux"
+brew "tombi"
+brew "typst"
+brew "uv"
+brew "vnu"
+brew "yaml-language-server"
+brew "yq"
+brew "yt-dlp"
+brew "zbar"
+
+cask "ableton-live-suite"
+cask "antigravity-cli"
+cask "calibre"
+cask "db-browser-for-sqlite"
+cask "font-intel-one-mono"
+cask "ghostty"
+cask "helium-browser"
+cask "kindle-previewer"
+cask "photocraft"
+cask "ruffle"
+cask "secretive"
+cask "transmission"
+cask "unity-hub"
+cask "valhalla-freq-echo"
+cask "valhalla-space-modulator"
+cask "valhalla-supermassive"
+cask "wireshark-app"
+
+uv "mutagen"
+uv "ghidra_mcp_bridge", source: "https://github.com/bethington/ghidra-mcp/releases/download/v6.0.0/ghidra_mcp_bridge-6.0.0-py3-none-any.whl"
+
+mas "Keynote", id: 361285480
+mas "MacPacker", id: 6473273874
+mas "Model D", id: 1339418001
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
+mas "Pixelmator Pro", id: 1289583905
+mas "Reeder", id: 6475002485
+mas "Wipr 2", id: 1662217862
+mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835
+
+# "github:TheZoraiz/ascii-image-converter"
+# "github:pystardust/ani-cli"
+#
+# "cargo:https://sr.ht/~zethra/license"
+# "gem:kaitai-struct-visualizer"
+# "github:theorzr/portablemc"
+# "go:gitlab.com/esr/loccount"
+# cask "imhex"
+# cask "schism-tracker"
