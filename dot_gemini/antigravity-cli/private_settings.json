@@ -1,0 +1,16 @@
+{
+  "agentMode": "auto",
+  "altScreenMode": "always",
+  "editorMode": "vim",
+  "model": "Gemini 3.8 Flash (High)",
+  "permissions": {
+    "allow": [
+      "mcp(ghidra/*)",
+      "command(rtk)"
+    ]
+  },
+  "runningLightSpeed": "off",
+  "showFeedbackSurvey": false,
+  "showTips": false,
+  "verbosity": "high"
+}
