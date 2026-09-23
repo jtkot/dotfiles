@@ -19,9 +19,14 @@ macos_defaults/
 
 {{- if ne .chezmoi.os "darwin" }}
 
-iCloud Drive
 Library/*
 !Library/ColorSync
 .bash_sessions_disable
+
+iCloud Drive
 .hammerspoon
+
+.local/bin/java_home
+.local/bin/lsregister
+.local/bin/PlistBuddy
 {{- end }}

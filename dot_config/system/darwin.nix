@@ -3,14 +3,6 @@
   lib,
   ...
 }:
-let
-  mkSystemBinSymlink =
-    path:
-    pkgs.runCommandLocal "${lib.baseNameOf path}-system-bin-symlink" { } ''
-      mkdir -p $out/bin
-      ln -s ${path} $out/bin/
-    '';
-in
 {
   system.primaryUser = "jan";
   system.tools.enable = false;
@@ -69,9 +61,6 @@ in
       ];
     };
     systemPackages = with pkgs; [
-      (mkSystemBinSymlink "/usr/libexec/PlistBuddy")
-      (mkSystemBinSymlink "/usr/libexec/java_home")
-      (mkSystemBinSymlink "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister")
       mesa-unstable
     ];
   };
