@@ -114,63 +114,7 @@
   targets.darwin = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     linkApps.enable = true;
     copyApps.enable = !config.targets.darwin.linkApps.enable;
-    currentHostDefaults = {
-      "com.apple.DigitalColorMeter2" = {
-        colorSpace = 4; # sRGB
-        displayMode = 1; # hex
-      };
-      "com.apple.controlcenter" = {
-        AirplayReceiverEnabled = false;
-        BatteryShowEnergyMode = 0;
-        BatteryShowPercentage = true;
-
-        # +2 enable, +8 disable, +16 show always
-        NowPlaying = 8;
-        Display = 8;
-        Sound = 8;
-        WiFi = 8;
-      };
-      "com.apple.Spotlight".MenuItemHidden = true;
-      "com.apple.screensaver".idleTime = 0;
-      "com.apple.soundpref".AlertsUseMainDevice = 1;
-    };
     defaults = {
-      NSGlobalDomain = {
-        "com.apple.sound.beep.feedback" = 1;
-        "com.apple.sound.beep.sound" = "/System/Library/Sounds/Bottle.aiff";
-        AppleSpacesSwitchOnActivate = true;
-        NSCloseAlwaysConfirmsChanges = true;
-        NSQuitAlwaysKeepsWindows = true;
-        NSWindowShouldDragOnGesture = true;
-        NSZoomButtonShowMenu = false;
-
-        # Mouse/Trackpad
-        "com.apple.swipescrolldirection" = 1;
-        CGDisableCursorLocationMagnification = true;
-
-        # Keyboard
-        NSAutomaticCapitalizationEnabled = false;
-        WebAutomaticSpellingCorrectionEnabled = false;
-        NSAutomaticPeriodSubstitutionEnabled = false;
-        NSAutomaticSpellingCorrectionEnabled = false;
-        InitialKeyRepeat = 25;
-        KeyRepeat = 2;
-        ApplePressAndHoldEnabled = false;
-      };
-      "com.apple.bird"."com.apple.clouddocs.unshared.moveOut.suppress" = 1;
-      "com.apple.chronod" = {
-        effectiveRemoteWidgetsEnabled = false;
-        hasRemoteWidgets = false;
-      };
-      "com.apple.dock" = {
-        tilesize = 36;
-        largesize = 72;
-        magnification = true;
-        enterMissionControlByTopWindowDrag = false;
-        expose-group-apps = true;
-        mru-spaces = false;
-        show-recents = false;
-      };
       "com.apple.finder" =
         let
           IconViewSettings = {
@@ -216,51 +160,6 @@
             inherit IconViewSettings;
           };
         };
-      "com.apple.loginwindow" = {
-        ClockFontIdentifier = "rounded";
-        ClockFontWeight = 485;
-        TALLogoutSavesState = false;
-      };
-      "com.apple.menuextra.clock" = {
-        FlashDateSeparators = false;
-        ShowDate = 1;
-        ShowDayOfWeek = true;
-        ShowSeconds = true;
-      };
-      "com.apple.screencapture" = {
-        disable-shadow = true;
-        location-screenshot = "~/Library/Mobile Documents/com~apple~CloudDocs/Zrzuty ekranu";
-        location-screenrecording = "~/Library/Mobile Documents/com~apple~CloudDocs/Nagrania ekranu";
-        save-selections = false;
-        show-thumbnail = true;
-        showsCursor = true;
-        captureSystemAudio = true;
-        style = "selection";
-      };
-      "com.apple.WindowManager" = {
-        # Window tiling
-        EnableTilingByEdgeDrag = false;
-        EnableTopTilingByEdgeDrag = false;
-        EnableTilingOptionAccelerator = true;
-
-        # Stage Manager
-        AppWindowGroupingBehavior = 0;
-        GloballyEnabledEver = true;
-        HideDesktop = false;
-
-        # Desktop
-        EnableStandardClickToShowDesktop = false;
-      };
-      "com.apple.TextEdit" = {
-        NSShowAppCentricOpenPanelInsteadOfUntitledFile = false;
-        RichText = false;
-        CheckGrammarWithSpelling = true;
-        NSFixedPitchFontSize = 17;
-      };
-      "com.apple.archiveutility" = {
-        dearchive-move-after-location.Selection = "MoveToTrash";
-        archive-reveal-after = true;
-      };
     };
   };
 }

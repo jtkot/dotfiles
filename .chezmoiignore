@@ -1,5 +1,6 @@
 LICENSE
 **/.DS_Store
+macos_defaults/
 
 .config/nvim/lazy-lock.json
 

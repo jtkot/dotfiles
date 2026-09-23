@@ -1,0 +1,10 @@
+{
+    "disable-shadow": true,
+    "location-screenshot": "~/Library/Mobile Documents/com~apple~CloudDocs/Zrzuty ekranu",
+    "location-screenrecording": "~/Library/Mobile Documents/com~apple~CloudDocs/Nagrania ekranu",
+    "save-selections": false,
+    "show-thumbnail": true,
+    "showsCursor": true,
+    "captureSystemAudio": true,
+    "style": "selection"
+}

@@ -1,0 +1,6 @@
+{
+    "dearchive-move-after-location": {
+        "Selection": "MoveToTrash"
+    },
+    "archive-reveal-after": true
+}

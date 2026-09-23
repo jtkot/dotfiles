@@ -1,0 +1,9 @@
+{
+    "tilesize": 36,
+    "largesize": 72,
+    "magnification": true,
+    "enterMissionControlByTopWindowDrag": false,
+    "expose-group-apps": true,
+    "mru-spaces": false,
+    "show-recents": false
+}

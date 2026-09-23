@@ -1,0 +1,9 @@
+{
+    "EnableTilingByEdgeDrag": false,
+    "EnableTopTilingByEdgeDrag": false,
+    "EnableTilingOptionAccelerator": true,
+    "AppWindowGroupingBehavior": 0,
+    "GloballyEnabledEver": true,
+    "HideDesktop": false,
+    "EnableStandardClickToShowDesktop": false
+}
