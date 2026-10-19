@@ -75,7 +75,7 @@ if [[ $- == *i* ]]; then
     shopt -s autocd
     bind -x '"\es": __sudo_toggle_command'
     __setup_prompt
-    safe_source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+    safe_source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
     # exec {BASH_XTRACEFD}> /dev/null
 
     if [[ $(uname -s) == Darwin ]]; then
