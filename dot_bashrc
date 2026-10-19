@@ -57,6 +57,7 @@ function __sync_history() {
 }
 
 export EDITOR="nvim"
+export XDG_CONFIG_HOME="$HOME/.config"
 safe_source "$HOME/.env"
 
 BREW="/opt/homebrew/bin/brew"
