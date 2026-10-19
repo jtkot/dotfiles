@@ -58,6 +58,19 @@ function __sync_history() {
 
 export EDITOR="nvim"
 safe_source "$HOME/.env"
+
+BREW="/opt/homebrew/bin/brew"
+if [[ -x $BREW ]]; then
+    export HOMEBREW_NO_ANALYTICS=1
+    export HOMEBREW_NO_ASK=1
+    export HOMEBREW_NO_EMOJI=1
+    export HOMEBREW_NO_ENV_HINTS=1
+
+    # shellcheck disable=SC1090
+    source <("$BREW" shellenv bash)
+fi
+unset BREW
+
 prepend_to_path "$HOME/.local/bin"
 
 if [[ $(command -v gem) ]]; then
@@ -75,6 +88,7 @@ if [[ $- == *i* ]]; then
     shopt -s autocd
     bind -x '"\es": __sudo_toggle_command'
     __setup_prompt
+    safe_source "/opt/homebrew/opt/bash-completion@2/etc/profile.d/bash_completion.sh"
     safe_source "$GHOSTTY_RESOURCES_DIR/shell-integration/bash/ghostty.bash"
     # exec {BASH_XTRACEFD}> /dev/null
 
