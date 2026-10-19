@@ -1,4 +1,5 @@
 brew "apkeep"
+brew "anyzig", link: true
 brew "bash"
 brew "bash-completion@2"
 brew "binwalk"
@@ -58,6 +59,8 @@ brew "yaml-language-server"
 brew "yq"
 brew "yt-dlp"
 brew "zbar"
+brew "zig", link: false
+brew "zls"
 
 cask "ableton-live-suite"
 cask "antigravity-cli"
