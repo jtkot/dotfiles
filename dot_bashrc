@@ -57,23 +57,8 @@ function __sync_history() {
 }
 
 export EDITOR="nvim"
-safe_source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 safe_source "$HOME/.env"
 prepend_to_path "$HOME/.local/bin"
-
-# keep nix available after macOS updates
-if [[ -z $(command -v nix) ]]; then
-    safe_source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-fi
-
-if [[ $(command -v nix) ]] && [[ $NIX_GITHUB_API_KEY ]]; then
-    export NIX_CONFIG="access-tokens = github.com=$NIX_GITHUB_API_KEY"
-fi
-
-if [[ $(command -v nh) ]]; then
-    export NH_FLAKE="$HOME/.config/system"
-    [[ -d $NH_FLAKE ]] || unset NH_FLAKE
-fi
 
 if [[ $(command -v gem) ]]; then
     prepend_to_path "$(gem env gemdir)/bin"
