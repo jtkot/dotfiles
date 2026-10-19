@@ -8,7 +8,6 @@ recipient = "74865B39CC76129E"
 {{- $imhexSharePaths := dict "darwin" "/Applications/ImHex.app/Contents/MacOS" -}}
 {{- $tmuxPaths := dict "darwin" "/opt/homebrew/bin/tmux" -}}
 {{- $ytDlpPaths := dict "darwin" "/opt/homebrew/bin/yt-dlp" -}}
-{{- $imhexDefaultSharePath:= joinPath .chezmoi.homeDir ".nix-profile/share/imhex" -}}
 
 [merge]
 command = "nvim"
@@ -22,7 +21,7 @@ args = [
 [data]
 fontSize = {{ index $fontSizes .chezmoi.hostname | default 11 }}
 cellHeight = {{ index $cellHeights .chezmoi.hostname | default 60 }}
-imhexSharePath = "{{ index $imhexSharePaths .chezmoi.os | default $imhexDefaultSharePath }}"
+imhexSharePath = "{{ index $imhexSharePaths .chezmoi.os | default "/usr/share/imhex" }}"
 tmuxPath = "{{ index $tmuxPaths .chezmoi.os | default "/usr/bin/tmux" }}"
 ytDlpPath = "{{ index $ytDlpPaths .chezmoi.os | default "/usr/bin/yt-dlp" }}"
 {{- if ne .chezmoi.os "darwin" }}
