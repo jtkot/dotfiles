@@ -112,8 +112,6 @@
   };
 
   targets.darwin = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-    linkApps.enable = true;
-    copyApps.enable = !config.targets.darwin.linkApps.enable;
     defaults = {
       "com.apple.finder" =
         let

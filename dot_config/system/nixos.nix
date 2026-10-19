@@ -4,7 +4,17 @@
   ...
 }:
 {
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
   system.disableInstallerTools = true;
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ (import ./overrides.nix { nixpkgs-unstable = inputs.nixpkgs-unstable; }) ];
+  };
 
   # Workaround for Unreal Engine
   system.activationScripts.binBash = {
@@ -90,6 +100,8 @@
     };
   };
 
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
   fonts.packages = with pkgs; [ nerd-fonts.symbols-only ];
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
@@ -102,6 +114,7 @@
     grim
     jq
     nautilus
+    nh # programs
     quickshell
     sbctl
     slurp
@@ -111,7 +124,13 @@
     xwayland-satellite
   ];
 
+  programs.zsh.enable = false;
+  programs.bash.completion.enable = true;
   programs.nano.enable = false;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
