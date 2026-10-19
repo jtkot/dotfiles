@@ -58,6 +58,7 @@ function __sync_history() {
 
 export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/Applications/Xcode.app/Contents/Developer/usr/share"
 safe_source "$HOME/.env"
 
 BREW="/opt/homebrew/bin/brew"
