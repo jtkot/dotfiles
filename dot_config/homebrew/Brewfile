@@ -13,6 +13,9 @@ brew "cmake"
 brew "cpdf"
 brew "deno", link: false
 brew "djvulibre"
+brew "docker"
+brew "docker-buildx"
+brew "docker-compose"
 brew "efm-langserver"
 brew "fastfetch"
 brew "fd"
@@ -27,7 +30,6 @@ brew "imagemagick"
 brew "jadx"
 brew "jj"
 brew "kaitai-struct-compiler"
-brew "lima"
 brew "lua", link: false
 brew "lua-language-server"
 brew "luajit", link: false
@@ -42,8 +44,6 @@ brew "oci-cli"
 brew "pam-reattach"
 brew "pandoc"
 brew "pinentry-mac"
-brew "podman"
-brew "podman-compose"
 brew "pystardust/ani-cli/ani-cli", trusted: true
 brew "python", link: false
 brew "python@3.14", link: false
@@ -52,6 +52,7 @@ brew "ripgrep"
 brew "rtk"
 brew "shellcheck"
 brew "shfmt"
+brew "socktainer" if OS.mac?
 brew "sshuttle"
 brew "stylua"
 brew "tinymist"

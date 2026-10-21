@@ -1,0 +1,12 @@
+{
+  "Endpoints" : {
+    "docker" : {
+      "Host" : "unix:\/\/\/opt\/homebrew\/var\/run\/socktainer\/.socktainer\/container.sock",
+      "SkipTLSVerify" : false
+    }
+  },
+  "Metadata" : {
+    "Description" : "Socktainer — Docker API over Apple Container"
+  },
+  "Name" : "socktainer"
+}

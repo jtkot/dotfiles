@@ -1,0 +1,6 @@
+{
+	"currentContext": "socktainer",
+	"cliPluginsExtraDirs": [
+		"/opt/homebrew/lib/docker/cli-plugins"
+	]
+}
