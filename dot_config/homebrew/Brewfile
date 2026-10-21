@@ -1,5 +1,8 @@
-brew "apkeep"
+tap "pystardust/ani-cli", "https://github.com/pystardust/ani-cli.git"
+
+brew "TheZoraiz/ascii-image-converter/ascii-image-converter", trusted: true
 brew "anyzig", link: true
+brew "apkeep"
 brew "bash"
 brew "bash-completion@2"
 brew "binwalk"
@@ -17,31 +20,33 @@ brew "ffmpeg"
 brew "forgejo-cli"
 brew "fzf"
 brew "gh"
-brew "gnupg"
 brew "ghidra"
 brew "git-lfs"
+brew "gnupg"
 brew "imagemagick"
 brew "jadx"
 brew "jj"
 brew "kaitai-struct-compiler"
 brew "lima"
 brew "lua", link: false
-brew "luajit", link: false
 brew "lua-language-server"
+brew "luajit", link: false
 brew "mas"
+brew "mcp-inspector"
 brew "mesa"
 brew "mpv"
 brew "neovim"
 brew "nmap"
+brew "node", link: false
 brew "oci-cli"
-brew "pandoc"
 brew "pam-reattach"
+brew "pandoc"
 brew "pinentry-mac"
 brew "podman"
 brew "podman-compose"
+brew "pystardust/ani-cli/ani-cli", trusted: true
 brew "python", link: false
 brew "python@3.14", link: false
-brew "node", link: false
 brew "recode"
 brew "ripgrep"
 brew "rtk"
@@ -52,6 +57,7 @@ brew "stylua"
 brew "tinymist"
 brew "tmux"
 brew "tombi"
+brew "ty"
 brew "typst"
 brew "uv"
 brew "vnu"
@@ -71,6 +77,7 @@ cask "ghostty"
 cask "helium-browser"
 cask "kindle-previewer"
 cask "photocraft"
+brew "ruff"
 cask "ruffle"
 cask "secretive"
 cask "transmission"
@@ -94,12 +101,8 @@ mas "Wipr 2", id: 1662217862
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 
-# "github:TheZoraiz/ascii-image-converter"
-# "github:pystardust/ani-cli"
-#
-# "cargo:https://sr.ht/~zethra/license"
-# "gem:kaitai-struct-visualizer"
-# "github:theorzr/portablemc"
-# "go:gitlab.com/esr/loccount"
 # cask "imhex"
 # cask "schism-tracker"
+# "cargo:https://sr.ht/~zethra/license"
+# "github:theorzr/portablemc"
+# "go:gitlab.com/esr/loccount"
