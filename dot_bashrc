@@ -76,9 +76,15 @@ unset BREW
 
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$HOME/.unity/bin"
+prepend_to_path "$HOME/.dotnet/tools"
 
 if [[ $(command -v gem) ]]; then
     prepend_to_path "$(gem env gemdir)/bin"
+fi
+
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
+if [[ ! -d $DOTNET_ROOT ]]; then
+    unset DOTNET_ROOT
 fi
 
 if [[ $- == *i* ]]; then
