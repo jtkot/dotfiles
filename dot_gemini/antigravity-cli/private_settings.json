@@ -6,6 +6,7 @@
   "permissions": {
     "allow": [
       "mcp(ghidra/*)",
+      "mcp(unity/*)",
       "command(rtk)"
     ]
   },

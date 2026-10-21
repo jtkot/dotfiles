@@ -2,7 +2,14 @@
   "mcpServers": {
     "ghidra": {
       "command": "bridge-mcp-ghidra",
-      "disabled": false
+      "disabled": true
+    },
+    "unity": {
+      "args": [
+        "mcp"
+      ],
+      "command": "unity",
+      "disabled": true
     }
   }
 }
