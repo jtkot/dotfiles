@@ -28,7 +28,7 @@
       loginwindow = {
         RetriesUntilHint = 0;
       };
-      system.defaults.SoftwareUpdate = {
+      SoftwareUpdate = {
         AutomaticallyInstallMacOSUpdates = true;
         AutomaticDownload = true;
         SplatEnabled = true;
