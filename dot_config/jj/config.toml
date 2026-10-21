@@ -13,8 +13,8 @@ merge-editor = "vimdiff"
 name = "Jan Kot"
 email = "jan@catnip.supply"
 
-[git]
-sign-on-push = true
+[revsets]
+git-sign-on-push = "~signed() & mine()"
 
 [signing]
 backend = "gpg"
