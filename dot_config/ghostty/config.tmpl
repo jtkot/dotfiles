@@ -3,7 +3,7 @@ command = "{{ .tmuxPath }}" new-session -t main
 shell-integration-features = no-cursor
 
 # Customization
-theme = Xcode Dark hc
+theme = X
 cursor-style-blink = false
 background-blur = 48
 background-opacity-cells = true
@@ -26,9 +26,9 @@ window-step-resize = true
 
 # Font
 adjust-cell-height = {{ .cellHeight }}%
-font-family = Intel One Mono
+adjust-cursor-height = {{ div .cellHeight 2 }}%
+font-family = Iosevka Term SS14
 font-size = {{ .fontSize }}
-font-feature = -calt
 
 # Behavior
 auto-update = download
