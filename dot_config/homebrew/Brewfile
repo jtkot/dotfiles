@@ -1,7 +1,8 @@
 tap "pystardust/ani-cli", "https://github.com/pystardust/ani-cli.git"
+tap "4evy/pared", "https://github.com/4evy/pared.git"
+tap "slop-bucket/tap", trusted: true
 
 brew "TheZoraiz/ascii-image-converter/ascii-image-converter", trusted: true
-brew "anyzig", link: true
 brew "apkeep"
 brew "bash"
 brew "bash-completion@2"
@@ -23,16 +24,18 @@ brew "fd"
 brew "ffmpeg"
 brew "forgejo-cli"
 brew "fzf"
-brew "gdb" if OS.linux?
+brew "gdb" unless OS.mac?
 brew "gh"
 brew "ghidra"
 brew "git-lfs"
 brew "gnupg"
+brew "go"
 brew "imagemagick"
 brew "jadx"
 brew "jj"
+brew "jupytext"
 brew "kaitai-struct-compiler"
-brew "llama.cpp" if OS.linux?
+brew "llama.cpp" if OS.linux? # enable per host, not per OS
 brew "lua", link: false
 brew "lua-language-server"
 brew "luajit", link: false
@@ -45,16 +48,20 @@ brew "node", link: false
 brew "oci-cli"
 brew "pam-reattach" if OS.mac?
 brew "pandoc"
+brew "4evy/pared/pared", trusted: true
 brew "pinentry-mac" if OS.mac?
+brew "pnpm"
 brew "pystardust/ani-cli/ani-cli", trusted: true
 brew "python", link: false
-brew "python@3.14", link: false
 brew "recode"
 brew "ripgrep"
 brew "rtk"
 brew "ruff"
 brew "shellcheck"
 brew "shfmt"
+brew "slop-bucket/tap/anyzig", link: true
+brew "slop-bucket/tap/loccount"
+brew "slop-bucket/tap/vscode-language-servers"
 brew "socktainer" if OS.mac?
 brew "sshuttle"
 brew "stylua"
@@ -70,8 +77,7 @@ brew "yaml-language-server"
 brew "yq"
 brew "yt-dlp"
 brew "zbar"
-brew "zig", link: false
-brew "zls"
+
 cask "ableton-live-suite" if OS.mac?
 cask "antigravity-cli"
 cask "calibre" if OS.mac?
@@ -83,6 +89,8 @@ cask "kindle-previewer" if OS.mac?
 cask "photocraft"
 cask "ruffle"
 cask "secretive" if OS.mac?
+cask "slop-bucket/tap/imhex" if OS.mac?
+cask "slop-bucket/tap/schism-tracker" if OS.mac?
 cask "steam"
 cask "transmission" if OS.mac?
 cask "unity-cli"
@@ -91,17 +99,6 @@ cask "valhalla-freq-echo" if OS.mac?
 cask "valhalla-space-modulator" if OS.mac?
 cask "valhalla-supermassive" if OS.mac?
 cask "wireshark-app" if OS.mac?
-
-flatpak "com.valvesoftware.Steam" unless OS.mac?
-flatpak "com.mitchellh.ghostty" unless OS.mac?
-flatpak "net.werwolv.ImHex" unless OS.mac?
-flatpak "org.blender.Blender" unless OS.mac?
-flatpak "org.gnome.DiskUtility" unless OS.mac?
-flatpak "org.gnome.Loupe" unless OS.mac?
-flatpak "org.gnome.dspy" unless OS.mac?
-flatpak "sh.cider.Cider" unless OS.mac?
-
-uv "mutagen"
 
 mas "Keynote", id: 361285480
 mas "MacPacker", id: 6473273874
@@ -113,8 +110,15 @@ mas "Reeder", id: 6475002485
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 
-# cask "imhex"
-# cask "schism-tracker"
+flatpak "com.valvesoftware.Steam" unless OS.mac?
+flatpak "com.mitchellh.ghostty" unless OS.mac?
+flatpak "net.werwolv.ImHex" unless OS.mac?
+flatpak "org.blender.Blender" unless OS.mac?
+flatpak "org.gnome.DiskUtility" unless OS.mac?
+flatpak "org.gnome.Loupe" unless OS.mac?
+flatpak "org.gnome.dspy" unless OS.mac?
+flatpak "sh.cider.Cider" unless OS.mac?
+
+uv "mutagen"
 # "cargo:https://sr.ht/~zethra/license"
 # "github:theorzr/portablemc"
-# "go:gitlab.com/esr/loccount"
