@@ -102,7 +102,6 @@ flatpak "org.gnome.dspy" unless OS.mac?
 flatpak "sh.cider.Cider" unless OS.mac?
 
 uv "mutagen"
-uv "ghidra_mcp_bridge", source: "https://github.com/bethington/ghidra-mcp/releases/download/v7.0.0/ghidra_mcp_bridge-7.0.0-py3-none-any.whl"
 
 mas "Keynote", id: 361285480
 mas "MacPacker", id: 6473273874

@@ -1,7 +1,12 @@
 {
   "mcpServers": {
     "ghidra": {
-      "command": "bridge-mcp-ghidra",
+      "args": [
+        "--from",
+        "git+https://github.com/bethington/ghidra-mcp.git@main",
+        "bridge-mcp-ghidra"
+      ],
+      "command": "uvx",
       "disabled": true
     },
     "unity": {
