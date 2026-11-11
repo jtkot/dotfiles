@@ -1,8 +1,10 @@
 {
   "agentMode": "auto",
   "altScreenMode": "always",
+  "artifactReviewPolicy": "agent-decides",
   "editorMode": "vim",
-  "model": "Gemini 3.8 Flash (High)",
+  "enableTerminalSandbox": true,
+  "model": "Gemini 4 Hydrogen (Medium)",
   "permissions": {
     "allow": [
       "mcp(ghidra/*)",
@@ -10,8 +12,13 @@
       "command(rtk)"
     ]
   },
+  "pickerGrouping": "grouped",
   "runningLightSpeed": "off",
   "showFeedbackSurvey": false,
   "showTips": false,
-  "verbosity": "high"
+  "toolPermission": "proceed-in-sandbox",
+  "verbosity": "high",
+  "voice": {
+    "voiceMode": "dictation"
+  }
 }
