@@ -85,6 +85,7 @@ cask "ruffle"
 cask "secretive" if OS.mac?
 cask "steam"
 cask "transmission" if OS.mac?
+cask "unity-cli"
 cask "unity-hub"
 cask "valhalla-freq-echo" if OS.mac?
 cask "valhalla-space-modulator" if OS.mac?
