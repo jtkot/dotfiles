@@ -74,6 +74,14 @@ if [[ -x $BREW ]]; then
 fi
 unset BREW
 
+if [[ $(command -v pnpm) ]]; then
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    case ":$PATH:" in
+    ":$PNPM_HOME/bin:"*) ;;
+    *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+    esac
+fi
+
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$HOME/.dotnet/tools"
 
