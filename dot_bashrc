@@ -89,6 +89,10 @@ if [[ $(command -v gem) ]]; then
     prepend_to_path "$(gem env gemdir)/bin"
 fi
 
+if [[ $(command -v cargo) ]]; then
+    prepend_to_path "$HOME/.cargo/bin"
+fi
+
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 if [[ ! -d $DOTNET_ROOT ]]; then
     unset DOTNET_ROOT
