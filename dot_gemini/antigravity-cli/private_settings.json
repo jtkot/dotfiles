@@ -4,6 +4,10 @@
   "editorMode": "vim",
   "enableTerminalSandbox": true,
   "model": "Gemini 4 Hydrogen (Medium)",
+  "orchestrator": {
+    "planner": "Gemini 4 Neon (Medium)",
+    "executor": "Gemini 4 Hydrogen (Low)"
+  },
   "permissions": {
     "allow": [
       "mcp(ghidra/*)",
