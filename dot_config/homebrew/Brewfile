@@ -55,7 +55,6 @@ brew "pystardust/ani-cli/ani-cli", trusted: true
 brew "python", link: false
 brew "recode"
 brew "ripgrep"
-brew "rtk"
 brew "ruff"
 brew "shellcheck"
 brew "shfmt"
