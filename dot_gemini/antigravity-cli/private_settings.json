@@ -1,5 +1,4 @@
 {
-  "agentMode": "auto",
   "altScreenMode": "always",
   "artifactReviewPolicy": "agent-decides",
   "editorMode": "vim",
