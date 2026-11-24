@@ -80,6 +80,7 @@ brew "zbar"
 
 cask "ableton-live-suite" if OS.mac?
 cask "antigravity-cli"
+cask "audacity"
 cask "calibre" if OS.mac?
 cask "db-browser-for-sqlite"
 cask "font-iosevka-ss14"
